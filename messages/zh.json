@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "home": "首页",
+    "academy": "心灵大学",
+    "metaverse": "心灵元宇宙",
+    "dao": "共建DAO",
+    "community": "全球社区",
+    "about": "关于我们"
+  },
+  "hero": {
+    "title": "心灵家园",
+    "subtitle": "Spiritual Oasis",
+    "slogan": "2026：用一年的时间，踏上终极自由之路",
+    "description": "从「精神内耗」到「内在清明」，通过「信念创造实相」实现每个人的价值完成",
+    "cta": "加入2026全年公益计划",
+    "ctaFree": "免费入驻"
+  },
+  "plan2026": {
+    "title": "2026 全球公益计划",
+    "subtitle": "每日节律，全年陪伴",
+    "morning": {
+      "time": "06:00 AM",
+      "title": "每日清晨的陪伴",
+      "subtitle": "Daily Wisdom",
+      "description": "音频引导 + 冥想练习，开启觉醒的一天"
+    },
+    "evening": {
+      "time": "20:00 PM",
+      "title": "每日深度的回应",
+      "subtitle": "Daily Live Q&A",
+      "description": "直播答疑，解答你的灵性困惑"
+    },
+    "allDay": {
+      "time": "全天",
+      "title": "社群共修",
+      "subtitle": "Daily Community Practice",
+      "description": "全球接龙，共同成长"
+    },
+    "commitment": {
+      "title": "承诺机制",
+      "description": "每周至少完成3次分享打卡，这不是KPI，是承诺。AI学习进度追踪，见证你的成长轨迹。"
+    }
+  },
+  "academy": {
+    "title": "心灵大学",
+    "subtitle": "Spirit Academy",
+    "description": "系统化的灵性成长课程体系",
+    "viewCourses": "查看课程",
+    "visitAcademy": "访问心灵学院",
+    "healing": {
+      "title": "重获新生疗愈",
+      "subtitle": "Healing",
+      "description": "OM疗愈、七脉轮能量平衡、21天丰盛之旅、动感冥想、梦中疗愈"
+    },
+    "growth": {
+      "title": "个人成长",
+      "subtitle": "Growth - 无条件的爱",
+      "description": "《你值得过更好的生活》《灵魂永生》《24周万能金钥》《了凡四训》新解"
+    },
+    "connection": {
+      "title": "关系与社会",
+      "subtitle": "Connection - 万物一体",
+      "description": "《灵性的本质》、情感与两性关系、《道德经》新解、《重塑组织》"
+    },
+    "truth": {
+      "title": "探索实相",
+      "subtitle": "Truth - 宇宙起源",
+      "description": "《未知的实相》《梦、演化与价值完成》《生命之花》、内在感官训练"
+    }
+  },
+  "metaverse": {
+    "title": "心灵元宇宙",
+    "subtitle": "Metaverse Portal",
+    "description": "3.5维虚拟空间，创造你的数字元身",
+    "comingSoon": "即将开放",
+    "features": {
+      "avatar": "数字元身",
+      "avatarDesc": "创建你的虚拟分身，设置人生蓝图",
+      "space": "体验空间",
+      "spaceDesc": "助眠区、读书区、音乐区",
+      "temple": "冥想圣殿",
+      "templeDesc": "多人实时在线冥想场域"
+    }
+  },
+  "dao": {
+    "title": "共建DAO",
+    "subtitle": "Co-Creation DAO",
+    "description": "去中心化治理，共同创造未来",
+    "governance": "治理中心",
+    "governanceDesc": "XWT持有者可参与社区重大决策投票",
+    "transparency": "财务透明",
+    "transparencyDesc": "链上数据实时展示资金分配情况",
+    "founders": "创始团队",
+    "foundersDesc": "The 100 - 终身权益、原始股、分红"
+  },
+  "community": {
+    "title": "全球社区",
+    "subtitle": "Global Community",
+    "description": "连接全球觉醒者，线上线下共修",
+    "map": "全球社区地图",
+    "mapDesc": "探索全球心灵家园实体社区",
+    "groups": "线上连接",
+    "groupsDesc": "加入微信、WhatsApp、Telegram群组",
+    "activities": "线下活动",
+    "activitiesDesc": "7天游学、苏菲旋转、太阳功等"
+  },
+  "about": {
+    "title": "关于我们",
+    "subtitle": "The Origin",
+    "mission": "核心使命",
+    "missionText": "打造一个多维度的灵性成长社区，推动人类文明进入下一个阶段",
+    "philosophy": "设计理念",
+    "philosophyItems": {
+      "dimension": "3.5维存在：连接内在心灵世界与物质现实世界",
+      "teal": "青色组织：去中心化、自主管理、身心整合",
+      "scaffold": "脚手架理论：技术服务于人的觉醒"
+    },
+    "history": "发展历程",
+    "historyText": "心灵家园成立于2020年，五年来从线上社区发展为虚实共生的综合平台",
+    "foundation": "哲学基石",
+    "foundationText": "基于赛斯资料（Seth Material）的宇宙观与实相创造理论"
+  },
+  "footer": {
+    "slogan": "从内耗到清明，信念创造实相",
+    "contact": "联系我们",
+    "followUs": "关注我们",
+    "copyright": "© 2025 心灵家园 Spiritual Oasis. All rights reserved."
+  },
+  "common": {
+    "learnMore": "了解更多",
+    "joinNow": "立即加入",
+    "comingSoon": "敬请期待",
+    "loading": "加载中..."
+  }
+}

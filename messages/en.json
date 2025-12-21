@@ -1,0 +1,135 @@
+{
+  "nav": {
+    "home": "Home",
+    "academy": "Spirit Academy",
+    "metaverse": "Metaverse",
+    "dao": "Co-Creation DAO",
+    "community": "Community",
+    "about": "About"
+  },
+  "hero": {
+    "title": "Spiritual Oasis",
+    "subtitle": "心灵家园",
+    "slogan": "2026: A Year-Long Journey to Ultimate Freedom",
+    "description": "From mental exhaustion to inner clarity, realize your value through 'Beliefs Create Reality'",
+    "cta": "Join 2026 Global Initiative",
+    "ctaFree": "Free to Join"
+  },
+  "plan2026": {
+    "title": "2026 Global Initiative",
+    "subtitle": "Daily Rhythm, Year-Round Companionship",
+    "morning": {
+      "time": "06:00 AM",
+      "title": "Morning Companionship",
+      "subtitle": "Daily Wisdom",
+      "description": "Audio guidance + meditation practice, awakening your day"
+    },
+    "evening": {
+      "time": "08:00 PM",
+      "title": "Evening Deep Response",
+      "subtitle": "Daily Live Q&A",
+      "description": "Live Q&A sessions for your spiritual questions"
+    },
+    "allDay": {
+      "time": "All Day",
+      "title": "Community Practice",
+      "subtitle": "Daily Community Practice",
+      "description": "Global relay, growing together"
+    },
+    "commitment": {
+      "title": "Commitment Mechanism",
+      "description": "Complete at least 3 sharing check-ins per week. This is not a KPI, it's a commitment. AI tracks your learning progress, witnessing your growth."
+    }
+  },
+  "academy": {
+    "title": "Spirit Academy",
+    "subtitle": "心灵大学",
+    "description": "Systematic spiritual growth curriculum",
+    "viewCourses": "View Courses",
+    "visitAcademy": "Visit Spirit Academy",
+    "healing": {
+      "title": "Rebirth Healing",
+      "subtitle": "Healing",
+      "description": "OM Healing, Seven Chakra Balancing, 21-Day Abundance Journey, Dynamic Meditation, Dream Healing"
+    },
+    "growth": {
+      "title": "Personal Growth",
+      "subtitle": "Growth - Unconditional Love",
+      "description": "'Busting Loose from the Money Game', 'Seth Speaks', '24-Week Master Key System', 'Liao Fan's Four Lessons'"
+    },
+    "connection": {
+      "title": "Relationships & Society",
+      "subtitle": "Connection - Oneness",
+      "description": "'The Nature of Personal Reality', Emotional & Relationship Courses, 'Tao Te Ching', 'Reinventing Organizations'"
+    },
+    "truth": {
+      "title": "Exploring Reality",
+      "subtitle": "Truth - Cosmic Origins",
+      "description": "'The Unknown Reality', 'Dreams, Evolution, Value Fulfillment', 'Flower of Life', Inner Senses Training"
+    }
+  },
+  "metaverse": {
+    "title": "Spirit Metaverse",
+    "subtitle": "Metaverse Portal",
+    "description": "3.5D virtual space, create your digital avatar",
+    "comingSoon": "Coming Soon",
+    "features": {
+      "avatar": "Digital Avatar",
+      "avatarDesc": "Create your virtual self, set your life blueprint",
+      "space": "Experience Zones",
+      "spaceDesc": "Sleep zone, Reading zone, Music zone",
+      "temple": "Meditation Temple",
+      "templeDesc": "Multi-user real-time meditation field"
+    }
+  },
+  "dao": {
+    "title": "Co-Creation DAO",
+    "subtitle": "共建DAO",
+    "description": "Decentralized governance, co-creating the future",
+    "governance": "Governance Center",
+    "governanceDesc": "XWT holders can vote on major community decisions",
+    "transparency": "Financial Transparency",
+    "transparencyDesc": "On-chain data displays fund allocation in real-time",
+    "founders": "Founding Team",
+    "foundersDesc": "The 100 - Lifetime benefits, equity, dividends"
+  },
+  "community": {
+    "title": "Global Community",
+    "subtitle": "全球社区",
+    "description": "Connect with awakening souls worldwide, online and offline",
+    "map": "Global Community Map",
+    "mapDesc": "Explore Spiritual Oasis physical communities worldwide",
+    "groups": "Online Connections",
+    "groupsDesc": "Join WeChat, WhatsApp, Telegram groups",
+    "activities": "Offline Activities",
+    "activitiesDesc": "7-day retreats, Sufi whirling, Sun Gazing & more"
+  },
+  "about": {
+    "title": "About Us",
+    "subtitle": "The Origin",
+    "mission": "Core Mission",
+    "missionText": "Build a multidimensional spiritual growth community, advancing human civilization to the next stage",
+    "philosophy": "Design Philosophy",
+    "philosophyItems": {
+      "dimension": "3.5D Existence: Connecting inner spiritual world with material reality",
+      "teal": "Teal Organization: Decentralized, self-managing, integrating body and mind",
+      "scaffold": "Scaffolding Theory: Technology serves human awakening"
+    },
+    "history": "Our Journey",
+    "historyText": "Spiritual Oasis was founded in 2020, evolving from an online community to a hybrid virtual-physical platform over five years",
+    "foundation": "Philosophical Foundation",
+    "foundationText": "Based on the Seth Material's cosmology and reality creation theories"
+  },
+  "footer": {
+    "slogan": "From exhaustion to clarity, beliefs create reality",
+    "contact": "Contact Us",
+    "followUs": "Follow Us",
+    "copyright": "© 2025 Spiritual Oasis 心灵家园. All rights reserved."
+  },
+  "common": {
+    "learnMore": "Learn More",
+    "joinNow": "Join Now",
+    "comingSoon": "Coming Soon",
+    "loading": "Loading..."
+  }
+}
