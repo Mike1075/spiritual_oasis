@@ -48,20 +48,20 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第一章、第二章",
     sourceEn: "Seth Speaks Chapter 1 & 2",
     goals: [
-      { zh: "打破"只有肉体才是真的"这一核心幻觉", en: "Break the core illusion that only physical body is real" },
-      { zh: "认识住在你豪宅二楼的"内我"", en: "Recognize the Inner Self living on the second floor of your mansion" },
-      { zh: "建立"我创造我自己的实相"的初步认知", en: "Establish initial understanding of 'I create my own reality'" },
+      { zh: "打破只有肉体才是真的这一核心幻觉", en: "Break the core illusion that only physical body is real" },
+      { zh: "认识住在你豪宅二楼的内我", en: "Recognize the Inner Self living on the second floor of your mansion" },
+      { zh: "建立我创造我自己的实相的初步认知", en: "Establish initial understanding of 'I create my own reality'" },
     ],
     lessons: [
       {
         date: "2026-01-01",
         titleZh: "这不仅是一本书，这是一面镜子",
         titleEn: "This Is Not Just a Book, It's a Mirror",
-        quoteZh: "你总以为"有肉体"和"没肉体"是两个物种。其实你现在读这段话时，内在那个没有形体的你，比肉体的你更清醒。",
+        quoteZh: "你总以为有肉体和没肉体是两个物种。其实你现在读这段话时，内在那个没有形体的你，比肉体的你更清醒。",
         quoteEn: "You always think 'having a body' and 'not having a body' are two species. Actually, when you read this, the formless you inside is more awake than your physical self.",
-        contentZh: "赛斯是谁？为什么一个没有肉身的"鬼"要写书？把"肉身"和"存在"的等号撕掉。",
+        contentZh: "赛斯是谁？为什么一个没有肉身的鬼要写书？把肉身和存在的等号撕掉。",
         contentEn: "Who is Seth? Why does a 'ghost' without a physical body write books? Tear down the equation between 'body' and 'existence'.",
-        actionZh: "对着镜子问自己：镜子里的是我，还是正在看镜子的那个是"我"？",
+        actionZh: "对着镜子问自己：镜子里的是我，还是正在看镜子的那个是我？",
         actionEn: "Ask yourself in the mirror: Is the one in the mirror 'me', or is the one looking at the mirror 'me'?",
         special: "元旦 New Year's Day"
       },
@@ -78,7 +78,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-03",
         titleZh: "我来，是为了给你一记耳光",
         titleEn: "I Come to Slap You Awake",
-        quoteZh: "你们发明了"上帝""命运""因果"，好让自己继续做无助的凡人。我来就是为了拆穿这个谎言。",
+        quoteZh: "你们发明了上帝命运因果，好让自己继续做无助的凡人。我来就是为了拆穿这个谎言。",
         quoteEn: "You invented 'God', 'fate', 'karma' to continue being helpless mortals. I'm here to expose this lie.",
         contentZh: "赛斯的目的不是建立宗教，而是提醒你忘记的事实。",
         contentEn: "Seth's purpose is not to establish religion, but to remind you of forgotten facts."
@@ -89,7 +89,7 @@ export const monthsData: MonthData[] = [
         titleEn: "The First Wake-Up Call",
         quoteZh: "你就是你实相的唯一创造者。没有例外，没有借口，没有任何更高力量在替你决定任何事。",
         quoteEn: "You are the sole creator of your reality. No exceptions, no excuses, no higher power decides anything for you.",
-        contentZh: "关于"责任"的终极定义。",
+        contentZh: "关于责任的终极定义。",
         contentEn: "The ultimate definition of 'responsibility'."
       },
       {
@@ -105,7 +105,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-06",
         titleZh: "三维世界的局限",
         titleEn: "Limitations of the 3D World",
-        quoteZh: "这本书从来不是"珍写给你的"，而是"我直接写给你内在的你"。珍只是我借用的钢笔。",
+        quoteZh: "这本书从来不是珍写给你的，而是我直接写给你内在的你。珍只是我借用的钢笔。",
         quoteEn: "This book was never 'written by Jane to you', but 'written directly by me to the you within'. Jane is just my borrowed pen.",
         contentZh: "赛斯如何通过珍·罗伯茨传递信息（心理回旋面）。",
         contentEn: "How Seth transmits information through Jane Roberts (psychological spiral window)."
@@ -150,7 +150,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-11",
         titleZh: "内我也会犯错吗？",
         titleEn: "Does the Inner Self Make Mistakes?",
-        quoteZh: "你开玩笑说"我想死"，它立刻去停你的心脏。它是个不懂幽默感的忠诚管家。",
+        quoteZh: "你开玩笑说我想死，它立刻去停你的心脏。它是个不懂幽默感的忠诚管家。",
         quoteEn: "When you jokingly say 'I want to die', it immediately tries to stop your heart. It's a loyal butler with no sense of humor.",
         contentZh: "内我对你的绝对忠诚。",
         contentEn: "The Inner Self's absolute loyalty to you."
@@ -172,7 +172,7 @@ export const monthsData: MonthData[] = [
         quoteEn: "Thank you for always working for me. Please heal me tonight.",
         contentZh: "具体的练习方法。",
         contentEn: "Specific practice methods.",
-        actionZh: "今晚睡前，把身体交给它，说一句："谢谢你一直为我工作，今晚请替我疗愈。"",
+        actionZh: "今晚睡前，把身体交给它，说一句：谢谢你一直为我工作，今晚请替我疗愈。",
         actionEn: "Tonight before sleep, surrender your body to it and say: 'Thank you for always working for me. Please heal me tonight.'"
       },
       {
@@ -206,7 +206,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-17",
         titleZh: "我们为什么这么慢？",
         titleEn: "Why Are We So Slow?",
-        quoteZh: "你们之所以觉得慢，只是因为你们相信"慢"。你们把创造力当奢侈品，我们把它当空气。",
+        quoteZh: "你们之所以觉得慢，只是因为你们相信慢。你们把创造力当奢侈品，我们把它当空气。",
         quoteEn: "You feel slow because you believe in 'slow'. You treat creativity as luxury; we treat it as air.",
         contentZh: "物质世界的延迟属性。",
         contentEn: "The delay property of the physical world."
@@ -215,7 +215,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-18",
         titleZh: "空间不是容器",
         titleEn: "Space Is Not a Container",
-        quoteZh: "你们的空间有"里面"和"外面"，我的空间只有"更里面"。",
+        quoteZh: "你们的空间有里面和外面，我的空间只有更里面。",
         quoteEn: "Your space has 'inside' and 'outside'; my space only has 'deeper inside'.",
         contentZh: "空间是意识的肌肉。",
         contentEn: "Space is the muscle of consciousness."
@@ -233,7 +233,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-20",
         titleZh: "创造的狂喜",
         titleEn: "The Ecstasy of Creation",
-        quoteZh: "每当一个学生明白"我是创造者"，我会像疯子一样放烟火。",
+        quoteZh: "每当一个学生明白我是创造者，我会像疯子一样放烟火。",
         quoteEn: "Whenever a student realizes 'I am the creator', I go crazy setting off fireworks.",
         contentZh: "赛斯最常体验的情绪。",
         contentEn: "The emotion Seth experiences most often."
@@ -271,7 +271,7 @@ export const monthsData: MonthData[] = [
         titleEn: "Time Is an Ocean, Not a River",
         quoteZh: "你们在时间里排队，我们在时间里冲浪。",
         quoteEn: "You queue in time; we surf in time.",
-        contentZh: "赛斯的"现在"包含过去未来。",
+        contentZh: "赛斯的现在包含过去未来。",
         contentEn: "Seth's 'now' contains past and future."
       },
       {
@@ -285,7 +285,7 @@ export const monthsData: MonthData[] = [
       },
       {
         date: "2026-01-26",
-        titleZh: "你并没有在"等死"",
+        titleZh: "你并没有在等死",
         titleEn: "You're Not 'Waiting to Die'",
         quoteZh: "你们把自己关进一个又小、又慢的笼子，然后假装那是宇宙的全部。",
         quoteEn: "You locked yourself in a small, slow cage, then pretend that's all the universe is.",
@@ -305,7 +305,7 @@ export const monthsData: MonthData[] = [
         date: "2026-01-28",
         titleZh: "别等下辈子",
         titleEn: "Don't Wait for Next Life",
-        quoteZh: "伸手过来。现在。这一秒。因为在我的时间里，根本没有"下辈子"。",
+        quoteZh: "伸手过来。现在。这一秒。因为在我的时间里，根本没有下辈子。",
         quoteEn: "Reach out your hand. Now. This second. Because in my time, there is no 'next life'.",
         contentZh: "当下的力量。",
         contentEn: "The power of now."
@@ -316,7 +316,7 @@ export const monthsData: MonthData[] = [
         titleEn: "First Month Review",
         quoteZh: "这一个月，我有没有把责任推给过外在？",
         quoteEn: "This month, did I push responsibility to external factors?",
-        contentZh: "回顾"我是创造者"和"内我"的概念。",
+        contentZh: "回顾我是创造者和内我的概念。",
         contentEn: "Review the concepts of 'I am the creator' and 'Inner Self'.",
         actionZh: "再次对自己说：这一个月，我有没有把责任推给过外在？",
         actionEn: "Ask yourself again: This month, did I blame anything external?"
@@ -338,7 +338,7 @@ export const monthsData: MonthData[] = [
         quoteEn: "Hey, I recognize you now.",
         contentZh: "结合第二章结尾的冥想。",
         contentEn: "Combined with the meditation at the end of Chapter 2.",
-        actionZh: "闭上眼，想象那个没有肉身的赛斯，甚至那个没有肉身的"你"，正微笑着看着此刻拿着手机的你。说一声："嘿，我认出你了。"",
+        actionZh: "闭上眼，想象那个没有肉身的赛斯，甚至那个没有肉身的你，正微笑着看着此刻拿着手机的你。说一声：嘿，我认出你了。",
         actionEn: "Close your eyes, imagine the bodiless Seth, or even the bodiless 'you', smiling at you holding your phone. Say: 'Hey, I recognize you now.'"
       }
     ]
@@ -353,10 +353,10 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第三章、第十章",
     sourceEn: "Seth Speaks Chapter 3 & 10",
     goals: [
-      { zh: "粉碎"身体是生化机器"的旧观念", en: "Shatter the old concept of 'body as biochemical machine'" },
-      { zh: "建立"细胞是有意识的伙伴"的新关系", en: "Build a new relationship with 'cells as conscious partners'" },
-      { zh: "学会"疾病是红色警告信"的解读法", en: "Learn to interpret 'disease as red warning letter'" },
-      { zh: "掌握"自我信念手术"的核心技术", en: "Master the core technique of 'self-belief surgery'" },
+      { zh: "粉碎身体是生化机器的旧观念", en: "Shatter the old concept of 'body as biochemical machine'" },
+      { zh: "建立细胞是有意识的伙伴的新关系", en: "Build a new relationship with 'cells as conscious partners'" },
+      { zh: "学会疾病是红色警告信的解读法", en: "Learn to interpret 'disease as red warning letter'" },
+      { zh: "掌握自我信念手术的核心技术", en: "Master the core technique of 'self-belief surgery'" },
     ],
     lessons: [
       {
@@ -367,14 +367,14 @@ export const monthsData: MonthData[] = [
         quoteEn: "You think you have a body? Wrong. You have a pile of beliefs that happen to take the shape you can touch now.",
         contentZh: "身体不是客观存在的机器，是信念实时打印出来的。",
         contentEn: "The body is not an objectively existing machine—it's printed in real-time by your beliefs.",
-        actionZh: "摸摸你现在的脸，问自己："这是我现在的哪个信念长出来的？"",
+        actionZh: "摸摸你现在的脸，问自己：这是我现在的哪个信念长出来的？",
         actionEn: "Touch your face now and ask yourself: 'Which of my current beliefs grew this?'"
       },
       {
         date: "2026-02-02",
         titleZh: "实时投影仪",
         titleEn: "Real-Time Projector",
-        quoteZh: "你今天照镜子骂自己"丑"，下一秒你的脸就真的变丑了0.01毫米。你不是在变老，你是在变"信"。",
+        quoteZh: "你今天照镜子骂自己丑，下一秒你的脸就真的变丑了0.01毫米。你不是在变老，你是在变信。",
         quoteEn: "Call yourself 'ugly' in the mirror today, and your face becomes 0.01mm uglier the next second. You're not aging—you're 'believing'.",
         contentZh: "身体变化的即时性。",
         contentEn: "The immediacy of body changes."
@@ -392,7 +392,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-04",
         titleZh: "最诚实的镜子",
         titleEn: "The Most Honest Mirror",
-        quoteZh: "你嘴上说"我很幸福"，你的胃溃疡却在说"我受够了"。身体是你对自己下的最新判决书。",
+        quoteZh: "你嘴上说我很幸福，你的胃溃疡却在说我受够了。身体是你对自己下的最新判决书。",
         quoteEn: "Your mouth says 'I'm happy', but your stomach ulcer says 'I've had enough'. Your body is the latest verdict you've passed on yourself.",
         contentZh: "身体从不撒谎。",
         contentEn: "The body never lies."
@@ -401,14 +401,14 @@ export const monthsData: MonthData[] = [
         date: "2026-02-05",
         titleZh: "遗传是借口",
         titleEn: "Genetics Is an Excuse",
-        quoteZh: "你敢说你没信过"遗传不可抗"？基因只是蓝图，信念才是施工队。",
+        quoteZh: "你敢说你没信过遗传不可抗？基因只是蓝图，信念才是施工队。",
         quoteEn: "Dare you say you never believed 'genetics can't be fought'? Genes are just blueprints; beliefs are the construction crew.",
         contentZh: "打破基因决定论。",
         contentEn: "Breaking genetic determinism."
       },
       {
         date: "2026-02-06",
-        titleZh: "并没有"意外"受伤",
+        titleZh: "并没有意外受伤",
         titleEn: "There Are No 'Accidental' Injuries",
         quoteZh: "你切菜切到手，不是因为刀快，是因为你在那一秒想惩罚自己。没有意外，只有精准的自我攻击。",
         quoteEn: "You cut your hand not because the knife was sharp, but because you wanted to punish yourself at that moment. No accidents, only precise self-attacks.",
@@ -419,7 +419,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-07",
         titleZh: "本周复盘——认领你的作品",
         titleEn: "Weekly Review—Claim Your Creation",
-        quoteZh: "看着镜子里的赘肉、皱纹、病痛，说一句："这是我雕刻的。既然是我雕的，我就能重雕。"",
+        quoteZh: "看着镜子里的赘肉、皱纹、病痛，说一句：这是我雕刻的。既然是我雕的，我就能重雕。",
         quoteEn: "Look at the fat, wrinkles, and pain in the mirror and say: 'I sculpted this. Since I carved it, I can re-carve it.'",
         contentZh: "对身体负全责。",
         contentEn: "Taking full responsibility for your body."
@@ -437,7 +437,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-09",
         titleZh: "别再下毒了",
         titleEn: "Stop Poisoning Them",
-        quoteZh: "你说"我心脏不好"，心肌细胞立刻集体罢工。你说"我活不下去了"，免疫细胞立刻放下武器。",
+        quoteZh: "你说我心脏不好，心肌细胞立刻集体罢工。你说我活不下去了，免疫细胞立刻放下武器。",
         quoteEn: "Say 'my heart is bad', and heart cells go on strike. Say 'I can't go on', and immune cells lay down their weapons.",
         contentZh: "负面语言对细胞的杀伤力。",
         contentEn: "The killing power of negative words on cells."
@@ -446,7 +446,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-10",
         titleZh: "细胞的盲目忠诚",
         titleEn: "Cells' Blind Loyalty",
-        quoteZh: "你开玩笑说"我要死了"，细胞含着泪说"好，听爸爸的"，然后开始停止工作。",
+        quoteZh: "你开玩笑说我要死了，细胞含着泪说好，听爸爸的，然后开始停止工作。",
         quoteEn: "You joke 'I want to die', and cells say with tears 'okay, listening to daddy', then start shutting down.",
         contentZh: "细胞不会反抗，只会执行。",
         contentEn: "Cells don't rebel—they only execute."
@@ -455,7 +455,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-11",
         titleZh: "对身体的暴政",
         titleEn: "Tyranny Over Your Body",
-        quoteZh: "你们吃药、化疗，把细胞当敌人轰炸，却从不低头对它们说一声："对不起，是我错了。"",
+        quoteZh: "你们吃药、化疗，把细胞当敌人轰炸，却从不低头对它们说一声：对不起，是我错了。",
         quoteEn: "You take drugs, do chemo, bomb cells like enemies, but never bow down to say: 'Sorry, I was wrong.'",
         contentZh: "吃药开刀是对细胞的战争。",
         contentEn: "Medicine and surgery are war on your cells."
@@ -464,11 +464,11 @@ export const monthsData: MonthData[] = [
         date: "2026-02-12",
         titleZh: "道歉的力量",
         titleEn: "The Power of Apology",
-        quoteZh: "今晚把手放在你最痛的部位，说："对不起，让你背锅了。谢谢你一直为我拼命。"",
+        quoteZh: "今晚把手放在你最痛的部位，说：对不起，让你背锅了。谢谢你一直为我拼命。",
         quoteEn: "Tonight, place your hand on your most painful part and say: 'Sorry for making you take the blame. Thank you for fighting for me.'",
         contentZh: "疗愈第一步——低头。",
         contentEn: "First step of healing—bow your head.",
-        actionZh: "今晚把手放在你最痛的部位，说："对不起，让你背锅了。谢谢你一直为我拼命。"",
+        actionZh: "今晚把手放在你最痛的部位，说：对不起，让你背锅了。谢谢你一直为我拼命。",
         actionEn: "Tonight, place your hand on your most painful part and say: 'Sorry for making you take the blame. Thank you for fighting for me.'"
       },
       {
@@ -484,7 +484,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-14",
         titleZh: "和你的身体谈场恋爱",
         titleEn: "Fall in Love with Your Body",
-        quoteZh: "与其等别人送花，不如送给你的细胞一句"我爱你"。这才是能救命的情话。",
+        quoteZh: "与其等别人送花，不如送给你的细胞一句我爱你。这才是能救命的情话。",
         quoteEn: "Instead of waiting for flowers from others, give your cells an 'I love you'. That's the love talk that saves lives.",
         contentZh: "最高级的自爱。",
         contentEn: "The highest form of self-love.",
@@ -503,7 +503,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-16",
         titleZh: "读懂你的病（一）",
         titleEn: "Read Your Disease (Part 1)",
-        quoteZh: "癌症是压抑太久的呐喊："看见我！"心脏病是你拒绝听从自己的心。",
+        quoteZh: "癌症是压抑太久的呐喊：看见我！心脏病是你拒绝听从自己的心。",
         quoteEn: "Cancer is a long-suppressed cry: 'See me!' Heart disease is refusing to listen to your own heart.",
         contentZh: "癌症与心脏病。",
         contentEn: "Cancer and heart disease."
@@ -521,7 +521,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-18",
         titleZh: "医生的真实角色",
         titleEn: "The Doctor's True Role",
-        quoteZh: "医生、药、手术只是负责把"生病"这个信念快递给你。医生只是替你按下你自己选好的"确认键"。",
+        quoteZh: "医生、药、手术只是负责把生病这个信念快递给你。医生只是替你按下你自己选好的确认键。",
         quoteEn: "Doctors, medicine, surgery just deliver the belief 'being sick' to you. Doctors just press the 'confirm' button you already chose.",
         contentZh: "医生只是快递员。",
         contentEn: "Doctors are just delivery people."
@@ -530,14 +530,14 @@ export const monthsData: MonthData[] = [
         date: "2026-02-19",
         titleZh: "为什么药有效？",
         titleEn: "Why Does Medicine Work?",
-        quoteZh: "不是药治好了你，是你"相信药能治好我"这个信念治好了你。药只是信念的道具。",
+        quoteZh: "不是药治好了你，是你相信药能治好我这个信念治好了你。药只是信念的道具。",
         quoteEn: "Medicine doesn't heal you—the belief 'medicine can heal me' heals you. Medicine is just a prop for beliefs.",
         contentZh: "安慰剂效应的本质。",
         contentEn: "The essence of the placebo effect."
       },
       {
         date: "2026-02-20",
-        titleZh: "没有"不治之症"",
+        titleZh: "没有不治之症",
         titleEn: "No 'Incurable' Disease",
         quoteZh: "所有没治好的病，都是患者死死抱住旧信念不肯松手。",
         quoteEn: "Every uncured disease is a patient clutching old beliefs and refusing to let go.",
@@ -548,7 +548,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-21",
         titleZh: "本周复盘——收下这封信",
         titleEn: "Weekly Review—Receive This Letter",
-        quoteZh: "别再问"怎么治好它"，先问"它想告诉我什么"。信读懂了，邮差（病）自然就走了。",
+        quoteZh: "别再问怎么治好它，先问它想告诉我什么。信读懂了，邮差（病）自然就走了。",
         quoteEn: "Stop asking 'how to cure it', first ask 'what is it trying to tell me'. When the letter is understood, the postman (disease) leaves.",
         contentZh: "停止对抗，开始阅读。",
         contentEn: "Stop fighting, start reading."
@@ -557,7 +557,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-22",
         titleZh: "衰老是集体催眠",
         titleEn: "Aging Is Collective Hypnosis",
-        quoteZh: "人类衰老不是自然规律，是地球上最成功的集体催眠。你从五岁就开始被注射"人会老"的毒品。",
+        quoteZh: "人类衰老不是自然规律，是地球上最成功的集体催眠。你从五岁就开始被注射人会老的毒品。",
         quoteEn: "Human aging isn't natural law—it's Earth's most successful collective hypnosis. You've been injected with 'people age' since you were five.",
         contentZh: "人为什么会老？",
         contentEn: "Why do people age?"
@@ -566,7 +566,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-23",
         titleZh: "皱纹是你画上去的",
         titleEn: "You Drew Those Wrinkles",
-        quoteZh: "你每一次叹气说"岁月不饶人"，你的胶原蛋白就流失一点。现在怪谁？",
+        quoteZh: "你每一次叹气说岁月不饶人，你的胶原蛋白就流失一点。现在怪谁？",
         quoteEn: "Every time you sigh 'time spares no one', your collagen depletes a bit. Who's to blame now?",
         contentZh: "信念对容貌的刻画。",
         contentEn: "How beliefs carve your appearance."
@@ -575,7 +575,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-24",
         titleZh: "死亡是毕业典礼",
         titleEn: "Death Is Graduation",
-        quoteZh: "没有意外死亡。所有死亡都是你自己提前按了"交卷"按钮。你想续约，随时可以。",
+        quoteZh: "没有意外死亡。所有死亡都是你自己提前按了交卷按钮。你想续约，随时可以。",
         quoteEn: "There are no accidental deaths. All deaths are you pressing 'submit' early. You can renew your contract anytime.",
         contentZh: "死亡是预约制。",
         contentEn: "Death is by appointment."
@@ -584,7 +584,7 @@ export const monthsData: MonthData[] = [
         date: "2026-02-25",
         titleZh: "别怕死，怕没活过",
         titleEn: "Don't Fear Death, Fear Not Living",
-        quoteZh: "你把"人会死"这个信念当圣旨，所以死神才敢来收你。你敢拔掉这个信念，死神就敢给你放假。",
+        quoteZh: "你把人会死这个信念当圣旨，所以死神才敢来收你。你敢拔掉这个信念，死神就敢给你放假。",
         quoteEn: "You treat 'people die' as sacred decree, so Death dares collect you. Dare to pull out this belief, and Death will give you a vacation.",
         contentZh: "对死亡的恐惧源于对生的辜负。",
         contentEn: "Fear of death comes from betraying life."
@@ -593,11 +593,11 @@ export const monthsData: MonthData[] = [
         date: "2026-02-26",
         titleZh: "终极疗愈——对自己开刀",
         titleEn: "Ultimate Healing—Operate on Yourself",
-        quoteZh: "把手放在病灶上，说："我知道是你，现在我撤销那个信念。你可以走了。"",
+        quoteZh: "把手放在病灶上，说：我知道是你，现在我撤销那个信念。你可以走了。",
         quoteEn: "Place your hand on the affected area and say: 'I know it's you. I now revoke that belief. You can leave.'",
         contentZh: "手术刀练习。",
         contentEn: "The scalpel exercise.",
-        actionZh: "把手放在病灶上，说："我知道是你，现在我撤销那个信念。你可以走了。"",
+        actionZh: "把手放在病灶上，说：我知道是你，现在我撤销那个信念。你可以走了。",
         actionEn: "Place your hand on the affected area and say: 'I know it's you. I now revoke that belief. You can leave.'"
       },
       {
@@ -630,9 +630,9 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第四章、第六章",
     sourceEn: "Seth Speaks Chapter 4 & 6",
     goals: [
-      { zh: "把"前世今生"的时间轴撕碎，建立"同时性"时间观", en: "Tear up the timeline of past/present lives, establish simultaneous time view" },
-      { zh: "认识"存有"（Entity），明白你只是剧团里的演员", en: "Recognize the 'Entity', understand you're just an actor in a troupe" },
-      { zh: "打破"因果报应"的恐吓，理解"业"是自我平衡", en: "Break the threat of 'karma', understand karma is self-balancing" },
+      { zh: "把前世今生的时间轴撕碎，建立同时性时间观", en: "Tear up the timeline of past/present lives, establish simultaneous time view" },
+      { zh: "认识存有（Entity），明白你只是剧团里的演员", en: "Recognize the 'Entity', understand you're just an actor in a troupe" },
+      { zh: "打破因果报应的恐吓，理解业是自我平衡", en: "Break the threat of 'karma', understand karma is self-balancing" },
       { zh: "和解原生家庭：是你自己求着他们来演反派的", en: "Reconcile with family: you begged them to play villains" },
     ],
     lessons: []
@@ -647,8 +647,8 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第五章、第十三章",
     sourceEn: "Seth Speaks Chapter 5 & 13",
     goals: [
-      { zh: "打破"唯一实相"的错觉，建立"多重宇宙"观", en: "Break the illusion of 'only reality', build multiverse view" },
-      { zh: "学会"跳频"技术，从受苦频道跳到享福频道", en: "Learn 'frequency jumping' technique" },
+      { zh: "打破唯一实相的错觉，建立多重宇宙观", en: "Break the illusion of 'only reality', build multiverse view" },
+      { zh: "学会跳频技术，从受苦频道跳到享福频道", en: "Learn 'frequency jumping' technique" },
       { zh: "重写个人历史与集体历史", en: "Rewrite personal and collective history" },
       { zh: "理解战争与灾难是集体信念的显化", en: "Understand war and disaster are manifestations of collective beliefs" },
     ],
@@ -664,10 +664,10 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第七章、第十八章",
     sourceEn: "Seth Speaks Chapter 7 & 18",
     goals: [
-      { zh: "把"人类中心主义"踩在脚下", en: "Crush 'human-centrism' underfoot" },
+      { zh: "把人类中心主义踩在脚下", en: "Crush 'human-centrism' underfoot" },
       { zh: "理解万物皆有意识（CU），建立与环境的深层连接", en: "Understand all things have consciousness (CU)" },
       { zh: "向你的房子、食物、空气道歉并致谢", en: "Apologize and thank your house, food, and air" },
-      { zh: "学会"施受同体"的慈悲", en: "Learn the compassion of 'giver and receiver as one'" },
+      { zh: "学会施受同体的慈悲", en: "Learn the compassion of 'giver and receiver as one'" },
     ],
     lessons: []
   },
@@ -698,9 +698,9 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第九章、第十六章",
     sourceEn: "Seth Speaks Chapter 9 & 16",
     goals: [
-      { zh: "彻底粉碎"受害者"情结", en: "Completely shatter the 'victim' complex" },
-      { zh: "理解"金钱是能量"、"关系是召唤"", en: "Understand 'money is energy', 'relationships are summons'" },
-      { zh: "学会"改信念"的暴力方法", en: "Learn violent methods to change beliefs" },
+      { zh: "彻底粉碎受害者情结", en: "Completely shatter the 'victim' complex" },
+      { zh: "理解金钱是能量、关系是召唤", en: "Understand 'money is energy', 'relationships are summons'" },
+      { zh: "学会改信念的暴力方法", en: "Learn violent methods to change beliefs" },
       { zh: "承认生活中的一切都是你亲手订购的", en: "Acknowledge everything in your life was ordered by you" },
     ],
     lessons: []
@@ -715,10 +715,10 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第十一章、第十五章",
     sourceEn: "Seth Speaks Chapter 11 & 15",
     goals: [
-      { zh: "掌握"比疯子还疯"的显化技术", en: "Master 'crazier than crazy' manifestation techniques" },
-      { zh: "为"性"去罪化，理解性是宇宙大爆炸的微缩版", en: "Destigmatize sex, understand sex as a mini Big Bang" },
+      { zh: "掌握比疯子还疯的显化技术", en: "Master 'crazier than crazy' manifestation techniques" },
+      { zh: "为性去罪化，理解性是宇宙大爆炸的微缩版", en: "Destigmatize sex, understand sex as a mini Big Bang" },
       { zh: "利用性高潮能量进行疗愈和显化", en: "Use orgasmic energy for healing and manifestation" },
-      { zh: "学会"假装"直到"成真"", en: "Learn to 'fake it till you make it'" },
+      { zh: "学会假装直到成真", en: "Learn to 'fake it till you make it'" },
     ],
     lessons: []
   },
@@ -733,9 +733,9 @@ export const monthsData: MonthData[] = [
     sourceEn: "Seth Speaks Chapter 12",
     goals: [
       { zh: "认识到五官的局限性（你是瞎子）", en: "Recognize the limitations of five senses (you are blind)" },
-      { zh: "开启"内在感官"的四把钥匙", en: "Unlock the four keys of 'inner senses'" },
-      { zh: "体验"概念感知"和"意识扩张"", en: "Experience 'conceptual sensing' and 'consciousness expansion'" },
-      { zh: "与你的"存有"（Entity）建立直接对话", en: "Establish direct dialogue with your 'Entity'" },
+      { zh: "开启内在感官的四把钥匙", en: "Unlock the four keys of 'inner senses'" },
+      { zh: "体验概念感知和意识扩张", en: "Experience 'conceptual sensing' and 'consciousness expansion'" },
+      { zh: "与你的存有（Entity）建立直接对话", en: "Establish direct dialogue with your 'Entity'" },
     ],
     lessons: []
   },
@@ -750,9 +750,9 @@ export const monthsData: MonthData[] = [
     sourceEn: "Seth Speaks Chapter 14 & Appendix 1",
     goals: [
       { zh: "把你跪了一辈子的神像砸碎", en: "Smash the idols you've knelt to your whole life" },
-      { zh: "理解所有宗教都是"奴隶合同"", en: "Understand all religions are 'slave contracts'" },
+      { zh: "理解所有宗教都是奴隶合同", en: "Understand all religions are 'slave contracts'" },
       { zh: "揭开耶稣被钉十字架的历史真相", en: "Reveal the historical truth of Jesus's crucifixion" },
-      { zh: "收回外包给神的权力，承认"我就是神"", en: "Reclaim power outsourced to gods, acknowledge 'I am God'" },
+      { zh: "收回外包给神的权力，承认我就是神", en: "Reclaim power outsourced to gods, acknowledge 'I am God'" },
     ],
     lessons: []
   },
@@ -766,10 +766,10 @@ export const monthsData: MonthData[] = [
     sourceZh: "《灵魂永生》第十七章、附录三",
     sourceEn: "Seth Speaks Chapter 17 & Appendix 3",
     goals: [
-      { zh: "认清地球是宇宙的"特训班/戒网中心"", en: "Recognize Earth as the universe's 'boot camp'" },
+      { zh: "认清地球是宇宙的特训班/戒网中心", en: "Recognize Earth as the universe's 'boot camp'" },
       { zh: "人类是叛逆的中二期少年", en: "Humans are rebellious teenagers in their edgy phase" },
-      { zh: "唯一的毕业考题目：把"受害者"变成"创造者"", en: "Only exam question: transform 'victim' into 'creator'" },
-      { zh: "掌握"终极一招"，随时自我解脱", en: "Master the 'ultimate move' for instant self-liberation" },
+      { zh: "唯一的毕业考题目：把受害者变成创造者", en: "Only exam question: transform 'victim' into 'creator'" },
+      { zh: "掌握终极一招，随时自我解脱", en: "Master the 'ultimate move' for instant self-liberation" },
     ],
     lessons: []
   },
@@ -784,7 +784,7 @@ export const monthsData: MonthData[] = [
     sourceEn: "Seth Speaks Chapter 20, 21, 22",
     goals: [
       { zh: "理解死亡是宇宙级的性高潮", en: "Understand death as a cosmic orgasm" },
-      { zh: "彻底杀死"小我"，成为"一切万有"", en: "Completely kill the ego, become 'All That Is'" },
+      { zh: "彻底杀死小我，成为一切万有", en: "Completely kill the ego, become 'All That Is'" },
       { zh: "接受赛斯的最后拥抱与告别", en: "Receive Seth's final embrace and farewell" },
       { zh: "合上书，回到绝对的寂静与光中", en: "Close the book, return to absolute silence and light" },
     ],
