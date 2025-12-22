@@ -12,6 +12,7 @@ export default function Header() {
 
   const navItems = [
     { href: "/", label: t("home") },
+    { href: "/calendar", label: t("calendar") },
     { href: "/academy", label: t("academy") },
     { href: "/metaverse", label: t("metaverse") },
     { href: "/dao", label: t("dao") },
