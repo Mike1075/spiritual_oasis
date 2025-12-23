@@ -4,8 +4,9 @@ import { useTranslations } from "next-intl";
 import { Heart, Sparkles, Users, Compass, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
-// 小鹅通课程平台链接
+// 课程平台链接
 const XIAOE_MAIN_URL = "https://appvwgstfof3025.pc.xiaoe-tech.com";
+const FUTUREMIND_URL = "https://www.futuremind2075.com";
 
 export default function AcademyPreview() {
   const t = useTranslations("academy");
@@ -90,21 +91,30 @@ export default function AcademyPreview() {
         </div>
 
         {/* CTA */}
-        <div className="text-center space-x-4">
+        <div className="flex flex-wrap justify-center gap-4">
           <Link
             href="/academy"
             className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
           >
-            查看全部课程 / View All Courses
+            查看全部课程 / View All
           </Link>
           <a
             href={XIAOE_MAIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 border border-purple-500 rounded-full text-white font-medium text-lg hover:bg-purple-500/20 transition-colors"
+            className="inline-flex items-center gap-2 px-6 py-4 border border-purple-500 rounded-full text-white font-medium hover:bg-purple-500/20 transition-colors"
           >
-            {t("visitAcademy")}
-            <ExternalLink size={20} />
+            小鹅通 / XiaoE
+            <ExternalLink size={18} />
+          </a>
+          <a
+            href={FUTUREMIND_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 px-6 py-4 border border-emerald-500 rounded-full text-white font-medium hover:bg-emerald-500/20 transition-colors"
+          >
+            未来心灵 / FutureMind
+            <ExternalLink size={18} />
           </a>
         </div>
       </div>

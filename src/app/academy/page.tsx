@@ -3,8 +3,9 @@
 import { useTranslations } from "next-intl";
 import { Heart, Sparkles, Users, Compass, ExternalLink, Clock, Award, Users2 } from "lucide-react";
 
-// 小鹅通课程平台链接
+// 课程平台链接
 const XIAOE_MAIN_URL = "https://appvwgstfof3025.pc.xiaoe-tech.com";
+const FUTUREMIND_URL = "https://www.futuremind2075.com";
 
 export default function AcademyPage() {
   const t = useTranslations("academy");
@@ -114,15 +115,26 @@ export default function AcademyPage() {
               </div>
             </div>
 
-            <a
-              href={XIAOE_MAIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
-            >
-              {t("visitAcademy")}
-              <ExternalLink size={20} />
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={XIAOE_MAIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
+              >
+                小鹅通课程 / XiaoE Courses
+                <ExternalLink size={20} />
+              </a>
+              <a
+                href={FUTUREMIND_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-purple-500 rounded-full text-white font-medium text-lg hover:bg-purple-500/20 transition-colors"
+              >
+                未来心灵学院 / FutureMind
+                <ExternalLink size={20} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
@@ -191,15 +203,26 @@ export default function AcademyPage() {
             <p className="text-gray-400 mb-8">
               加入心灵大学，系统学习灵性智慧，实现生命的价值完成
             </p>
-            <a
-              href={XIAOE_MAIN_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-medium text-lg hover:scale-105 transition-transform"
-            >
-              立即访问 / Visit Now
-              <ExternalLink size={20} />
-            </a>
+            <div className="flex flex-wrap justify-center gap-4">
+              <a
+                href={XIAOE_MAIN_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-medium text-lg hover:scale-105 transition-transform"
+              >
+                小鹅通课程 / XiaoE
+                <ExternalLink size={20} />
+              </a>
+              <a
+                href={FUTUREMIND_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-8 py-4 border border-white rounded-full text-white font-medium text-lg hover:bg-white/10 transition-colors"
+              >
+                未来心灵学院 / FutureMind
+                <ExternalLink size={20} />
+              </a>
+            </div>
           </div>
         </div>
       </section>
