@@ -3,6 +3,9 @@
 import { useTranslations } from "next-intl";
 import { Heart, Sparkles, Users, Compass, ExternalLink, Clock, Award, Users2 } from "lucide-react";
 
+// 小鹅通课程平台链接
+const XIAOE_MAIN_URL = "https://appvwgstfof3025.pc.xiaoe-tech.com";
+
 export default function AcademyPage() {
   const t = useTranslations("academy");
 
@@ -13,12 +16,13 @@ export default function AcademyPage() {
       subtitle: t("healing.subtitle"),
       description: t("healing.description"),
       color: "from-rose-500 to-pink-500",
+      categoryUrl: XIAOE_MAIN_URL,
       courses: [
-        "OM疗愈 / OM Healing",
-        "七脉轮能量平衡 / Seven Chakra Balancing",
-        "21天丰盛之旅 / 21-Day Abundance Journey",
-        "动感冥想 / Dynamic Meditation",
-        "梦中疗愈 / Dream Healing",
+        { name: "绽放生命体验营 / Life Blossoming Camp", url: XIAOE_MAIN_URL },
+        { name: "阴阳极致之美 / Yin Yang Beauty", url: XIAOE_MAIN_URL },
+        { name: "21天丰盛之旅 / 21-Day Abundance Journey", url: XIAOE_MAIN_URL },
+        { name: "动感冥想 / Dynamic Meditation", url: XIAOE_MAIN_URL },
+        { name: "阴阳交融之美 / Yin Yang Fusion", url: XIAOE_MAIN_URL },
       ],
     },
     {
@@ -27,12 +31,13 @@ export default function AcademyPage() {
       subtitle: t("growth.subtitle"),
       description: t("growth.description"),
       color: "from-purple-500 to-violet-500",
+      categoryUrl: XIAOE_MAIN_URL,
       courses: [
-        "《你值得过更好的生活》/ Busting Loose",
-        "《灵魂永生》/ Seth Speaks",
-        "《个人实相的本质》/ Nature of Personal Reality",
-        "《24周万能金钥》/ Master Key System",
-        "《了凡四训》新解 / Liao Fan's Four Lessons",
+        { name: "《做自己的主人》/ Be Your Own Master", url: XIAOE_MAIN_URL },
+        { name: "《灵魂永生》/ Seth Speaks", url: XIAOE_MAIN_URL },
+        { name: "灵性本质三阶段开悟 / Spiritual Awakening", url: XIAOE_MAIN_URL },
+        { name: "讲师内训课程 / Instructor Training", url: XIAOE_MAIN_URL },
+        { name: "《了凡四训》新解 / Liao Fan's Four Lessons", url: XIAOE_MAIN_URL },
       ],
     },
     {
@@ -41,12 +46,13 @@ export default function AcademyPage() {
       subtitle: t("connection.subtitle"),
       description: t("connection.description"),
       color: "from-emerald-500 to-teal-500",
+      categoryUrl: XIAOE_MAIN_URL,
       courses: [
-        "《灵性的本质》/ Nature of the Psyche",
-        "情感与两性关系 / Relationships & Intimacy",
-        "《道德经》新解 / Tao Te Ching",
-        "《重塑组织》/ Reinventing Organizations",
-        "与万物互联练习 / Oneness Practices",
+        { name: "以性悟道系列 / Tao Through Intimacy", url: XIAOE_MAIN_URL },
+        { name: "情感与两性关系 / Relationships & Intimacy", url: XIAOE_MAIN_URL },
+        { name: "《道德经》高维解读 / Tao Te Ching", url: XIAOE_MAIN_URL },
+        { name: "《庄子》高维解读 / Zhuangzi Wisdom", url: XIAOE_MAIN_URL },
+        { name: "与万物互联练习 / Oneness Practices", url: XIAOE_MAIN_URL },
       ],
     },
     {
@@ -55,12 +61,13 @@ export default function AcademyPage() {
       subtitle: t("truth.subtitle"),
       description: t("truth.description"),
       color: "from-blue-500 to-indigo-500",
+      categoryUrl: XIAOE_MAIN_URL,
       courses: [
-        "《未知的实相》/ The Unknown Reality",
-        "《梦、演化与价值完成》/ Dreams & Value Fulfillment",
-        "《生命之花》/ Flower of Life",
-        "梅尔卡巴 / Merkaba",
-        "9大内在感官训练 / Inner Senses Training",
+        { name: "《未知的实相》/ The Unknown Reality", url: XIAOE_MAIN_URL },
+        { name: "《梦、演化与价值完成》/ Dreams & Value Fulfillment", url: XIAOE_MAIN_URL },
+        { name: "《生命之花》/ Flower of Life", url: XIAOE_MAIN_URL },
+        { name: "梅尔卡巴 / Merkaba", url: XIAOE_MAIN_URL },
+        { name: "9大内在感官训练 / Inner Senses Training", url: XIAOE_MAIN_URL },
       ],
     },
   ];
@@ -108,7 +115,7 @@ export default function AcademyPage() {
             </div>
 
             <a
-              href="https://www.futuremind2075.com"
+              href={XIAOE_MAIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
@@ -151,12 +158,16 @@ export default function AcademyPage() {
                     </h3>
                     <div className="grid sm:grid-cols-2 gap-3">
                       {category.courses.map((course, courseIndex) => (
-                        <div
+                        <a
                           key={courseIndex}
-                          className="px-4 py-3 bg-gray-800/50 rounded-lg text-gray-300 hover:bg-purple-500/20 hover:text-white transition-colors cursor-pointer"
+                          href={course.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="px-4 py-3 bg-gray-800/50 rounded-lg text-gray-300 hover:bg-purple-500/20 hover:text-white transition-colors flex items-center justify-between group"
                         >
-                          {course}
-                        </div>
+                          <span>{course.name}</span>
+                          <ExternalLink size={16} className="opacity-0 group-hover:opacity-100 transition-opacity" />
+                        </a>
                       ))}
                     </div>
                   </div>
@@ -181,7 +192,7 @@ export default function AcademyPage() {
               加入心灵大学，系统学习灵性智慧，实现生命的价值完成
             </p>
             <a
-              href="https://www.futuremind2075.com"
+              href={XIAOE_MAIN_URL}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-8 py-4 bg-white text-gray-900 rounded-full font-medium text-lg hover:scale-105 transition-transform"

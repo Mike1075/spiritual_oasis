@@ -4,6 +4,9 @@ import { useTranslations } from "next-intl";
 import { Heart, Sparkles, Users, Compass, ExternalLink } from "lucide-react";
 import Link from "next/link";
 
+// 小鹅通课程平台链接
+const XIAOE_MAIN_URL = "https://appvwgstfof3025.pc.xiaoe-tech.com";
+
 export default function AcademyPreview() {
   const t = useTranslations("academy");
 
@@ -87,12 +90,18 @@ export default function AcademyPreview() {
         </div>
 
         {/* CTA */}
-        <div className="text-center">
+        <div className="text-center space-x-4">
+          <Link
+            href="/academy"
+            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
+          >
+            查看全部课程 / View All Courses
+          </Link>
           <a
-            href="https://www.futuremind2075.com"
+            href={XIAOE_MAIN_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-purple-600 to-emerald-500 rounded-full text-white font-medium text-lg hover:scale-105 transition-transform"
+            className="inline-flex items-center gap-2 px-8 py-4 border border-purple-500 rounded-full text-white font-medium text-lg hover:bg-purple-500/20 transition-colors"
           >
             {t("visitAcademy")}
             <ExternalLink size={20} />
