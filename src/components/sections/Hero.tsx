@@ -3,7 +3,7 @@
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
-import { isHolidaySeason } from "./HolidaySection";
+import { isHolidaySeason } from "@/lib/holiday";
 
 export default function Hero() {
   const t = useTranslations("hero");
