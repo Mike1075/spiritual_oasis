@@ -17,6 +17,7 @@ export default function Header() {
     { href: "/metaverse", label: t("metaverse") },
     { href: "/dao", label: t("dao") },
     { href: "/community", label: t("community") },
+    { href: "/cofounders", label: t("cofounders") },
     { href: "/about", label: t("about") },
   ];
 
