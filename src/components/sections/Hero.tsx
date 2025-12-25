@@ -3,10 +3,12 @@
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
+import { isHolidaySeason } from "./HolidaySection";
 
 export default function Hero() {
   const t = useTranslations("hero");
   const [isBreathing, setIsBreathing] = useState(false);
+  const isHoliday = isHolidaySeason();
 
   // Breathing animation on mouse hold
   const handleMouseDown = () => setIsBreathing(true);
@@ -48,9 +50,9 @@ export default function Hero() {
             isBreathing ? "opacity-40" : "opacity-20"
           }`}
         >
-          <div className="absolute top-0 left-1/4 w-96 h-96 bg-purple-500/30 rounded-full blur-3xl animate-float" />
-          <div className="absolute top-1/3 right-1/4 w-80 h-80 bg-emerald-500/20 rounded-full blur-3xl animate-float-delayed" />
-          <div className="absolute bottom-1/4 left-1/3 w-72 h-72 bg-purple-400/20 rounded-full blur-3xl animate-float" />
+          <div className={`absolute top-0 left-1/4 w-96 h-96 ${isHoliday ? 'bg-red-500/20' : 'bg-purple-500/30'} rounded-full blur-3xl animate-float`} />
+          <div className={`absolute top-1/3 right-1/4 w-80 h-80 ${isHoliday ? 'bg-green-500/20' : 'bg-emerald-500/20'} rounded-full blur-3xl animate-float-delayed`} />
+          <div className={`absolute bottom-1/4 left-1/3 w-72 h-72 ${isHoliday ? 'bg-red-400/15' : 'bg-purple-400/20'} rounded-full blur-3xl animate-float`} />
         </div>
       </div>
 
@@ -94,6 +96,15 @@ export default function Hero() {
         <p className="mt-12 text-gray-500 text-sm animate-pulse">
           长按屏幕，深呼吸... / Hold to breathe...
         </p>
+
+        {/* Holiday greeting */}
+        {isHoliday && (
+          <div className="mt-8 inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-500/20 to-green-500/20 rounded-full border border-white/10">
+            <span className="text-2xl">🎄</span>
+            <span className="text-white/80">圣诞快乐 · Merry Christmas</span>
+            <span className="text-2xl">🎅</span>
+          </div>
+        )}
       </div>
 
       {/* Scroll indicator */}
