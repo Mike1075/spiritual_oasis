@@ -349,7 +349,7 @@ export const cofounders: CoFounder[] = [
   { id: 316, name: "王欢" },
   { id: 317, name: "秦小惠" },
   { id: 318, name: "左" },
-  { id: 319, name: "李洛枪" },
+  { id: 319, name: "李洺梒" },
 ];
 
 // 获取共建者总数
