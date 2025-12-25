@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { cofounders, totalCofounders } from "@/data/cofounders";
-import { Heart, Star, Sparkles, Users, Award } from "lucide-react";
+import { Heart, Star, Sparkles, Users, Award, Camera } from "lucide-react";
+import CoFounderGallery from "@/components/CoFounderGallery";
 
 export default function CoFoundersPage() {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -128,6 +129,27 @@ export default function CoFoundersPage() {
                 Together, they form a river of light, illuminating the way home."
               </p>
             </div>
+          </div>
+        </section>
+
+        {/* 共建者风采展示 - 图片轮播 */}
+        <section className="py-16">
+          <div className="max-w-5xl mx-auto px-4">
+            <div className="text-center mb-10">
+              <div className="flex items-center justify-center gap-3 mb-4">
+                <Camera className="text-purple-400" size={28} />
+                <h2 className="text-3xl font-bold text-white">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                    共建者风采
+                  </span>
+                </h2>
+              </div>
+              <p className="text-gray-400">
+                Co-Founders Gallery · 每一张面孔都闪耀着光芒
+              </p>
+            </div>
+
+            <CoFounderGallery />
           </div>
         </section>
 
