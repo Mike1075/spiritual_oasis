@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
-import { ChevronLeft, ChevronRight, Calendar, BookOpen, Star, Sparkles } from "lucide-react";
+import { ChevronLeft, ChevronRight, Calendar, BookOpen, Star, Sparkles, Lock } from "lucide-react";
 import Link from "next/link";
 import { monthsData, quarters, getQuarterByMonth } from "@/data/courses2026";
 
@@ -20,6 +20,15 @@ export default function CalendarPage() {
 
   const getFirstDayOfMonth = (month: number, year: number = 2026) => {
     return new Date(year, month - 1, 1).getDay();
+  };
+
+  // 检查日期是否已解锁（是否 <= 今天）
+  const isDateUnlocked = (year: number, month: number, day: number) => {
+    const targetDate = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    targetDate.setHours(0, 0, 0, 0);
+    return targetDate <= today;
   };
 
   const daysInMonth = getDaysInMonth(currentMonth);
@@ -198,24 +207,49 @@ export default function CalendarPage() {
                 const dateStr = `2026-${String(currentMonth).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
                 const dayOfWeek = (firstDay + index) % 7;
                 const isWeekend = dayOfWeek === 0 || dayOfWeek === 6;
+                const isUnlocked = isDateUnlocked(2026, currentMonth, day);
 
-                return lesson ? (
-                  <Link
-                    key={day}
-                    href={`/calendar/${dateStr}`}
-                    className="aspect-square bg-gradient-to-br from-purple-500/20 to-emerald-500/20 hover:from-purple-500/40 hover:to-emerald-500/40 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all flex flex-col items-center justify-center p-1 group relative"
-                  >
-                    <span className={`text-lg font-bold ${isWeekend ? 'text-purple-300' : 'text-white'}`}>
-                      {day}
-                    </span>
-                    {lesson.special && (
-                      <Star size={12} className="text-yellow-500 absolute top-1 right-1" />
-                    )}
-                    <span className="text-[10px] text-gray-400 text-center line-clamp-2 hidden sm:block group-hover:text-emerald-300 transition-colors">
-                      {locale === 'zh' ? lesson.titleZh.slice(0, 6) : lesson.titleEn.slice(0, 10)}...
-                    </span>
-                  </Link>
-                ) : (
+                // 有课程且已解锁
+                if (lesson && isUnlocked) {
+                  return (
+                    <Link
+                      key={day}
+                      href={`/calendar/${dateStr}`}
+                      className="aspect-square bg-gradient-to-br from-purple-500/20 to-emerald-500/20 hover:from-purple-500/40 hover:to-emerald-500/40 rounded-xl border border-purple-500/30 hover:border-purple-500 transition-all flex flex-col items-center justify-center p-1 group relative"
+                    >
+                      <span className={`text-lg font-bold ${isWeekend ? 'text-purple-300' : 'text-white'}`}>
+                        {day}
+                      </span>
+                      {lesson.special && (
+                        <Star size={12} className="text-yellow-500 absolute top-1 right-1" />
+                      )}
+                      <span className="text-[10px] text-gray-400 text-center line-clamp-2 hidden sm:block group-hover:text-emerald-300 transition-colors">
+                        {locale === 'zh' ? lesson.titleZh.slice(0, 6) : lesson.titleEn.slice(0, 10)}...
+                      </span>
+                    </Link>
+                  );
+                }
+
+                // 有课程但未解锁
+                if (lesson && !isUnlocked) {
+                  return (
+                    <div
+                      key={day}
+                      className="aspect-square bg-gray-800/30 rounded-xl border border-gray-700/30 flex flex-col items-center justify-center p-1 opacity-60 cursor-not-allowed relative"
+                    >
+                      <Lock size={12} className="text-gray-500 absolute top-1 right-1" />
+                      <span className={`text-lg font-bold ${isWeekend ? 'text-purple-300/40' : 'text-gray-500'}`}>
+                        {day}
+                      </span>
+                      <span className="text-[10px] text-gray-600 hidden sm:block">
+                        {locale === 'zh' ? '未解锁' : 'Locked'}
+                      </span>
+                    </div>
+                  );
+                }
+
+                // 没有课程
+                return (
                   <div
                     key={day}
                     className="aspect-square bg-gray-800/50 rounded-xl border border-gray-700/50 flex flex-col items-center justify-center p-1 opacity-50"
@@ -236,7 +270,11 @@ export default function CalendarPage() {
           <div className="flex flex-wrap justify-center gap-6 mt-6 text-sm">
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded bg-gradient-to-br from-purple-500/20 to-emerald-500/20 border border-purple-500/30" />
-              <span className="text-gray-400">{locale === 'zh' ? '有课程' : 'Has Lesson'}</span>
+              <span className="text-gray-400">{locale === 'zh' ? '已解锁' : 'Unlocked'}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <Lock size={14} className="text-gray-500" />
+              <span className="text-gray-400">{locale === 'zh' ? '未解锁' : 'Locked'}</span>
             </div>
             <div className="flex items-center gap-2">
               <div className="w-4 h-4 rounded bg-gray-800/50 border border-gray-700/50" />
