@@ -45,7 +45,7 @@ export default function Hero() {
       {/* Content - 简洁的进入按钮 */}
       <div className="relative z-10 text-center px-4">
         <Link
-          href="/academy"
+          href="/calendar"
           className="group inline-flex items-center gap-3 px-12 py-6 bg-white/10 backdrop-blur-md border-2 border-white/30 rounded-full text-white font-medium text-xl hover:bg-white/20 hover:border-white/50 transition-all duration-300 hover:scale-105 shadow-2xl"
         >
           <span>进入 365 课程</span>
