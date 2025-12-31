@@ -3,51 +3,43 @@
 import { useTranslations } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
-import { getDailyWallpapers } from "@/lib/dailyContent";
+import { getHeroSlides } from "@/lib/dailyContent";
 import Link from "next/link";
 
 export default function Hero() {
   const t = useTranslations("hero");
-  const [currentWallpaperIndex, setCurrentWallpaperIndex] = useState(0);
-  const wallpapers = getDailyWallpapers();
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const slides = getHeroSlides();
 
-  // 背景图轮播（每5秒切换一次）
+  // 背景图轮播（每6秒切换一次）
   useEffect(() => {
     const interval = setInterval(() => {
-      setCurrentWallpaperIndex((prev) => (prev + 1) % wallpapers.length);
-    }, 5000);
+      setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+    }, 6000);
     return () => clearInterval(interval);
-  }, [wallpapers.length]);
-
-  // 添加日志来调试
-  useEffect(() => {
-    console.log("Today's wallpapers:", wallpapers);
-    console.log("Current index:", currentWallpaperIndex);
-  }, [wallpapers, currentWallpaperIndex]);
+  }, [slides.length]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* 每日壁纸背景轮播 */}
-      <div className="absolute inset-0 bg-gradient-to-b from-purple-900 via-indigo-900 to-black">
-        {wallpapers.map((wallpaper, index) => (
+      {/* PDF幻灯片背景轮播 */}
+      <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black">
+        {slides.map((slide, index) => (
           <div
-            key={wallpaper}
+            key={slide}
             className={`absolute inset-0 transition-opacity duration-1000 ${
-              index === currentWallpaperIndex ? "opacity-100" : "opacity-0"
+              index === currentSlideIndex ? "opacity-100" : "opacity-0"
             }`}
             style={{
-              backgroundImage: `url(${wallpaper})`,
+              backgroundImage: `url(${slide})`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
               backgroundRepeat: 'no-repeat',
             }}
-          >
-            {/* 如果图片加载失败，会显示背景渐变色 */}
-          </div>
+          />
         ))}
 
         {/* 轻微遮罩层 */}
-        <div className="absolute inset-0 bg-black/30" />
+        <div className="absolute inset-0 bg-black/40" />
       </div>
 
       {/* Content - 简洁的进入按钮 */}

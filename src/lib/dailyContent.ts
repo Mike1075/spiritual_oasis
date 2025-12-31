@@ -23,6 +23,17 @@ export function getDailyLesson(date: Date = new Date()): DailyLesson | null {
 }
 
 /**
+ * 获取首页轮播图片数组（PDF幻灯片）
+ * @returns 15张幻灯片图片的URL数组
+ */
+export function getHeroSlides(): string[] {
+  // 返回15张PDF幻灯片图片
+  return Array.from({ length: 15 }, (_, i) =>
+    `/slides/slide-${String(i).padStart(2, '0')}.jpg`
+  );
+}
+
+/**
  * 生成每日背景图URL数组（4张横版图）
  * @param date Date对象，默认为今天
  * @returns 4个图片URL的数组
