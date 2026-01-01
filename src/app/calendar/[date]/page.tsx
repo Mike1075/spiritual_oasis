@@ -2,6 +2,7 @@
 
 import { useParams } from "next/navigation";
 import { useLocale } from "next-intl";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import {
   ChevronLeft,
@@ -22,6 +23,19 @@ export default function LessonPage() {
   const dateStr = params.date as string;
 
   const lesson = getLessonByDate(dateStr);
+
+  // PDF幻灯片轮播
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+  const slides = Array.from({ length: 15 }, (_, i) =>
+    `/slides/slide-${String(i).padStart(2, '0')}.jpg`
+  );
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   // Parse date
   const [year, month, day] = dateStr.split('-').map(Number);
@@ -83,10 +97,48 @@ export default function LessonPage() {
   }
 
   return (
-    <div className="min-h-screen bg-black pt-20">
+    <div className="min-h-screen bg-black">
+      {/* Hero Section with PDF Slides */}
+      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
+        {/* PDF幻灯片背景轮播 */}
+        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black">
+          {slides.map((slide, index) => (
+            <div
+              key={slide}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentSlideIndex ? "opacity-100" : "opacity-0"
+              }`}
+              style={{
+                backgroundImage: `url(${slide})`,
+                backgroundSize: 'cover',
+                backgroundPosition: 'center',
+                backgroundRepeat: 'no-repeat',
+              }}
+            />
+          ))}
+
+          {/* 深色遮罩层 */}
+          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
+          <h1 className="text-4xl md:text-6xl font-bold mb-4">
+            <span className="bg-gradient-to-r from-purple-400 via-pink-300 to-emerald-400 bg-clip-text text-transparent">
+              {locale === 'zh' ? lesson.titleZh : lesson.titleEn}
+            </span>
+          </h1>
+          {lesson.special && (
+            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 rounded-full border border-yellow-500/30 mb-4">
+              <Star className="text-yellow-400" size={16} />
+              <span className="text-yellow-300 text-sm">{lesson.special}</span>
+            </div>
+          )}
+        </div>
+      </section>
+
       {/* Header */}
-      <section className="py-8 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/20 to-transparent" />
+      <section className="py-8 relative overflow-hidden bg-black">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           {/* Breadcrumb */}
           <div className="flex items-center gap-2 text-sm text-gray-500 mb-6">
