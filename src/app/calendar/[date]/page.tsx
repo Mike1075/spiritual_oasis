@@ -102,14 +102,14 @@ export default function LessonPage() {
       {/* Hero Section with PDF Slides Gallery */}
       <section className="relative min-h-[70vh] bg-black pt-24 pb-8 flex items-center justify-center overflow-hidden">
         {/* Download Button - Top Right */}
-        <Link
-          href="https://www.futuremind2075.com/seth365"
-          target="_blank"
+        <a
+          href="/The_Silent_Architect.pdf"
+          download="The_Silent_Architect.pdf"
           className="absolute top-24 right-4 z-20 flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-white text-sm transition-colors shadow-lg"
         >
           <Download size={16} />
-          {locale === 'zh' ? '下载壁纸' : 'Download'}
-        </Link>
+          {locale === 'zh' ? '下载PDF' : 'Download PDF'}
+        </a>
 
         {/* Image Gallery */}
         <div className="relative w-full max-w-6xl mx-auto px-4">
