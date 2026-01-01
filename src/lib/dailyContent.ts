@@ -35,6 +35,8 @@ export function getHeroSlides(locale: string = 'zh'): string[] {
 
   // 年份格式：后两位（如2026 -> 26）
   const yearShort = String(year).slice(-2);
+  // 月份目录：补零（如01、02、12）
+  const monthDir = String(month).padStart(2, '0');
 
   const baseUrl = "https://pub-810d6e0711de44d396071ecfc5ae9c2a.r2.dev/wallpapers";
 
@@ -42,9 +44,11 @@ export function getHeroSlides(locale: string = 'zh'): string[] {
   const langPrefix = locale === 'zh' ? 'C' : 'E';
 
   // 生成2张横版图的URL
-  // 格式：YY.M.D.XH.png（例如：26.1.1.CH1.png 或 26.1.1.EH1.png）
+  // 目录格式：/YY/MM/（月份补零）
+  // 文件名格式：YY.M.D.XHN.png（不补零）
+  // 示例：wallpapers/26/01/26.1.1.CH1.png
   return [1, 2].map(n =>
-    `${baseUrl}/${yearShort}/${month}/${yearShort}.${month}.${day}.${langPrefix}H${n}.png`
+    `${baseUrl}/${yearShort}/${monthDir}/${yearShort}.${month}.${day}.${langPrefix}H${n}.png`
   );
 }
 
