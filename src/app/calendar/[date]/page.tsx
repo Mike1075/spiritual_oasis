@@ -13,7 +13,8 @@ import {
   Lightbulb,
   Star,
   Share2,
-  Home
+  Home,
+  Download
 } from "lucide-react";
 import { getLessonByDate, getMonthData, monthsData } from "@/data/courses2026";
 
@@ -98,42 +99,66 @@ export default function LessonPage() {
 
   return (
     <div className="min-h-screen bg-black">
-      {/* Hero Section with PDF Slides */}
-      <section className="relative min-h-[60vh] flex items-center justify-center overflow-hidden">
-        {/* PDF幻灯片背景轮播 */}
-        <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black">
-          {slides.map((slide, index) => (
-            <div
-              key={slide}
-              className={`absolute inset-0 transition-opacity duration-1000 ${
-                index === currentSlideIndex ? "opacity-100" : "opacity-0"
-              }`}
-              style={{
-                backgroundImage: `url(${slide})`,
-                backgroundSize: 'cover',
-                backgroundPosition: 'center',
-                backgroundRepeat: 'no-repeat',
-              }}
-            />
-          ))}
+      {/* Hero Section with PDF Slides Gallery */}
+      <section className="relative min-h-[70vh] bg-black pt-24 pb-8 flex items-center justify-center overflow-hidden">
+        {/* Download Button - Top Right */}
+        <Link
+          href="https://www.futuremind2075.com/seth365"
+          target="_blank"
+          className="absolute top-24 right-4 z-20 flex items-center gap-2 px-4 py-2 bg-purple-600 hover:bg-purple-700 rounded-full text-white text-sm transition-colors shadow-lg"
+        >
+          <Download size={16} />
+          {locale === 'zh' ? '下载壁纸' : 'Download'}
+        </Link>
 
-          {/* 深色遮罩层 */}
-          <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/60 to-black" />
-        </div>
+        {/* Image Gallery */}
+        <div className="relative w-full max-w-6xl mx-auto px-4">
+          {/* Main Image Display */}
+          <div className="relative aspect-video bg-gray-900 rounded-2xl overflow-hidden shadow-2xl">
+            {slides.map((slide, index) => (
+              <img
+                key={slide}
+                src={slide}
+                alt={`Slide ${index + 1}`}
+                className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-500 ${
+                  index === currentSlideIndex ? "opacity-100" : "opacity-0"
+                }`}
+              />
+            ))}
 
-        {/* Hero Content */}
-        <div className="relative z-10 text-center px-4 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold mb-4">
-            <span className="bg-gradient-to-r from-purple-400 via-pink-300 to-emerald-400 bg-clip-text text-transparent">
-              {locale === 'zh' ? lesson.titleZh : lesson.titleEn}
-            </span>
-          </h1>
-          {lesson.special && (
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-yellow-500/20 rounded-full border border-yellow-500/30 mb-4">
-              <Star className="text-yellow-400" size={16} />
-              <span className="text-yellow-300 text-sm">{lesson.special}</span>
-            </div>
-          )}
+            {/* Navigation Buttons */}
+            <button
+              onClick={() => setCurrentSlideIndex((prev) => (prev - 1 + slides.length) % slides.length)}
+              className="absolute left-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors backdrop-blur-sm"
+              aria-label="Previous slide"
+            >
+              <ChevronLeft size={24} />
+            </button>
+
+            <button
+              onClick={() => setCurrentSlideIndex((prev) => (prev + 1) % slides.length)}
+              className="absolute right-4 top-1/2 -translate-y-1/2 p-3 bg-black/50 hover:bg-black/70 rounded-full text-white transition-colors backdrop-blur-sm"
+              aria-label="Next slide"
+            >
+              <ChevronRight size={24} />
+            </button>
+          </div>
+
+          {/* Slide Indicators */}
+          <div className="flex items-center justify-center gap-2 mt-6">
+            {slides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setCurrentSlideIndex(index)}
+                className={`h-2 rounded-full transition-all ${
+                  index === currentSlideIndex
+                    ? "w-8 bg-purple-500"
+                    : "w-2 bg-gray-600 hover:bg-gray-500"
+                }`}
+                aria-label={`Go to slide ${index + 1}`}
+              />
+            ))}
+          </div>
         </div>
       </section>
 
