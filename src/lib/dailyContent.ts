@@ -49,8 +49,8 @@ export function getDailyWallpapers(date: Date = new Date()): string[] {
   const baseUrl = "https://pub-810d6e0711de44d396071ecfc5ae9c2a.r2.dev/wallpapers";
 
   // 生成4张横版图的URL
-  // 格式：YY.M.D.EHN.webp（例如：26.1.1.EH1.webp）
+  // 格式：YY.M.D.EHN.png（例如：26.1.1.EH1.png）
   return [1, 2, 3, 4].map(n =>
-    `${baseUrl}/${yearShort}/${month}/${yearShort}.${month}.${day}.EH${n}.webp`
+    `${baseUrl}/${yearShort}/${month}/${yearShort}.${month}.${day}.EH${n}.png`
   );
 }
