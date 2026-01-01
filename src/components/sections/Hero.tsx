@@ -1,6 +1,6 @@
 "use client";
 
-import { useTranslations } from "next-intl";
+import { useTranslations, useLocale } from "next-intl";
 import { ChevronDown } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getHeroSlides } from "@/lib/dailyContent";
@@ -8,20 +8,21 @@ import Link from "next/link";
 
 export default function Hero() {
   const t = useTranslations("hero");
+  const locale = useLocale();
   const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
-  const slides = getHeroSlides();
+  const slides = getHeroSlides(locale);
 
-  // 背景图轮播（每6秒切换一次）
+  // 背景图轮播（每8秒切换一次，2张图片）
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentSlideIndex((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 8000);
     return () => clearInterval(interval);
   }, [slides.length]);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-      {/* PDF幻灯片背景轮播 */}
+      {/* 每日壁纸背景轮播（根据语言和日期自动切换） */}
       <div className="absolute inset-0 bg-gradient-to-b from-gray-900 via-gray-800 to-black">
         {slides.map((slide, index) => (
           <div

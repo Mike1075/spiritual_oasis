@@ -23,13 +23,28 @@ export function getDailyLesson(date: Date = new Date()): DailyLesson | null {
 }
 
 /**
- * 获取首页轮播图片数组（PDF幻灯片）
- * @returns 15张幻灯片图片的URL数组
+ * 获取首页轮播图片数组（根据语言和日期从R2获取）
+ * @param locale 语言环境 ('zh' | 'en')
+ * @returns 2张当日壁纸图片的URL数组
  */
-export function getHeroSlides(): string[] {
-  // 返回15张PDF幻灯片图片
-  return Array.from({ length: 15 }, (_, i) =>
-    `/slides/slide-${String(i).padStart(2, '0')}.jpg`
+export function getHeroSlides(locale: string = 'zh'): string[] {
+  const today = new Date();
+  const year = today.getFullYear();
+  const month = today.getMonth() + 1;
+  const day = today.getDate();
+
+  // 年份格式：后两位（如2026 -> 26）
+  const yearShort = String(year).slice(-2);
+
+  const baseUrl = "https://pub-810d6e0711de44d396071ecfc5ae9c2a.r2.dev/wallpapers";
+
+  // 语言前缀：C=中文，E=英文
+  const langPrefix = locale === 'zh' ? 'C' : 'E';
+
+  // 生成2张横版图的URL
+  // 格式：YY.M.D.XH.png（例如：26.1.1.CH1.png 或 26.1.1.EH1.png）
+  return [1, 2].map(n =>
+    `${baseUrl}/${yearShort}/${month}/${yearShort}.${month}.${day}.${langPrefix}H${n}.png`
   );
 }
 
