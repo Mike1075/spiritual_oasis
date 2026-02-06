@@ -19,6 +19,7 @@ export default function CalendarPage() {
   const heroSlidesConfig: Record<number, { folder: string; prefix: string; count: number }> = {
     2: { folder: "february", prefix: "feb", count: 28 },
     3: { folder: "march", prefix: "mar", count: 27 },
+    4: { folder: "april", prefix: "apr", count: 28 },
   };
 
   const slideConfig = heroSlidesConfig[currentMonth];
