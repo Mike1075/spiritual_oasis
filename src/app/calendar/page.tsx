@@ -14,22 +14,30 @@ export default function CalendarPage() {
   const monthData = monthsData.find(m => m.month === currentMonth);
   const quarterData = getQuarterByMonth(currentMonth);
 
-  // 二月份 Hero 轮播图片（28张，来自 Supabase Storage）
+  // Hero 轮播图片配置（来自 Supabase Storage）
   const SUPABASE_URL = "https://grgrnqlgufgahsstoawz.supabase.co";
-  const febSlides = Array.from({ length: 28 }, (_, i) => {
-    const day = String(i + 1).padStart(2, '0');
-    return `${SUPABASE_URL}/storage/v1/object/public/course-slides/february/feb-${day}.jpg`;
-  });
+  const heroSlidesConfig: Record<number, { folder: string; prefix: string; count: number }> = {
+    2: { folder: "february", prefix: "feb", count: 28 },
+    3: { folder: "march", prefix: "mar", count: 27 },
+  };
+
+  const slideConfig = heroSlidesConfig[currentMonth];
+  const heroSlides = slideConfig
+    ? Array.from({ length: slideConfig.count }, (_, i) => {
+        const num = String(i + 1).padStart(2, '0');
+        return `${SUPABASE_URL}/storage/v1/object/public/course-slides/${slideConfig.folder}/${slideConfig.prefix}-${num}.jpg`;
+      })
+    : [];
 
   const [heroSlideIndex, setHeroSlideIndex] = useState(0);
 
   useEffect(() => {
-    if (currentMonth !== 2) return;
+    if (heroSlides.length === 0) return;
     const interval = setInterval(() => {
-      setHeroSlideIndex((prev) => (prev + 1) % febSlides.length);
+      setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length);
     }, 6000);
     return () => clearInterval(interval);
-  }, [currentMonth, febSlides.length]);
+  }, [currentMonth, heroSlides.length]);
 
   // 切换月份时重置轮播索引
   useEffect(() => {
@@ -81,14 +89,14 @@ export default function CalendarPage() {
   return (
     <div className="min-h-screen bg-black pt-20">
       {/* Hero Section */}
-      {currentMonth === 2 ? (
+      {heroSlides.length > 0 ? (
         <section className="relative w-full overflow-hidden bg-black" style={{ aspectRatio: '16/9', maxHeight: '70vh' }}>
-          {/* 二月份图片轮播 */}
-          {febSlides.map((slide, index) => (
+          {/* 课程图片轮播 */}
+          {heroSlides.map((slide, index) => (
             <img
               key={slide}
               src={slide}
-              alt={`${locale === 'zh' ? '二月课程' : 'February Course'} - Day ${index + 1}`}
+              alt={`${monthNames[locale as 'zh' | 'en'][currentMonth - 1]} - ${index + 1}`}
               className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ${
                 index === heroSlideIndex ? "opacity-100" : "opacity-0"
               }`}
@@ -96,7 +104,7 @@ export default function CalendarPage() {
           ))}
           {/* 轮播指示器 */}
           <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10">
-            {febSlides.map((_, index) => (
+            {heroSlides.map((_, index) => (
               <button
                 key={index}
                 onClick={() => setHeroSlideIndex(index)}
@@ -110,20 +118,20 @@ export default function CalendarPage() {
           </div>
           {/* 左右切换按钮 */}
           <button
-            onClick={() => setHeroSlideIndex((prev) => (prev - 1 + febSlides.length) % febSlides.length)}
+            onClick={() => setHeroSlideIndex((prev) => (prev - 1 + heroSlides.length) % heroSlides.length)}
             className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors"
           >
             <ChevronLeft size={24} />
           </button>
           <button
-            onClick={() => setHeroSlideIndex((prev) => (prev + 1) % febSlides.length)}
+            onClick={() => setHeroSlideIndex((prev) => (prev + 1) % heroSlides.length)}
             className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors"
           >
             <ChevronRight size={24} />
           </button>
-          {/* 日期标签 */}
+          {/* 页码标签 */}
           <div className="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/50 rounded-full text-white text-sm backdrop-blur-sm">
-            {locale === 'zh' ? `2月${heroSlideIndex + 1}日` : `Feb ${heroSlideIndex + 1}`}
+            {heroSlideIndex + 1} / {heroSlides.length}
           </div>
         </section>
       ) : (
