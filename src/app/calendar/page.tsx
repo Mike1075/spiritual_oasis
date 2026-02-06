@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { ChevronLeft, ChevronRight, Calendar, BookOpen, Star, Sparkles, Lock } from "lucide-react";
 import Link from "next/link";
@@ -13,6 +13,28 @@ export default function CalendarPage() {
 
   const monthData = monthsData.find(m => m.month === currentMonth);
   const quarterData = getQuarterByMonth(currentMonth);
+
+  // 二月份 Hero 轮播图片（28张，来自 Supabase Storage）
+  const SUPABASE_URL = "https://grgrnqlgufgahsstoawz.supabase.co";
+  const febSlides = Array.from({ length: 28 }, (_, i) => {
+    const day = String(i + 1).padStart(2, '0');
+    return `${SUPABASE_URL}/storage/v1/object/public/course-slides/february/feb-${day}.jpg`;
+  });
+
+  const [heroSlideIndex, setHeroSlideIndex] = useState(0);
+
+  useEffect(() => {
+    if (currentMonth !== 2) return;
+    const interval = setInterval(() => {
+      setHeroSlideIndex((prev) => (prev + 1) % febSlides.length);
+    }, 6000);
+    return () => clearInterval(interval);
+  }, [currentMonth, febSlides.length]);
+
+  // 切换月份时重置轮播索引
+  useEffect(() => {
+    setHeroSlideIndex(0);
+  }, [currentMonth]);
 
   const getDaysInMonth = (month: number, year: number = 2026) => {
     return new Date(year, month, 0).getDate();
@@ -59,27 +81,74 @@ export default function CalendarPage() {
   return (
     <div className="min-h-screen bg-black pt-20">
       {/* Hero Section */}
-      <section className="py-12 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center">
-            <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-300 text-sm mb-6">
-              <Calendar size={16} />
-              <span>2026 {locale === 'zh' ? '公益陪伴计划' : 'Public Welfare Program'}</span>
-            </div>
-            <h1 className="text-4xl md:text-5xl font-bold mb-4">
-              <span className="bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
-                {locale === 'zh' ? '365天觉醒之旅' : '365-Day Awakening Journey'}
-              </span>
-            </h1>
-            <p className="text-xl text-gray-400 max-w-2xl mx-auto">
-              {locale === 'zh'
-                ? '基于《灵魂永生》的全年心灵成长课程，每天一个主题，带你重新认识自己'
-                : 'A year-long spiritual growth course based on "Seth Speaks", with daily themes to help you rediscover yourself'}
-            </p>
+      {currentMonth === 2 ? (
+        <section className="relative w-full overflow-hidden bg-black" style={{ aspectRatio: '16/9', maxHeight: '70vh' }}>
+          {/* 二月份图片轮播 */}
+          {febSlides.map((slide, index) => (
+            <img
+              key={slide}
+              src={slide}
+              alt={`${locale === 'zh' ? '二月课程' : 'February Course'} - Day ${index + 1}`}
+              className={`absolute inset-0 w-full h-full object-contain transition-opacity duration-1000 ${
+                index === heroSlideIndex ? "opacity-100" : "opacity-0"
+              }`}
+            />
+          ))}
+          {/* 轮播指示器 */}
+          <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex items-center gap-1 z-10">
+            {febSlides.map((_, index) => (
+              <button
+                key={index}
+                onClick={() => setHeroSlideIndex(index)}
+                className={`w-2 h-2 rounded-full transition-all ${
+                  index === heroSlideIndex
+                    ? "bg-purple-400 w-6"
+                    : "bg-white/30 hover:bg-white/50"
+                }`}
+              />
+            ))}
           </div>
-        </div>
-      </section>
+          {/* 左右切换按钮 */}
+          <button
+            onClick={() => setHeroSlideIndex((prev) => (prev - 1 + febSlides.length) % febSlides.length)}
+            className="absolute left-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronLeft size={24} />
+          </button>
+          <button
+            onClick={() => setHeroSlideIndex((prev) => (prev + 1) % febSlides.length)}
+            className="absolute right-4 top-1/2 -translate-y-1/2 z-10 w-10 h-10 rounded-full bg-black/40 hover:bg-black/60 flex items-center justify-center text-white transition-colors"
+          >
+            <ChevronRight size={24} />
+          </button>
+          {/* 日期标签 */}
+          <div className="absolute top-4 right-4 z-10 px-3 py-1.5 bg-black/50 rounded-full text-white text-sm backdrop-blur-sm">
+            {locale === 'zh' ? `2月${heroSlideIndex + 1}日` : `Feb ${heroSlideIndex + 1}`}
+          </div>
+        </section>
+      ) : (
+        <section className="py-12 relative overflow-hidden">
+          <div className="absolute inset-0 bg-gradient-to-b from-purple-900/30 to-transparent" />
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div className="text-center">
+              <div className="inline-flex items-center gap-2 px-4 py-2 bg-emerald-500/20 rounded-full text-emerald-300 text-sm mb-6">
+                <Calendar size={16} />
+                <span>2026 {locale === 'zh' ? '公益陪伴计划' : 'Public Welfare Program'}</span>
+              </div>
+              <h1 className="text-4xl md:text-5xl font-bold mb-4">
+                <span className="bg-gradient-to-r from-purple-400 to-emerald-400 bg-clip-text text-transparent">
+                  {locale === 'zh' ? '365天觉醒之旅' : '365-Day Awakening Journey'}
+                </span>
+              </h1>
+              <p className="text-xl text-gray-400 max-w-2xl mx-auto">
+                {locale === 'zh'
+                  ? '基于《灵魂永生》的全年心灵成长课程，每天一个主题，带你重新认识自己'
+                  : 'A year-long spiritual growth course based on "Seth Speaks", with daily themes to help you rediscover yourself'}
+              </p>
+            </div>
+          </div>
+        </section>
+      )}
 
       {/* Quarter & Month Theme */}
       <section className="py-8">
