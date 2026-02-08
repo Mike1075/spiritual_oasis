@@ -24,6 +24,10 @@ export default function CalendarPage() {
     6: { folder: "june", prefix: "jun", count: 30 },
     7: { folder: "july", prefix: "jul", count: 24 },
     8: { folder: "august", prefix: "aug", count: 28 },
+    9: { folder: "september", prefix: "sep", count: 26 },
+    10: { folder: "october", prefix: "oct", count: 39 },
+    11: { folder: "november", prefix: "nov", count: 23 },
+    12: { folder: "december", prefix: "dec", count: 30 },
   };
 
   const slideConfig = heroSlidesConfig[currentMonth];
