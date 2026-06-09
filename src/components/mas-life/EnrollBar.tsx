@@ -1,8 +1,8 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Link from "next/link";
 import { ArrowRight } from "lucide-react";
+import { XIAOE_COURSE_URL } from "@/data/masLife";
 
 // 早鸟截止：2026-06-18 23:59:59 (北京时间 UTC+8)
 const EARLY_BIRD_DEADLINE = Date.UTC(2026, 5, 18, 15, 59, 59); // 18日23:59:59 CST = 15:59:59 UTC
@@ -56,13 +56,15 @@ export default function EnrollBar() {
             第一天学不会，100% 全额退款
           </p>
         </div>
-        <Link
-          href="#enroll"
+        <a
+          href={XIAOE_COURSE_URL}
+          target="_blank"
+          rel="noopener noreferrer"
           className="flex shrink-0 items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-500 to-emerald-400 px-5 py-2.5 text-sm font-bold text-white transition active:scale-95 sm:px-7 sm:text-base"
         >
           立即报名
           <ArrowRight className="h-4 w-4" />
-        </Link>
+        </a>
       </div>
     </div>
   );

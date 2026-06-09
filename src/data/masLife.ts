@@ -326,3 +326,7 @@ export const FEATURED_TESTIMONIAL = {
   videoUrl: "https://youtube.com/live/drsWsIbDe1g",
   videoNote: "看直播回放对谈片段（第 5–26 分钟）",
 };
+
+// ===== 小鹅通课程购买链接（直接报名/购买）=====
+export const XIAOE_COURSE_URL =
+  "https://appvwgstfof3025.pc.xiaoe-tech.com/p/t_pc/goods_pc_detail/goods_detail/course_3EIOZrG6OodXDDD3ZZNHmzH4UG0?app_id=appvwgstfof3025&course_id=course_3EIOZrG6OodXDDD3ZZNHmzH4UG0";

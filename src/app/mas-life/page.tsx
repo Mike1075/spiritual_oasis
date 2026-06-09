@@ -33,6 +33,7 @@ import {
   TIMELINE_STATS,
   CASES,
   FEATURED_TESTIMONIAL,
+  XIAOE_COURSE_URL,
 } from "@/data/masLife";
 
 export const metadata: Metadata = {
@@ -700,15 +701,24 @@ export default function MasLifePage() {
               </span>
             </div>
 
-            <Link
-              href="/gaokao"
+            <a
+              href={XIAOE_COURSE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
               className="mt-8 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-emerald-500 to-emerald-400 py-4 text-lg font-bold text-emerald-950 transition active:scale-[0.99]"
             >
-              做个定位自测，领名额信息 + 报名
+              立即报名 · 小鹅通购买
               <ArrowRight className="h-5 w-5" />
+            </a>
+            <Link
+              href="/gaokao"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-full border border-white/20 py-3.5 text-base font-semibold text-gray-200 transition hover:bg-white/5"
+            >
+              <Sparkles className="h-4 w-4 text-emerald-300" />
+              还在犹豫？先免费做 AI 时代定位自测
             </Link>
             <p className="mt-3 text-center text-xs text-gray-400">
-              先免费看清你的 AI 时代方向，再决定要不要上车。
+              点「立即报名」直达小鹅通购买；学生 8 折 / 老学员 7.5 折请联系客服核验。
             </p>
           </div>
         </div>
