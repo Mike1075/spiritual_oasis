@@ -310,7 +310,7 @@ export const CASES: Case[] = [
   },
 ];
 
-// ===== 最新 · 直播对谈学员分享（王小沐，YouTube 直播 5–26 分，本地转写提炼）=====
+// ===== 最新 · 直播对谈学员分享（王小沐，直播回放本地转写提炼；视频用 B 站国内可访问）=====
 export const FEATURED_TESTIMONIAL = {
   badge: "最新 · 直播对谈",
   name: "王小沐",
@@ -323,8 +323,8 @@ export const FEATURED_TESTIMONIAL = {
     "“没学过的人只能当被动的‘使用者’：人家开放什么你用什么；学过的人是‘创造者’，什么想法都能抽象成一个系统、把它造出来。”",
     "“对这个感兴趣的，真的值得去学一下——它不是制造焦虑，是一项会跟着你一起成长的、实打实的生存技能。”",
   ],
-  videoUrl: "https://youtube.com/live/drsWsIbDe1g",
-  videoNote: "看直播回放对谈片段（第 5–26 分钟）",
+  videoUrl: "https://www.bilibili.com/video/BV1iXE363Eix/",
+  videoNote: "看直播回放 · 王小沐现场分享（B 站）",
 };
 
 // ===== 小鹅通课程购买链接（直接报名/购买）=====
