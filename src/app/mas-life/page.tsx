@@ -17,6 +17,7 @@ import {
   Award,
   Quote,
   ExternalLink,
+  PlayCircle,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import {
@@ -31,6 +32,7 @@ import {
   TIMELINE,
   TIMELINE_STATS,
   CASES,
+  FEATURED_TESTIMONIAL,
 } from "@/data/masLife";
 
 export const metadata: Metadata = {
@@ -512,6 +514,49 @@ export default function MasLifePage() {
             <p className="mx-auto mt-4 max-w-2xl text-gray-400">
               他们的起点，大概率比你想象的还低。每个故事都来自我们公众号的学员自述，可点「阅读原文」核实。
             </p>
+          </div>
+
+          {/* 最新 · 直播对谈 featured */}
+          <div className="mb-10 overflow-hidden rounded-3xl border border-emerald-400/30 bg-gradient-to-br from-emerald-500/10 via-transparent to-purple-500/10">
+            <div className="grid md:grid-cols-5">
+              <div className="flex flex-col justify-center gap-4 p-8 md:col-span-3 md:p-10">
+                <span className="w-fit rounded-full border border-emerald-400/60 bg-emerald-400/10 px-3 py-1 text-xs text-emerald-300">
+                  {FEATURED_TESTIMONIAL.badge}
+                </span>
+                <div className="flex gap-3">
+                  <Quote className="h-8 w-8 shrink-0 text-emerald-400/70" />
+                  <p className="text-xl font-semibold leading-relaxed text-white md:text-2xl">
+                    {FEATURED_TESTIMONIAL.quote}
+                  </p>
+                </div>
+                <ul className="space-y-2 border-l-2 border-white/10 pl-4">
+                  {FEATURED_TESTIMONIAL.points.map((p, i) => (
+                    <li key={i} className="text-[15px] leading-relaxed text-gray-300">
+                      {p}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-1">
+                  <div className="font-bold text-white">{FEATURED_TESTIMONIAL.name}</div>
+                  <div className="text-sm text-gray-400">
+                    {FEATURED_TESTIMONIAL.role}
+                  </div>
+                </div>
+              </div>
+              <a
+                href={FEATURED_TESTIMONIAL.videoUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative flex min-h-[200px] items-center justify-center bg-gradient-to-br from-purple-700/40 to-emerald-700/30 p-8 md:col-span-2"
+              >
+                <div className="flex flex-col items-center gap-3 text-center">
+                  <PlayCircle className="h-16 w-16 text-white transition group-hover:scale-110" />
+                  <span className="text-sm font-medium text-white">
+                    {FEATURED_TESTIMONIAL.videoNote}
+                  </span>
+                </div>
+              </a>
+            </div>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
