@@ -521,21 +521,30 @@ export default function MasLifePage() {
                 href={c.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-emerald-400/40 hover:bg-white/[0.05]"
+                className="group flex flex-col overflow-hidden rounded-2xl border border-white/10 bg-white/[0.03] transition hover:border-emerald-400/40 hover:bg-white/[0.05]"
               >
-                <div className="mb-1 text-lg font-bold text-white">{c.name}</div>
-                <div className="mb-4 text-xs leading-snug text-purple-300">
-                  {c.role}
+                {/* 公众号原文真实封面 */}
+                <div
+                  className="relative h-44 bg-cover bg-center"
+                  style={{ backgroundImage: `url(/images/mas-life/cases/${c.id}.jpg)` }}
+                >
+                  <div className="absolute inset-0 bg-gradient-to-t from-gray-950 via-gray-950/20 to-transparent" />
                 </div>
-                <p className="mb-4 text-sm leading-relaxed text-gray-400">
-                  {c.built}
-                </p>
-                <div className="mt-auto rounded-lg border-l-2 border-emerald-400 bg-emerald-400/[0.07] p-3 text-sm leading-relaxed text-emerald-50">
-                  {c.result}
-                </div>
-                <div className="mt-4 flex items-center gap-1.5 text-xs text-sky-300 transition group-hover:gap-2.5">
-                  阅读原文（公众号「爱学 AI 教育」）
-                  <ExternalLink className="h-3.5 w-3.5" />
+                <div className="flex flex-1 flex-col p-6">
+                  <div className="mb-1 text-lg font-bold text-white">{c.name}</div>
+                  <div className="mb-4 text-xs leading-snug text-purple-300">
+                    {c.role}
+                  </div>
+                  <p className="mb-4 text-sm leading-relaxed text-gray-400">
+                    {c.built}
+                  </p>
+                  <div className="mt-auto rounded-lg border-l-2 border-emerald-400 bg-emerald-400/[0.07] p-3 text-sm leading-relaxed text-emerald-50">
+                    {c.result}
+                  </div>
+                  <div className="mt-4 flex items-center gap-1.5 text-xs text-sky-300 transition group-hover:gap-2.5">
+                    阅读原文（公众号「爱学 AI 教育」）
+                    <ExternalLink className="h-3.5 w-3.5" />
+                  </div>
                 </div>
               </a>
             ))}
