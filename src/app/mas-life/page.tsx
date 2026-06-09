@@ -415,7 +415,8 @@ export default function MasLifePage() {
             <h2 className="text-3xl font-bold md:text-5xl">独特性，藏不住</h2>
           </div>
 
-          <div className="overflow-hidden rounded-2xl border border-white/10">
+          <div className="-mx-5 overflow-x-auto px-5 sm:mx-0 sm:px-0">
+           <div className="min-w-[680px] overflow-hidden rounded-2xl border border-white/10">
             <div className="grid grid-cols-4 bg-white/[0.04] text-sm font-semibold">
               <div className="p-4 text-gray-400" />
               {COMPARE.cols.map((c, i) => (
@@ -451,6 +452,7 @@ export default function MasLifePage() {
                 ))}
               </div>
             ))}
+           </div>
           </div>
           <p className="mt-5 text-center text-sm text-gray-500">
             在低信任的市场里，<b className="text-gray-300">诚实就是第一生产力</b>
