@@ -2,17 +2,25 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
 
 export default function Header() {
   const t = useTranslations("nav");
+  const pathname = usePathname();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  // 高考留资落地页保持纯净，不显示全站导航
+  if (pathname?.startsWith("/gaokao")) {
+    return null;
+  }
 
   const navItems = [
     { href: "/", label: t("home") },
     { href: "/calendar", label: t("calendar") },
+    { href: "/mas-life", label: t("masLife") },
     { href: "/academy", label: t("academy") },
     { href: "/metaverse", label: t("metaverse") },
     { href: "/dao", label: t("dao") },

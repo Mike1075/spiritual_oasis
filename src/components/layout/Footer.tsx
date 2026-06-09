@@ -2,10 +2,17 @@
 
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 export default function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const pathname = usePathname();
+
+  // 高考留资落地页保持纯净，不显示页脚
+  if (pathname?.startsWith("/gaokao")) {
+    return null;
+  }
 
   return (
     <footer className="bg-black border-t border-gray-800">

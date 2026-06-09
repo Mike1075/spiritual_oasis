@@ -1,6 +1,7 @@
 "use client";
 
 import Hero from "@/components/sections/Hero";
+import MasLifePreview from "@/components/sections/MasLifePreview";
 import Plan2026 from "@/components/sections/Plan2026";
 import AcademyPreview from "@/components/sections/AcademyPreview";
 import MetaversePreview from "@/components/sections/MetaversePreview";
@@ -14,6 +15,7 @@ export default function Home() {
   return (
     <>
       <Hero />
+      <MasLifePreview />
       {showHoliday && <HolidaySection />}
       <Plan2026 />
       <AcademyPreview />
