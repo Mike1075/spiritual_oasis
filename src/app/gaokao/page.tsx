@@ -438,7 +438,15 @@ function DoneBlock({
       </div>
 
       {/* 夏令营 offer */}
-      <div className="mb-5 rounded-2xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 to-sky-500/10 p-5 text-left">
+      <div className="mb-5 rounded-2xl border border-purple-400/40 bg-gradient-to-br from-purple-600/15 via-fuchsia-600/10 to-emerald-500/10 p-5 text-left">
+        <div className="mb-3 flex flex-wrap gap-2">
+          <span className="rounded-full border border-purple-300/50 px-2.5 py-0.5 text-xs text-purple-100">
+            2026 暑期 · 深圳夏令营
+          </span>
+          <span className="rounded-full border border-rose-400/50 bg-rose-500/10 px-2.5 py-0.5 text-xs text-rose-200">
+            仅 30 个名额 · 6/18 涨价
+          </span>
+        </div>
         <div className="text-base font-bold">把定位，真的落成你的第一个作品</div>
         <p className="mt-2 text-sm leading-relaxed text-gray-300">
           我们做了 5 期：最近一期带零基础的同学
@@ -455,10 +463,10 @@ function DoneBlock({
           <li>🛡 第一天听不懂学不会，100% 全额退款</li>
         </ul>
         <Link
-          href="/mas-life"
+          href="/mas-life#enroll"
           className="mt-4 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 py-3.5 font-bold text-white transition active:scale-[0.99]"
         >
-          看夏令营详情
+          看夏令营详情 · 报名
           <ArrowRight className="h-5 w-5" />
         </Link>
       </div>
