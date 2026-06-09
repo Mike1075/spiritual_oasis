@@ -323,8 +323,8 @@ export const FEATURED_TESTIMONIAL = {
     "“没学过的人只能当被动的‘使用者’：人家开放什么你用什么；学过的人是‘创造者’，什么想法都能抽象成一个系统、把它造出来。”",
     "“对这个感兴趣的，真的值得去学一下——它不是制造焦虑，是一项会跟着你一起成长的、实打实的生存技能。”",
   ],
-  videoUrl: "https://www.bilibili.com/video/BV1iXE363Eix/",
-  videoNote: "看直播回放 · 王小沐现场分享（B 站）",
+  videoUrl: "https://www.bilibili.com/video/BV1iXE363Eix/?t=309",
+  videoNote: "看直播回放 · 王小沐现场分享（B 站 · 5:09–26:00）",
 };
 
 // ===== 小鹅通课程购买链接（直接报名/购买）=====
