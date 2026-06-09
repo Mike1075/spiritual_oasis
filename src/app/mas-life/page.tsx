@@ -125,7 +125,7 @@ export default function MasLifePage() {
           <div className="mt-14 grid max-w-2xl grid-cols-2 gap-x-6 gap-y-5 border-t border-white/10 pt-8 sm:grid-cols-4">
             {[
               ["4 年", "真实时间线"],
-              ["5 期", "两百多篇实名案例"],
+              ["512 位", "累计 AI 学员"],
               ["60 天", "零基础上架 App*"],
               ["¥119/月", "成本封顶 · 真账"],
             ].map(([a, b]) => (
