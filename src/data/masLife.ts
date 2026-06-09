@@ -188,3 +188,124 @@ export const FAQ = [
     a: "相反——课会结束，系统不会。它住在你电脑里，越用越懂你、还会自己变强，再配 21 天陪跑把习惯固化成肌肉记忆。",
   },
 ];
+
+// ===== 我们的来时路（机构时间线，依据公众号「5届营·200+篇学员实录」）=====
+export const TIMELINE = [
+  {
+    year: "2022",
+    title: "别人还在看热闹，我们已下场实战",
+    desc: "ChatGPT 还没刷屏、AI 还是极客圈的新词，团队已真金白银用它做项目、踩坑、沉淀方法，并办起首届 AI 实操营。",
+  },
+  {
+    year: "2023",
+    title: "把 AI 做成一台能卖的硬件",
+    desc: "推出「爱学一派」LOVE PAD AI 伴学平板，2 个月营收破百万、深圳开出 AI 智能自习室；首创「少年马斯克 AI 夏令营」，孩子人手一台亲手开发 AI 游戏与绘本并上线变现。",
+  },
+  {
+    year: "2024",
+    title: "AI 走进校园与日常",
+    desc: "AI 学习产品押中当年四省高考作文方向；年底推出面向更广人群的「未来智创营」，把「工作流」「数字分身」做成课。",
+  },
+  {
+    year: "2025",
+    title: "零代码也能做出真东西",
+    desc: "「爱学 AI 创富营」90 天陪跑、拿作品毕业——没写过一行代码的人做出数十个小程序与自动化应用；「Vibe Coding」带零基础 60 天做出真实上架 App Store 的游戏《地球新主》：48,121 行生产级代码、一人抵 15 人团队、接入真实支付。",
+  },
+  {
+    year: "2026",
+    title: "交付「AI 系统架构营」",
+    desc: "给人生装一套生命操作系统——飞书在前、AI 代理在后、本地大脑 + 云端大脑协同，架构与黄仁勋官宣的 AI PC 几乎同构。你不是在追热点，是在大厂官宣之前提前住进未来。",
+  },
+];
+
+export const TIMELINE_STATS = [
+  ["5 届", "AI 营 / 冬令营"],
+  ["200+", "篇实名学员实录"],
+  ["48,121 行", "AI 代码 · 上架 App Store"],
+  ["50万+250万", "学员项目融资*"],
+];
+
+// ===== 学员实录墙（真实改编自公众号原文，沿用自述名 + 链原文）=====
+export type Case = {
+  id: string;
+  name: string;
+  role: string;
+  built: string;
+  result: string;
+  url: string;
+};
+
+export const CASES: Case[] = [
+  {
+    id: "founder",
+    name: "一位 40 岁+ 创始人",
+    role: "前德企高管 · 经《赛斯资料》结缘心灵家园",
+    built:
+      "在创富营接下首个商业项目——为美国保险代理公司研发 AI 保险教练（n8n + Supabase + RAG），从“用工具”到“指挥一支数字军团”。",
+    result: "获投资人 50 万天使投资，后追加 250 万。儿子说她“眼里有了光”。",
+    url: "https://mp.weixin.qq.com/s/n89fN8zhqUHCgPLY2qBx3g",
+  },
+  {
+    id: "indie",
+    name: "一位独立开发者",
+    role: "独立 App 开发者",
+    built:
+      "用 AI 写 StoreKit 代码、生成苹果审核申诉，做出《衣镜 dressmi》《食物热量识别》两款 App。",
+    result: "历经 7 次被拒、逐条攻克，最终全部真实上架 App Store。",
+    url: "https://mp.weixin.qq.com/s/JRHDZdgTIy4_-fTABs12ig",
+  },
+  {
+    id: "ouyang",
+    name: "欧阳双",
+    role: "舞蹈老师 / 壁画师 / 极限运动组织者",
+    built:
+      "90 天做出 20 个 AI 小程序——宝宝成长日记、番茄钟、垃圾分类、五行穿衣（已上线）……",
+    result: "获爱学 AI 官方「AI 创富实践家」认证，全额返还学费。",
+    url: "https://mp.weixin.qq.com/s/1s2MSvl3CsrSXdB9NL1Imw",
+  },
+  {
+    id: "mom",
+    name: "直觉猫小7",
+    role: "四个孩子的妈妈 · 在职",
+    built:
+      "用 AI 重做公文材料、辅导孩子作业，做「明星数字解读」视频；把被生活裹挟的时间“偷”了回来。",
+    result: "工作效率翻倍、准时下班；视频号/抖音 70 天涨粉 500+；优秀学员、全额返费。",
+    url: "https://mp.weixin.qq.com/s/be9Dz4xz9Zmf5Us7JUXDZg",
+  },
+  {
+    id: "consultant",
+    name: "一位 48 岁学员",
+    role: "企业管理咨询师 / 手工博主 · 零基础",
+    built:
+      "零代码起步，用扣子 / n8n 开发「Inside me」（中年女性 AI 心灵陪伴）、「诗来词往」等小程序与智能体。",
+    result: "被评「特别优秀学员」，免 9800 学费 + 包食宿到线下学习。",
+    url: "https://mp.weixin.qq.com/s/bd_QXjE6FHTQ-aQHBgutaA",
+  },
+  {
+    id: "tara",
+    name: "Tara",
+    role: "非技术背景职场人",
+    built:
+      "90 天独立开发 10 个上线 AI 应用：《夸夸灵》、政府培训 AI 客服、成都租房找铺助手、梦境分析智能体……",
+    result: "政府客服效率提升 80%；从重复劳动的职场人，蜕变为 AI 产品人。",
+    url: "https://mp.weixin.qq.com/s/JkFOgQqXjOQQYXXBXdmpgQ",
+  },
+  {
+    id: "zhiyu",
+    name: "止语",
+    role: "生命数字导师 · 爱学 AI 第三期",
+    built:
+      "围绕生命数字做出 AI 产品矩阵——生命方程式牌卡、生命数字地图、人生三重奏、DISC 测试……独立打通微信支付商业闭环。",
+    result: "社群一致好评、收到「红包鼓励」累计 1000+，从开发者蜕变为产品人。",
+    url: "https://mp.weixin.qq.com/s/4ZYrUckAWx8m4Fk0jj3Kpg",
+  },
+  {
+    id: "eve",
+    name: "Eve",
+    role: "心灵家园 AI 应用实践课毕业生 · 程序员",
+    built:
+      "放下“收藏夹式学习”，「听话照做」90 天日更，把做事当成借事修心、治好精神内耗。",
+    result: "小红书两篇 3w+ 爆款、粉丝破 500、评为优秀学员、拿回学费保证金。",
+    url: "https://mp.weixin.qq.com/s/2uk8USovBW1PB7za3hBlrA",
+  },
+];

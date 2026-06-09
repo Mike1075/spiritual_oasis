@@ -16,6 +16,7 @@ import {
   Calendar,
   Award,
   Quote,
+  ExternalLink,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import {
@@ -27,6 +28,9 @@ import {
   EDGES,
   COMPARE,
   FAQ,
+  TIMELINE,
+  TIMELINE_STATS,
+  CASES,
 } from "@/data/masLife";
 
 export const metadata: Metadata = {
@@ -448,6 +452,97 @@ export default function MasLifePage() {
           <p className="mt-5 text-center text-sm text-gray-500">
             在低信任的市场里，<b className="text-gray-300">诚实就是第一生产力</b>
             ——我们最大的武器，是别人造不出的：4 年时间线 + 实名战果 + 真机验证。
+          </p>
+        </div>
+      </section>
+
+      {/* ============ 我们的来时路（时间线） ============ */}
+      <section className="border-t border-white/5 px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-12 text-center">
+            <Eyebrow>
+              <span className="mx-auto">凭什么信我们</span>
+            </Eyebrow>
+            <h2 className="text-3xl font-bold md:text-5xl">我们的来时路</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-gray-400">
+              判断一家机构有没有实力，先看它“什么时候开始做的”。把我们这几年的动作摆在 AI 的时间线上——你就明白什么叫踩在时代前面。
+            </p>
+          </div>
+
+          {/* 数字条 */}
+          <div className="mb-14 grid grid-cols-2 gap-x-6 gap-y-6 rounded-2xl border border-white/10 bg-white/[0.03] p-7 sm:grid-cols-4">
+            {TIMELINE_STATS.map(([a, b]) => (
+              <div key={b} className="text-center">
+                <div className="bg-gradient-to-r from-purple-300 to-emerald-300 bg-clip-text text-2xl font-extrabold text-transparent md:text-3xl">
+                  {a}
+                </div>
+                <div className="mt-1 text-xs leading-snug text-gray-400">{b}</div>
+              </div>
+            ))}
+          </div>
+
+          {/* 时间线 */}
+          <div className="relative ml-3 border-l border-white/15 pl-8 sm:ml-6 sm:pl-10">
+            {TIMELINE.map((t) => (
+              <div key={t.year} className="relative pb-10 last:pb-0">
+                <span className="absolute -left-[37px] top-1 flex h-5 w-5 items-center justify-center sm:-left-[47px]">
+                  <span className="h-3 w-3 rounded-full bg-gradient-to-br from-purple-400 to-emerald-400 ring-4 ring-black" />
+                </span>
+                <div className="mb-1 font-mono text-xl font-extrabold text-emerald-400">
+                  {t.year}
+                </div>
+                <h3 className="mb-2 text-lg font-bold">{t.title}</h3>
+                <p className="max-w-2xl text-[15px] leading-relaxed text-gray-300">
+                  {t.desc}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ 学员实录墙 ============ */}
+      <section className="border-t border-white/5 bg-gradient-to-b from-black via-gray-950 to-black px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 text-center">
+            <Eyebrow>
+              <span className="mx-auto">真名 · 真人 · 真作品</span>
+            </Eyebrow>
+            <h2 className="text-3xl font-bold md:text-5xl">学员实录墙</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-gray-400">
+              他们的起点，大概率比你想象的还低。每个故事都来自我们公众号的学员自述，可点「阅读原文」核实。
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+            {CASES.map((c) => (
+              <a
+                key={c.id}
+                href={c.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group flex flex-col rounded-2xl border border-white/10 bg-white/[0.03] p-6 transition hover:border-emerald-400/40 hover:bg-white/[0.05]"
+              >
+                <div className="mb-1 text-lg font-bold text-white">{c.name}</div>
+                <div className="mb-4 text-xs leading-snug text-purple-300">
+                  {c.role}
+                </div>
+                <p className="mb-4 text-sm leading-relaxed text-gray-400">
+                  {c.built}
+                </p>
+                <div className="mt-auto rounded-lg border-l-2 border-emerald-400 bg-emerald-400/[0.07] p-3 text-sm leading-relaxed text-emerald-50">
+                  {c.result}
+                </div>
+                <div className="mt-4 flex items-center gap-1.5 text-xs text-sky-300 transition group-hover:gap-2.5">
+                  阅读原文（公众号「爱学 AI 教育」）
+                  <ExternalLink className="h-3.5 w-3.5" />
+                </div>
+              </a>
+            ))}
+          </div>
+
+          <p className="mx-auto mt-8 max-w-2xl text-center text-xs leading-relaxed text-gray-600">
+            以上均为学员真实自述、个例呈现，不代表普遍结果；我们不承诺任何收入或融资结果。部分学员应本人意愿匿名。
           </p>
         </div>
       </section>
