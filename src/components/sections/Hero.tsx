@@ -1,7 +1,7 @@
 "use client";
 
 import { useTranslations, useLocale } from "next-intl";
-import { ChevronDown, Download } from "lucide-react";
+import { ChevronDown, Download, GraduationCap } from "lucide-react";
 import { useEffect, useState } from "react";
 import { getHeroSlides } from "@/lib/dailyContent";
 import Link from "next/link";
@@ -38,6 +38,15 @@ export default function Hero() {
         {/* 轻微遮罩层 */}
         <div className="absolute inset-0 bg-black/30" />
       </div>
+
+      {/* MAS-Life 报名 Button - Top Left */}
+      <Link
+        href="/mas-life"
+        className="absolute top-24 left-6 z-20 flex items-center gap-2 px-5 py-3 bg-gradient-to-r from-purple-600 to-emerald-500 hover:from-purple-700 hover:to-emerald-600 rounded-full text-white font-medium transition-all duration-300 hover:scale-105 shadow-2xl"
+      >
+        <GraduationCap size={18} />
+        <span>{locale === "zh" ? "MAS-Life 夏令营报名" : "Join MAS-Life Camp"}</span>
+      </Link>
 
       {/* Download Button - Top Right */}
       <Link
