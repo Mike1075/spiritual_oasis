@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import {
   BadgeCheck,
   CalendarClock,
@@ -109,7 +110,9 @@ function PayRefHelp() {
       >
         <HelpCircle className="h-5 w-5" />
       </button>
-      {open && (
+      {/* 用 Portal 挂到 body：触发按钮的祖先带 transform，会让 fixed 失效（弹窗被压成窄条的 bug） */}
+      {open &&
+        createPortal(
         <div
           className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 sm:items-center sm:p-6"
           onClick={() => setOpen(false)}
@@ -203,7 +206,8 @@ function PayRefHelp() {
               知道了，去填写
             </button>
           </div>
-        </div>
+        </div>,
+        document.body
       )}
     </>
   );
