@@ -4,8 +4,8 @@ import Link from "next/link";
 import { ArrowRight, Sparkles, Calendar, Wallet, ShieldCheck } from "lucide-react";
 
 const HIGHLIGHTS = [
-  { icon: Calendar, text: "7/6–7/12 深圳夏令营 + 21 天陪跑" },
-  { icon: Wallet, text: "早鸟 4980（6/18 前）· 应届高考生 8 折" },
+  { icon: Calendar, text: "28 天 · 深/京/沪线下 + 线上全球同价" },
+  { icon: Wallet, text: "早鸟 4980（6/18 前）· 学生/拼团 8 折" },
   { icon: ShieldCheck, text: "第一天学不会，100% 全额退款" },
 ];
 

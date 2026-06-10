@@ -44,7 +44,7 @@ export default function Hero() {
           className="absolute left-3 top-20 z-20 flex items-center gap-1.5 rounded-full bg-gradient-to-r from-purple-600 to-emerald-500 px-3 py-2 text-xs font-medium text-white shadow-2xl transition-all duration-300 hover:scale-105 sm:left-6 sm:top-24 sm:gap-2 sm:px-5 sm:py-3 sm:text-base"
         >
           <GraduationCap className="h-4 w-4 shrink-0 sm:h-[18px] sm:w-[18px]" />
-          <span>{locale === "zh" ? "夏令营报名" : "Join Camp"}</span>
+          <span>{locale === "zh" ? "课程报名" : "Enroll Now"}</span>
         </Link>
 
         {/* Download Button - Top Right */}

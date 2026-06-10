@@ -40,7 +40,7 @@ import {
 export const metadata: Metadata = {
   title: "MAS-Life OS — 给你装一个会帮你的系统 | 心灵家园",
   description:
-    "不是一门 AI 课，是 28 天亲手给你装一套会教你想、陪你练、帮你造的活系统。AI 时代普通人改命的必修课。7/6 深圳夏令营 + 21 天陪跑。",
+    "不是一门 AI 课，是 28 天亲手给你装一套会教你想、陪你练、帮你造的活系统。AI 时代普通人改命的必修课。深圳/北京/上海线下 + 线上全球同价，早鸟 4980 至 6/18。",
 };
 
 const FACTOR_ICONS = [Compass, Brain, Gauge];
@@ -111,7 +111,7 @@ export default function MasLifePage() {
               href="#enroll"
               className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-8 py-4 text-lg font-bold transition hover:scale-[1.02]"
             >
-              查看夏令营 · 立即报名
+              查看报名方案 · 早鸟 4980
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
@@ -673,10 +673,10 @@ export default function MasLifePage() {
           <div className="rounded-3xl border border-purple-400/40 bg-gradient-to-br from-purple-600/20 via-fuchsia-600/10 to-emerald-500/10 p-8 md:p-12">
             <div className="mb-5 flex flex-wrap items-center gap-3">
               <span className="rounded-full border border-purple-300/50 px-3 py-1 text-xs text-purple-100">
-                2026 暑期 · 深圳线下夏令营
+                人生方向设计 · 28 天课程
               </span>
               <span className="rounded-full border border-rose-400/50 bg-rose-500/10 px-3 py-1 text-xs text-rose-200">
-                仅 30 个名额 · 6/18 涨价
+                三城线下各限 50 席 · 6/18 涨价
               </span>
             </div>
             <h2 className="text-3xl font-extrabold leading-tight md:text-5xl">
@@ -684,14 +684,14 @@ export default function MasLifePage() {
             </h2>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2">
-              <Spec icon={Calendar} title="时间地点">
-                7/6–7/12 深圳线下 + 21 天线上陪跑
+              <Spec icon={Calendar} title="开课方式">
+                深圳 / 北京 / 上海线下小班 + 线上全球可报 · 同价同课
               </Spec>
               <Spec icon={Wallet} title="价格 · 早鸟">
                 <b className="text-emerald-300">早鸟 4980</b>（6/18 前）· 之后 6980
               </Spec>
               <Spec icon={Award} title="折扣">
-                应届高考生 8 折 · 老学员 7.5 折（需核验）
+                金卡 / 学生 8 折 · 老学员 75 折 · 3 人拼团 8 折（仅新人）
               </Spec>
               <Spec icon={ShieldCheck} title="风险逆转">
                 第一天学不会，<b className="text-emerald-300">100% 全额退款</b>
@@ -700,10 +700,11 @@ export default function MasLifePage() {
 
             <div className="mt-8 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-relaxed text-gray-300">
               <b className="text-white">你会带走：</b>
-              一套真在跑的「硅基外骨骼」+ 你的方向卡 + 你的第一个真产品 + 一块诚实仪表盘 +
-              21 天陪跑。
+              一套真在跑的「硅基外骨骼」+ 你的方向方案 + 你的第一个真产品 +
+              一块诚实仪表盘。课程结束，系统带走，一直跑。
               <span className="mt-2 block text-gray-500">
-                深圳场最多 50 人，仅放 <b className="text-white">30 个名额</b>，线下小班，先到先得。
+                深圳 / 北京 / 上海线下各限{" "}
+                <b className="text-white">50 席</b>，小班先到先得；线上不限名额，海外可报。
               </span>
             </div>
 
@@ -724,7 +725,8 @@ export default function MasLifePage() {
               还在犹豫？先免费做 AI 时代定位自测
             </Link>
             <p className="mt-3 text-center text-xs text-gray-400">
-              点「立即报名」直达小鹅通购买；学生 8 折 / 老学员 7.5 折请联系客服核验。
+              点「立即报名」直达小鹅通，金卡 / 老学员折扣自动显示；学生 8 折、3
+              人拼团（仅新人）及 618 锁位通道请进意向群找客服。
             </p>
           </div>
         </div>

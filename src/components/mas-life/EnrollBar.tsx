@@ -48,8 +48,8 @@ export default function EnrollBar() {
             </p>
           ) : (
             <p className="truncate text-sm text-gray-300">
-              7/6 深圳夏令营 ·{" "}
-              <b className="text-emerald-300">限 30 个名额</b>
+              深 / 京 / 沪线下各限{" "}
+              <b className="text-emerald-300">50 席</b> · 线上全球可报
             </p>
           )}
           <p className="hidden text-xs text-gray-500 sm:block">
