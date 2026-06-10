@@ -737,6 +737,14 @@ export default function LockClient() {
                 客服将在 <strong>24 小时内</strong>核验到账并与你确认
                 （{session}）。请<strong>保存好付款凭证截图</strong>。
               </p>
+              {result.teamCode && result.teamComplete && (
+                <p className="mx-auto mt-3 max-w-md rounded-xl border border-emerald-400/30 bg-black/30 p-3 text-sm leading-relaxed text-white/75">
+                  <strong className="text-emerald-200">接下来：</strong>
+                  客服核验三位的 618 到账后会逐一联系你们，发放专属报名通道——
+                  <strong>开课前补尾款 3366</strong>（618 + 3366 = 拼团价
+                  3984）即完成报名，之后等开课通知就行。
+                </p>
+              )}
             </div>
 
             {/* 拼团分享区 */}

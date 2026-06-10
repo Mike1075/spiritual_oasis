@@ -14,6 +14,7 @@ import {
   maskName,
   getTeamMembers,
   cityFull,
+  countActiveRecords,
 } from "@/lib/lock";
 
 export const runtime = "nodejs";
@@ -104,6 +105,23 @@ export async function POST(req: Request) {
       { ok: false, error: "系统暂时不可用，请直接联系群内客服锁位" },
       { status: 503 }
     );
+  }
+
+  // 一个联系方式只允许一条有效锁位记录：已锁位/已在团（含已成团）的人
+  // 不能再次提交或另开新团——改类型/换团走"自助修改"，特殊情况找客服
+  try {
+    if ((await countActiveRecords(contact)) > 0) {
+      return NextResponse.json(
+        {
+          ok: false,
+          error:
+            "这个联系方式已有锁位记录，无需重复提交。想改类型/场次或换团，请用页面上方的'自助修改'；要为家人朋友再锁一个名额，请用对方的手机/微信号提交，或联系群内客服。",
+        },
+        { status: 409 }
+      );
+    }
+  } catch {
+    // 查重失败不阻断提交（宁可放过让客服核验时去重，不挡真实付款用户）
   }
 
   // 拼团仅限新人；个人锁位允许填身份（金卡/老学员正价报名走小鹅通，锁位仍可用）

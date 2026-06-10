@@ -100,6 +100,19 @@ export type LockRecord = {
   note: string;
 };
 
+// 该联系方式名下的有效锁位记录数（已退款不算）。
+// 一个联系方式只允许一条有效记录：防止已锁位/已成团的人重复提交、重复开团。
+export async function countActiveRecords(contact: string): Promise<number> {
+  const records = await searchBitableRecords(
+    "手机/微信",
+    contact,
+    LOCK_TABLE_ID,
+    20,
+    LOCK_APP_TOKEN
+  );
+  return records.filter((r) => fieldText(r.fields["状态"]) !== "已退款").length;
+}
+
 // 凭"联系方式 + 付款单号"双因子找回锁位记录（无登录体系下的轻量身份验证，
 // 与 compass 找回报告同一思路）
 export async function findLockRecord(
