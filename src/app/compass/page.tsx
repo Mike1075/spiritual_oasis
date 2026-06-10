@@ -8,6 +8,7 @@
 import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import AssistantWidget from "@/components/assistant/AssistantWidget";
 import {
   ArrowRight,
   Compass,
@@ -892,6 +893,7 @@ export default function CompassPage() {
       }
     >
       <CompassFlow />
+      <AssistantWidget />
     </Suspense>
   );
 }

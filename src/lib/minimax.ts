@@ -19,6 +19,18 @@ export async function streamChat(
   user: string,
   maxTokens = 6000
 ): Promise<Response> {
+  return streamChatMessages(system, [{ role: "user", content: user }], maxTokens, 0.7);
+}
+
+export type ChatMessage = { role: "user" | "assistant"; content: string };
+
+// 多轮对话版（AI 客服用）
+export async function streamChatMessages(
+  system: string,
+  messages: ChatMessage[],
+  maxTokens = 3000,
+  temperature = 0.3
+): Promise<Response> {
   if (!API_KEY) {
     return Response.json(
       { ok: false, error: "MINIMAX_API_KEY 未配置" },
@@ -34,12 +46,9 @@ export async function streamChat(
     body: JSON.stringify({
       model: MODEL,
       stream: true,
-      messages: [
-        { role: "system", content: system },
-        { role: "user", content: user },
-      ],
+      messages: [{ role: "system", content: system }, ...messages],
       max_tokens: maxTokens,
-      temperature: 0.7,
+      temperature,
     }),
   });
   if (!upstream.ok || !upstream.body) {

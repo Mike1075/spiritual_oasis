@@ -20,6 +20,7 @@ import {
   PlayCircle,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
+import AssistantWidget from "@/components/assistant/AssistantWidget";
 import {
   MIDLIFE,
   PERSONAS,
@@ -76,6 +77,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 export default function MasLifePage() {
   return (
     <div className="bg-black text-white">
+      <AssistantWidget />
       {/* ============ HERO ============ */}
       <section className="relative flex min-h-screen items-center overflow-hidden">
         <div

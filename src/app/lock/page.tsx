@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import LockClient from "@/components/lock/LockClient";
+import AssistantWidget from "@/components/assistant/AssistantWidget";
 
 // 私域专用页：不进搜索引擎，入口只通过意向群/客服发放
 export const metadata: Metadata = {
@@ -9,5 +10,10 @@ export const metadata: Metadata = {
 };
 
 export default function LockPage() {
-  return <LockClient />;
+  return (
+    <>
+      <LockClient />
+      <AssistantWidget />
+    </>
+  );
 }
