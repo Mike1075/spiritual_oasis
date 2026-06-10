@@ -13,6 +13,9 @@ const TABLE_ID = process.env.FEISHU_BITABLE_TABLE_ID || "tblWYdnuPsa86tTp";
 // AI 罗盘测评结果表（与线索表同 base，应用权限自动覆盖）
 export const COMPASS_TABLE_ID =
   process.env.FEISHU_COMPASS_TABLE_ID || "tblmMoNLy8WKTJcI";
+// 618 锁位表（与线索表同 base）
+export const LOCK_TABLE_ID =
+  process.env.FEISHU_LOCK_TABLE_ID || "tblXurrEtCeVYc7H";
 
 export const feishuConfigured = Boolean(APP_SECRET);
 
@@ -48,7 +51,7 @@ async function getTenantToken(): Promise<string> {
   return cachedToken.token;
 }
 
-export type LeadFields = Record<string, string>;
+export type LeadFields = Record<string, string | number>;
 
 // 同一张多维表格不支持并发写，直播峰值下偶发冲突——指数退避重试基本能救回
 async function feishuFetch<T extends { code: number; msg: string }>(
@@ -146,6 +149,37 @@ export async function searchBitableRecords(
     recordId: r.record_id,
     fields: r.fields,
   }));
+}
+
+// 拉取整表指定字段（锁位余位统计用）。自动翻页，表内记录量级在几百条，开销可控。
+export async function listBitableRecords(
+  tableId: string,
+  fieldNames: string[]
+): Promise<Record<string, unknown>[]> {
+  const all: Record<string, unknown>[] = [];
+  let pageToken = "";
+  do {
+    const qs = `page_size=500${pageToken ? `&page_token=${pageToken}` : ""}`;
+    const json = await feishuFetch<{
+      code: number;
+      msg: string;
+      data?: {
+        items?: { fields: Record<string, unknown> }[];
+        has_more?: boolean;
+        page_token?: string;
+      };
+    }>(
+      `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/search?${qs}`,
+      {
+        method: "POST",
+        body: JSON.stringify({ field_names: fieldNames }),
+      },
+      1
+    );
+    for (const r of json.data?.items ?? []) all.push(r.fields);
+    pageToken = json.data?.has_more ? json.data?.page_token ?? "" : "";
+  } while (pageToken);
+  return all;
 }
 
 // 读取单条记录（分享页用）
