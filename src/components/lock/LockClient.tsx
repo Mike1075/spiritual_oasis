@@ -71,6 +71,10 @@ const TEAM_BENEFITS = [
   },
 ];
 
+// 分享链接固定用正式域名：vercel.app 在国内无法直接访问，
+// 不能依赖 location.origin（用户可能从预览域名进来）
+const SITE_URL = "https://www.spiritual-oasis.net";
+
 type JoinTeam = {
   code: string;
   count: number;
@@ -120,9 +124,7 @@ export default function LockClient() {
   }, []);
 
   const benefits = mode === "team" ? TEAM_BENEFITS : SOLO_BENEFITS;
-  const shareUrl = result.teamCode
-    ? `${typeof window !== "undefined" ? window.location.origin : ""}/lock?t=${result.teamCode}`
-    : "";
+  const shareUrl = result.teamCode ? `${SITE_URL}/lock?t=${result.teamCode}` : "";
 
   async function copyShare() {
     try {
