@@ -43,7 +43,7 @@ export const metadata: Metadata = {
 };
 
 const FACTOR_ICONS = [Compass, Brain, Gauge];
-const EDGE_ICONS = [Swords, InfinityIcon, Cpu];
+const EDGE_ICONS = [Swords, InfinityIcon, Cpu, Wallet];
 
 // 简单的 **加粗** 渲染
 function Rich({ text }: { text: string }) {
@@ -378,7 +378,7 @@ export default function MasLifePage() {
       <section className="border-t border-white/5 px-5 py-24 sm:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-14 max-w-2xl">
-            <Eyebrow>别家给不了的三件事</Eyebrow>
+            <Eyebrow>别家给不了的四件事</Eyebrow>
             <h2 className="text-3xl font-bold md:text-5xl">
               为什么说它“领先这个时代”
             </h2>
@@ -397,7 +397,9 @@ export default function MasLifePage() {
                     </span>
                     <h3 className="text-xl font-bold leading-snug">{e.title}</h3>
                   </div>
-                  <p className="text-[15px] leading-relaxed text-gray-300">{e.desc}</p>
+                  <p className="text-[15px] leading-relaxed text-gray-300">
+                    <Rich text={e.desc} />
+                  </p>
                 </div>
               );
             })}
