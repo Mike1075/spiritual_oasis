@@ -84,6 +84,264 @@ type JoinTeam = {
   members: string[];
 };
 
+type ModifySummary = {
+  name: string;
+  session: string;
+  identity: string;
+  mode: "solo" | "team";
+  teamCode?: string;
+  teamCount?: number;
+  teamComplete?: boolean;
+};
+
+// 从粘贴的链接或裸团码里抽出团码
+function parseTeamCode(input: string): string {
+  const m = input.trim().toUpperCase().match(/P[A-Z2-9]{6}/);
+  return m ? m[0] : "";
+}
+
+// 自助改单：凭联系方式+付款单号找回记录，自助切换 个人锁位⇄拼团、改场次
+function ModifyPanel() {
+  const [contact, setContact] = useState("");
+  const [payRef, setPayRef] = useState("");
+  const [rec, setRec] = useState<ModifySummary | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [joinInput, setJoinInput] = useState("");
+  const [newSession, setNewSession] = useState("");
+  const [done, setDone] = useState("");
+  const [shareCode, setShareCode] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  async function call(
+    action: string,
+    extra: Record<string, string> = {}
+  ): Promise<{
+    ok: boolean;
+    error?: string;
+    record?: ModifySummary;
+    teamCode?: string;
+    teamCount?: number;
+    session?: string;
+  } | null> {
+    setBusy(true);
+    setError("");
+    try {
+      const res = await fetch("/api/lock/modify", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contact, payRef, action, ...extra }),
+      });
+      const j = await res.json();
+      setBusy(false);
+      return j;
+    } catch {
+      setBusy(false);
+      setError("网络异常，请重试");
+      return null;
+    }
+  }
+
+  async function find() {
+    if (!contact.trim() || !payRef.trim())
+      return setError("请填写提交时用的联系方式和付款单号");
+    const j = await call("find");
+    if (!j) return;
+    if (j.ok && j.record) {
+      setRec(j.record);
+      setDone("");
+      setShareCode("");
+    } else setError(j.error || "查询失败");
+  }
+
+  async function act(action: string, extra: Record<string, string> = {}) {
+    const j = await call(action, extra);
+    if (!j) return;
+    if (j.ok) {
+      if (j.teamCode) {
+        setShareCode(j.teamCode);
+        setDone(
+          action === "to-team-join"
+            ? `已加入团 ${j.teamCode}（当前 ${j.teamCount}/3 人）`
+            : `已转为 3 人拼团（拼团价 3984），团码 ${j.teamCode}`
+        );
+      } else if (action === "to-solo") {
+        setShareCode("");
+        setDone("已转为个人锁位（锁定早鸟价 4980）");
+      } else if (action === "change-session") {
+        setDone(`场次已改为 ${j.session}`);
+      }
+      const f = await call("find");
+      if (f?.ok && f.record) setRec(f.record);
+    } else setError(j.error || "操作失败");
+  }
+
+  const shareUrl = shareCode ? `${SITE_URL}/lock?t=${shareCode}` : "";
+
+  async function copyShare() {
+    try {
+      await navigator.clipboard.writeText(
+        `我在拼「人生方向设计」3 人团，拼团价 3984（早鸟 4980 打 8 折），618 元锁位入团：${shareUrl}`
+      );
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* 旧浏览器降级：手动长按复制 */
+    }
+  }
+
+  const inputCls =
+    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400";
+  const btnCls =
+    "rounded-xl border border-fuchsia-400/50 px-4 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15 disabled:opacity-40";
+
+  return (
+    <div className="mt-3 rounded-2xl border border-white/15 bg-white/[0.04] p-5">
+      <div className="text-sm font-bold text-white/85">
+        修改我的锁位（选错了类型 / 场次？这里自助改）
+      </div>
+      <p className="mt-1 text-xs text-white/50">
+        填提交时用的联系方式和付款单号，找回后即可修改。涉及已有队友的团需联系群内客服。
+      </p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+        <input
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder="手机号或微信号"
+          className={inputCls}
+        />
+        <input
+          value={payRef}
+          onChange={(e) => setPayRef(e.target.value)}
+          placeholder="付款单号 / 转账备注后5位"
+          className={inputCls}
+        />
+        <button type="button" onClick={find} disabled={busy} className={btnCls}>
+          {busy && !rec ? "查找中…" : "找回我的锁位"}
+        </button>
+      </div>
+
+      {rec && (
+        <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-4">
+          <div className="text-sm">
+            当前：
+            <strong className="text-emerald-200">
+              {rec.mode === "team"
+                ? `3 人拼团（${rec.teamCount}/3 · 团码 ${rec.teamCode}）`
+                : "个人锁位（早鸟价 4980）"}
+            </strong>
+            <span className="mx-2 text-white/30">|</span>
+            场次：<strong className="text-emerald-200">{rec.session}</strong>
+          </div>
+
+          <div className="mt-3 flex flex-wrap items-center gap-2">
+            {rec.mode === "solo" && (
+              <button
+                type="button"
+                onClick={() => act("to-team-create")}
+                disabled={busy}
+                className={btnCls}
+              >
+                转为 3 人拼团（开团 · 3984）
+              </button>
+            )}
+            {rec.mode === "team" && (
+              <button
+                type="button"
+                onClick={() => act("to-solo")}
+                disabled={busy}
+                className={btnCls}
+              >
+                转为个人锁位（4980）
+              </button>
+            )}
+            <select
+              value={newSession}
+              onChange={(e) => setNewSession(e.target.value)}
+              className={inputCls + " py-2.5"}
+            >
+              <option value="" className="bg-black">
+                改场次…
+              </option>
+              {SESSIONS.filter((s) => s.key !== rec.session).map((s) => (
+                <option key={s.key} value={s.key} className="bg-black">
+                  {s.label}
+                </option>
+              ))}
+            </select>
+            {newSession && (
+              <button
+                type="button"
+                onClick={() => act("change-session", { session: newSession })}
+                disabled={busy}
+                className={btnCls}
+              >
+                确认改场次
+              </button>
+            )}
+          </div>
+
+          {rec.mode === "solo" && (
+            <div className="mt-2 flex flex-wrap items-center gap-2">
+              <input
+                value={joinInput}
+                onChange={(e) => setJoinInput(e.target.value)}
+                placeholder="或粘贴朋友的拼团链接 / 团码"
+                className={inputCls + " min-w-56 flex-1"}
+              />
+              <button
+                type="button"
+                onClick={() => {
+                  const code = parseTeamCode(joinInput);
+                  if (!code) return setError("没识别出团码，请检查链接");
+                  act("to-team-join", { teamCode: code });
+                }}
+                disabled={busy}
+                className={btnCls}
+              >
+                加入朋友的团
+              </button>
+            </div>
+          )}
+        </div>
+      )}
+
+      {done && (
+        <p className="mt-3 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-2.5 text-sm text-emerald-200">
+          ✅ {done}
+        </p>
+      )}
+      {shareCode && (
+        <div className="mt-2 flex items-center gap-2">
+          <code className="min-w-0 flex-1 truncate rounded-xl bg-white/10 px-3 py-2.5 text-xs text-emerald-200">
+            {shareUrl}
+          </code>
+          <button
+            type="button"
+            onClick={copyShare}
+            className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 px-4 py-2.5 text-sm font-bold"
+          >
+            {copied ? (
+              <>
+                <Check className="h-4 w-4" /> 已复制
+              </>
+            ) : (
+              <>
+                <Copy className="h-4 w-4" /> 复制邀请
+              </>
+            )}
+          </button>
+        </div>
+      )}
+      {error && (
+        <p className="mt-3 rounded-xl border border-red-400/40 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
+          {error}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export default function LockClient() {
   const [mode, setMode] = useState<"solo" | "team">("solo");
   const [joinTeam, setJoinTeam] = useState<JoinTeam | null>(null);
@@ -100,6 +358,7 @@ export default function LockClient() {
   const [qrMissing, setQrMissing] = useState(false);
   const [groupQrMissing, setGroupQrMissing] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [showModify, setShowModify] = useState(false);
   const [result, setResult] = useState<{
     teamCode?: string;
     teamCount?: number;
@@ -262,6 +521,16 @@ export default function LockClient() {
             3 人拼团 · 新人价 3984
           </button>
         </div>
+
+        {/* 自助改单入口 */}
+        <button
+          type="button"
+          onClick={() => setShowModify((v) => !v)}
+          className="mt-3 text-xs text-white/50 underline underline-offset-4 hover:text-white/80"
+        >
+          已提交过但选错了？点这里自助修改（个人锁位 ⇄ 拼团 / 改场次）
+        </button>
+        {showModify && <ModifyPanel />}
 
         {/* 拼团说明 / 来自分享链接的团进度 */}
         {mode === "team" && (

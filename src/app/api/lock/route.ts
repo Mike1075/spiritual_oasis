@@ -1,97 +1,28 @@
 import { NextResponse } from "next/server";
 import {
   createBitableRecord,
-  listBitableRecords,
-  searchBitableRecords,
   feishuConfigured,
   LOCK_APP_TOKEN,
   LOCK_TABLE_ID,
 } from "@/lib/feishu";
+import {
+  ALL_SESSIONS,
+  IDENTITY_SET,
+  TEAM_SIZE,
+  TEAM_CODE_RE,
+  genTeamCode,
+  maskName,
+  getTeamMembers,
+  cityFull,
+} from "@/lib/lock";
 
 export const runtime = "nodejs";
-
-// 每城线下锁位上限（服务端静默校验，页面不展示报名人数）；线上不限
-const CITY_CAP = 50;
-const OFFLINE_CITIES = ["深圳线下", "北京线下", "上海线下"] as const;
-const ALL_SESSIONS = new Set<string>([...OFFLINE_CITIES, "线上"]);
-const IDENTITY_SET = new Set([
-  "纯新人",
-  "学生",
-  "金卡会员",
-  "老学员",
-  "金卡+老学员",
-]);
-
-const TEAM_SIZE = 3;
-// 团码字符集去掉 0/O/1/I/L 等易混淆字符；P 前缀代表"拼"
-const CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
-
-function genTeamCode(): string {
-  let s = "P";
-  for (let i = 0; i < 6; i++) {
-    s += CODE_CHARS[Math.floor(Math.random() * CODE_CHARS.length)];
-  }
-  return s;
-}
-
-// 文本字段在搜索接口里以 segment 数组返回，单选字段是字符串
-function fieldText(v: unknown): string {
-  if (typeof v === "string") return v;
-  if (Array.isArray(v)) {
-    return v
-      .map((seg) =>
-        typeof seg === "object" && seg && "text" in seg
-          ? String((seg as { text: unknown }).text)
-          : ""
-      )
-      .join("");
-  }
-  return "";
-}
-
-function maskName(name: string): string {
-  if (!name) return "新同学";
-  return name.length <= 1 ? `${name}**` : `${name[0]}**`;
-}
-
-type TeamMember = { name: string; contact: string; verified: boolean };
-
-// 取一个团的有效成员（已退款不算）
-async function getTeamMembers(code: string): Promise<TeamMember[]> {
-  const records = await searchBitableRecords(
-    "团码",
-    code,
-    LOCK_TABLE_ID,
-    20,
-    LOCK_APP_TOKEN
-  );
-  return records
-    .filter((r) => fieldText(r.fields["状态"]) !== "已退款")
-    .map((r) => ({
-      name: fieldText(r.fields["姓名"]),
-      contact: fieldText(r.fields["手机/微信"]),
-      verified: fieldText(r.fields["状态"]) === "已核验",
-    }));
-}
-
-async function cityFull(session: string): Promise<boolean> {
-  if (session === "线上") return false;
-  const records = await listBitableRecords(
-    LOCK_TABLE_ID,
-    ["场次", "状态"],
-    LOCK_APP_TOKEN
-  );
-  const taken = records.filter(
-    (r) => r["场次"] === session && r["状态"] !== "已退款"
-  ).length;
-  return taken >= CITY_CAP;
-}
 
 // GET /api/lock?team=PXXXXXX — 查团进度（分享落地页用，姓名打码）
 export async function GET(req: Request) {
   const code = new URL(req.url).searchParams.get("team")?.trim().toUpperCase();
   if (!code) return NextResponse.json({ ok: true });
-  if (!/^P[A-Z2-9]{6}$/.test(code) || !feishuConfigured) {
+  if (!TEAM_CODE_RE.test(code) || !feishuConfigured) {
     return NextResponse.json({ ok: false, error: "团码无效" }, { status: 404 });
   }
   try {
@@ -188,7 +119,7 @@ export async function POST(req: Request) {
 
   if (mode === "team-join") {
     teamCode = (body.teamCode || "").trim().toUpperCase();
-    if (!/^P[A-Z2-9]{6}$/.test(teamCode)) {
+    if (!TEAM_CODE_RE.test(teamCode)) {
       return NextResponse.json(
         { ok: false, error: "团码无效，请检查分享链接" },
         { status: 400 }

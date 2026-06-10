@@ -112,10 +112,11 @@ export async function createBitableRecord(
 export async function updateBitableRecord(
   recordId: string,
   fields: LeadFields,
-  tableId: string = TABLE_ID
+  tableId: string = TABLE_ID,
+  appToken: string = APP_TOKEN
 ): Promise<void> {
   await feishuFetch<{ code: number; msg: string }>(
-    `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/${recordId}`,
+    `${FEISHU_BASE}/bitable/v1/apps/${appToken}/tables/${tableId}/records/${recordId}`,
     { method: "PUT", body: JSON.stringify({ fields }) }
   );
 }
