@@ -5,7 +5,7 @@
 // → 选方向深挖 → 行业冷观察+预死亡推演+行动计划(流式) → 匿名落表
 // → 留资解锁「保存+分享链接」 → 完成页(分享+offer)
 
-import { Suspense, useMemo, useRef, useState } from "react";
+import { Suspense, useEffect, useMemo, useRef, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
@@ -13,6 +13,7 @@ import {
   Compass,
   Copy,
   CheckCircle2,
+  History,
   Loader2,
   RotateCcw,
   ShieldCheck,
@@ -43,6 +44,29 @@ type Step =
   | "done";
 
 const EMPTY_SCORE: Record<ArchetypeKey, number> = { B: 0, C: 0, S: 0, H: 0, K: 0 };
+
+// 本机历史报告（localStorage）：换设备/清缓存会丢，丢了走 /compass/find 凭联系方式找回
+type SavedReport = { id: string; title: string; ts: number };
+const LS_KEY = "compass_reports";
+
+function loadSavedReports(): SavedReport[] {
+  try {
+    const list = JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+    return Array.isArray(list) ? list.slice(0, 10) : [];
+  } catch {
+    return [];
+  }
+}
+
+function persistReport(r: SavedReport) {
+  try {
+    const list = loadSavedReports().filter((x) => x.id !== r.id);
+    list.unshift(r);
+    localStorage.setItem(LS_KEY, JSON.stringify(list.slice(0, 10)));
+  } catch {
+    /* 隐私模式等场景写不进就算了 */
+  }
+}
 
 // MiniMax-M3 把思维链以 <think>…</think> 混在 content 里输出——展示前剥掉；
 // 未闭合（还在思考）时只展示 <think> 之前的内容（即空，等待指示器会持续显示）
@@ -132,8 +156,13 @@ function CompassFlow() {
   const [gateErr, setGateErr] = useState("");
   const [shareId, setShareId] = useState("");
   const [copied, setCopied] = useState(false);
+  const [history, setHistory] = useState<SavedReport[]>([]);
 
   const savingRef = useRef(false);
+
+  useEffect(() => {
+    setHistory(loadSavedReports());
+  }, []);
 
   const identity = IDENTITIES.find((i) => i.id === identityId);
   const track: Track = identity?.track ?? "adult";
@@ -285,6 +314,15 @@ function CompassFlow() {
       const j = await res.json();
       if (!res.ok || !j.ok) throw new Error(j.error || "提交失败");
       setShareId(j.shareId || "");
+      if (j.shareId) {
+        persistReport({
+          id: j.shareId,
+          title: [identity?.label, archetypeLabel, direction]
+            .filter(Boolean)
+            .join(" · "),
+          ts: Date.now(),
+        });
+      }
       setStep("done");
       window.scrollTo(0, 0);
     } catch (err) {
@@ -373,6 +411,33 @@ function CompassFlow() {
               开始（11 题 · AI 现场分析 · 约 6 分钟）
               <ArrowRight className="h-5 w-5" />
             </button>
+
+            {history.length > 0 && (
+              <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
+                <p className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-sky-300">
+                  <History className="h-4 w-4" />
+                  你在本机保存过 {history.length} 份报告
+                </p>
+                <div className="space-y-2">
+                  {history.slice(0, 3).map((h) => (
+                    <Link
+                      key={h.id}
+                      href={`/compass/r/${h.id}`}
+                      className="block rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-sm transition hover:border-emerald-400/60"
+                    >
+                      {h.title || "我的定位报告"}
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            <Link
+              href="/compass/find"
+              className="mt-4 block text-center text-sm text-gray-400 underline-offset-4 transition hover:text-white hover:underline"
+            >
+              做过测评但链接丢了？凭联系方式找回 →
+            </Link>
             <Disclaimer />
           </section>
         )}
@@ -657,7 +722,11 @@ function CompassFlow() {
             {shareUrl ? (
               <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-5">
                 <p className="mb-2 text-sm font-semibold text-sky-300">
-                  你的专属报告链接（可转发给朋友/家人）
+                  你的专属报告链接（可转发给朋友/家人，已在本机记住；换设备可凭联系方式
+                  <Link href="/compass/find" className="underline underline-offset-2">
+                    找回
+                  </Link>
+                  ）
                 </p>
                 <div className="flex items-center gap-2">
                   <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-lg bg-black/40 px-3 py-2.5 text-xs text-emerald-300">

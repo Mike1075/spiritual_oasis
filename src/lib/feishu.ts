@@ -113,6 +113,41 @@ export async function updateBitableRecord(
   );
 }
 
+// 按字段精确匹配搜索记录（找回报告用），返回 record_id + fields
+export async function searchBitableRecords(
+  fieldName: string,
+  value: string,
+  tableId: string = TABLE_ID,
+  limit = 20
+): Promise<{ recordId: string; fields: Record<string, unknown> }[]> {
+  const json = await feishuFetch<{
+    code: number;
+    msg: string;
+    data?: {
+      items?: { record_id: string; fields: Record<string, unknown> }[];
+    };
+  }>(
+    `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/search?page_size=${limit}`,
+    {
+      method: "POST",
+      body: JSON.stringify({
+        filter: {
+          conjunction: "and",
+          conditions: [
+            { field_name: fieldName, operator: "is", value: [value] },
+          ],
+        },
+        automatic_fields: true,
+      }),
+    },
+    1
+  );
+  return (json.data?.items ?? []).map((r) => ({
+    recordId: r.record_id,
+    fields: r.fields,
+  }));
+}
+
 // 读取单条记录（分享页用）
 export async function getBitableRecord(
   recordId: string,
