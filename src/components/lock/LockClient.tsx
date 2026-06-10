@@ -6,6 +6,7 @@ import {
   CalendarClock,
   Check,
   Copy,
+  HelpCircle,
   Loader2,
   Lock,
   MapPin,
@@ -14,6 +15,7 @@ import {
   ShieldCheck,
   Ticket,
   Users,
+  X,
 } from "lucide-react";
 
 const SESSIONS = [
@@ -93,6 +95,119 @@ type ModifySummary = {
   teamCount?: number;
   teamComplete?: boolean;
 };
+
+// 付款单号怎么找——"?"帮助弹窗（微信/支付宝/云闪付 + 找不到的兜底）
+function PayRefHelp() {
+  const [open, setOpen] = useState(false);
+  return (
+    <>
+      <button
+        type="button"
+        aria-label="如何找到付款单号"
+        onClick={() => setOpen(true)}
+        className="text-white/40 transition hover:text-fuchsia-300"
+      >
+        <HelpCircle className="h-5 w-5" />
+      </button>
+      {open && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center bg-black/75 sm:items-center sm:p-6"
+          onClick={() => setOpen(false)}
+        >
+          <div
+            className="max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-t-3xl border border-white/15 bg-zinc-900 p-6 text-left sm:rounded-3xl"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center justify-between">
+              <h3 className="text-lg font-bold text-white">
+                付款单号在哪里找？
+              </h3>
+              <button
+                type="button"
+                aria-label="关闭"
+                onClick={() => setOpen(false)}
+                className="text-white/50 hover:text-white"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <p className="mt-1 text-xs text-white/50">
+              只需要填单号的<strong className="text-emerald-300">最后 5 位数字</strong>
+              ，用于客服核对到账。
+            </p>
+
+            <div className="mt-4 space-y-4 text-sm leading-relaxed text-white/75">
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="font-bold text-emerald-200">
+                  微信支付（最常用）
+                </div>
+                <ol className="mt-1.5 list-decimal space-y-1 pl-4">
+                  <li>
+                    微信 →「我」→「服务」→「钱包」→「账单」
+                    （或直接点开"微信支付"发给你的支付凭证消息）
+                  </li>
+                  <li>找到 <strong>-618.00（深圳市心灵家园）</strong>那笔，点进去</li>
+                  <li>
+                    看「<strong className="text-emerald-300">交易单号</strong>」
+                    ——一长串数字
+                  </li>
+                  <li>
+                    填<strong>最后 5 位</strong>。例：单号是
+                    4500…83<strong className="text-emerald-300">714084</strong>
+                    ，就填 <strong className="text-emerald-300">14084</strong>
+                  </li>
+                </ol>
+                <p className="mt-2 text-xs text-amber-300/90">
+                  ⚠️ 是数字单号，不是「商户全称」那一行的公司名；
+                  万一填成了「商户单号」的后 5 位也没关系，客服同样能查到。
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="font-bold text-emerald-200">支付宝</div>
+                <ol className="mt-1.5 list-decimal space-y-1 pl-4">
+                  <li>支付宝 → 右下角「我的」→「账单」</li>
+                  <li>找到 618 那笔（深圳市心灵家园 / 收钱码收款），点进去</li>
+                  <li>
+                    看「订单号」；没有的话点底部「更多」，看
+                    「<strong className="text-emerald-300">支付宝交易号</strong>」
+                  </li>
+                  <li>填最后 5 位</li>
+                </ol>
+              </div>
+
+              <div className="rounded-xl border border-white/10 bg-white/5 p-4">
+                <div className="font-bold text-emerald-200">云闪付</div>
+                <p className="mt-1.5">
+                  「我的」→「交易记录」→ 点开 618 那笔 → 订单号后 5 位。
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-4">
+                <div className="font-bold text-fuchsia-200">实在找不到？</div>
+                <p className="mt-1.5">
+                  在单号栏填「付款日期+时间」，例如 6 月 10 日 16:04 付的，就填{" "}
+                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-emerald-200">
+                    0610-1604
+                  </code>
+                  ，并保存好付款截图——客服按金额和时间一样能对上账。
+                </p>
+              </div>
+            </div>
+
+            <button
+              type="button"
+              onClick={() => setOpen(false)}
+              className="mt-5 w-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-6 py-3 font-bold text-white"
+            >
+              知道了，去填写
+            </button>
+          </div>
+        </div>
+      )}
+    </>
+  );
+}
 
 // 从粘贴的链接或裸团码里抽出团码
 function parseTeamCode(input: string): string {
@@ -210,12 +325,17 @@ function ModifyPanel() {
           placeholder="手机号或微信号"
           className={inputCls}
         />
-        <input
-          value={payRef}
-          onChange={(e) => setPayRef(e.target.value)}
-          placeholder="付款单号 / 转账备注后5位"
-          className={inputCls}
-        />
+        <div className="relative">
+          <input
+            value={payRef}
+            onChange={(e) => setPayRef(e.target.value)}
+            placeholder="付款单号后5位"
+            className={inputCls + " w-full pr-11"}
+          />
+          <span className="absolute right-3 top-1/2 -translate-y-1/2">
+            <PayRefHelp />
+          </span>
+        </div>
         <button type="button" onClick={find} disabled={busy} className={btnCls}>
           {busy && !rec ? "查找中…" : "找回我的锁位"}
         </button>
@@ -743,8 +863,11 @@ export default function LockClient() {
                   </code>
                 </p>
                 <p className="mt-2 text-white/50">
-                  付款完成后，把单号（或转账备注后 5 位）填进下方表单，
+                  付款完成后，把<strong>交易单号的最后 5 位</strong>填进下方表单，
                   客服核验到账后{mode === "team" ? "即入团锁价" : "席位即锁定"}。
+                  不知道单号在哪？点单号输入框旁的{" "}
+                  <HelpCircle className="inline h-4 w-4 text-fuchsia-300" />{" "}
+                  看图文教程。
                 </p>
               </div>
             </div>
@@ -786,12 +909,17 @@ export default function LockClient() {
                   身份：新朋友（拼团专享）
                 </div>
               )}
-              <input
-                value={payRef}
-                onChange={(e) => setPayRef(e.target.value)}
-                placeholder="付款单号 / 转账备注后5位 *"
-                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
-              />
+              <div className="relative">
+                <input
+                  value={payRef}
+                  onChange={(e) => setPayRef(e.target.value)}
+                  placeholder="付款单号后5位 *（点 ? 看哪里找）"
+                  className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 pr-11 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
+                />
+                <span className="absolute right-3 top-1/2 -translate-y-1/2">
+                  <PayRefHelp />
+                </span>
+              </div>
               <input
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
