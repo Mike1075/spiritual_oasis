@@ -794,6 +794,16 @@ function CompassFlow() {
                 看课程详情
                 <ArrowRight className="h-5 w-5" />
               </Link>
+              <Link
+                href="/lock"
+                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/60 py-3.5 font-bold text-emerald-300 transition hover:bg-emerald-400/10 active:scale-[0.99]"
+              >
+                618 元锁住早鸟价 / 3 人拼团 8 折
+                <ArrowRight className="h-5 w-5" />
+              </Link>
+              <p className="mt-2 text-center text-xs text-gray-500">
+                锁位金全额抵学费 · 早鸟价 4980 至 6/18 · 拼团仅限新朋友
+              </p>
             </div>
 
             <button
