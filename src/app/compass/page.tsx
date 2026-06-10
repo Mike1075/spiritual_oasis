@@ -774,9 +774,11 @@ function CompassFlow() {
               <p className="mb-3 text-sm leading-relaxed text-gray-300">
                 {track === "student" ? (
                   <>
-                    这三晚直播会展开讲「AI 时代怎么选方向」；7 月深圳夏令营带你
-                    <b className="text-white">60 天做出第一个真作品</b>
-                    （上一期零基础同学做出了上架苹果商店的 App）。应届高考生额外 8 折。
+                    这三晚直播会展开讲「AI 时代怎么选方向」；28 天人生方向设计课带你把今天的报告
+                    <b className="text-white">落成你的第一个真作品</b>
+                    （上一期零基础同学做出了上架苹果商店的
+                    App，个例）。深圳/北京/上海线下 + 线上全球同价，
+                    <b className="text-white">学生专属 8 折</b>，进群找客服核验。
                   </>
                 ) : (
                   <>
