@@ -10,6 +10,9 @@ const APP_SECRET = process.env.FEISHU_APP_SECRET || "";
 const APP_TOKEN =
   process.env.FEISHU_BITABLE_APP_TOKEN || "BMlcbTjznaJL5WsOXsxcgHavnrh";
 const TABLE_ID = process.env.FEISHU_BITABLE_TABLE_ID || "tblWYdnuPsa86tTp";
+// AI 罗盘测评结果表（与线索表同 base，应用权限自动覆盖）
+export const COMPASS_TABLE_ID =
+  process.env.FEISHU_COMPASS_TABLE_ID || "tblmMoNLy8WKTJcI";
 
 export const feishuConfigured = Boolean(APP_SECRET);
 
@@ -47,27 +50,86 @@ async function getTenantToken(): Promise<string> {
 
 export type LeadFields = Record<string, string>;
 
-// 向多维表格写一条记录，返回 record_id
-export async function createBitableRecord(fields: LeadFields): Promise<string> {
-  const token = await getTenantToken();
-  const res = await fetch(
-    `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${TABLE_ID}/records`,
-    {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({ fields }),
+// 同一张多维表格不支持并发写，直播峰值下偶发冲突——指数退避重试基本能救回
+async function feishuFetch<T extends { code: number; msg: string }>(
+  url: string,
+  init: RequestInit,
+  retries = 3
+): Promise<T> {
+  let lastErr: unknown;
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const token = await getTenantToken();
+      const res = await fetch(url, {
+        ...init,
+        headers: {
+          "Content-Type": "application/json; charset=utf-8",
+          Authorization: `Bearer ${token}`,
+          ...(init.headers || {}),
+        },
+      });
+      const json = (await res.json()) as T;
+      if (json.code === 0) return json;
+      lastErr = new Error(`飞书接口失败: ${json.code} ${json.msg}`);
+      // 频控/冲突类错误才值得重试；权限/参数错误直接抛
+      if (![1254290, 1254291, 1255040, 99991400].includes(json.code) && i > 0) {
+        throw lastErr;
+      }
+    } catch (e) {
+      lastErr = e;
     }
-  );
-  const json = (await res.json()) as {
+    if (i < retries) {
+      await new Promise((r) => setTimeout(r, 300 * 2 ** i + Math.random() * 200));
+    }
+  }
+  throw lastErr;
+}
+
+// 向多维表格写一条记录，返回 record_id
+export async function createBitableRecord(
+  fields: LeadFields,
+  tableId: string = TABLE_ID
+): Promise<string> {
+  const json = await feishuFetch<{
     code: number;
     msg: string;
     data?: { record?: { record_id?: string } };
-  };
-  if (json.code !== 0) {
-    throw new Error(`飞书写表失败: ${json.code} ${json.msg}`);
-  }
+  }>(`${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records`, {
+    method: "POST",
+    body: JSON.stringify({ fields }),
+  });
   return json.data?.record?.record_id ?? "";
+}
+
+// 更新已有记录（留资解锁时补写姓名/联系方式）
+export async function updateBitableRecord(
+  recordId: string,
+  fields: LeadFields,
+  tableId: string = TABLE_ID
+): Promise<void> {
+  await feishuFetch<{ code: number; msg: string }>(
+    `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/${recordId}`,
+    { method: "PUT", body: JSON.stringify({ fields }) }
+  );
+}
+
+// 读取单条记录（分享页用）
+export async function getBitableRecord(
+  recordId: string,
+  tableId: string = TABLE_ID
+): Promise<Record<string, unknown> | null> {
+  try {
+    const json = await feishuFetch<{
+      code: number;
+      msg: string;
+      data?: { record?: { fields?: Record<string, unknown> } };
+    }>(
+      `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/${recordId}`,
+      { method: "GET" },
+      1
+    );
+    return json.data?.record?.fields ?? null;
+  } catch {
+    return null;
+  }
 }
