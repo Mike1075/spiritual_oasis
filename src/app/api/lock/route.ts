@@ -4,6 +4,7 @@ import {
   listBitableRecords,
   searchBitableRecords,
   feishuConfigured,
+  LOCK_APP_TOKEN,
   LOCK_TABLE_ID,
 } from "@/lib/feishu";
 
@@ -57,7 +58,13 @@ type TeamMember = { name: string; contact: string; verified: boolean };
 
 // 取一个团的有效成员（已退款不算）
 async function getTeamMembers(code: string): Promise<TeamMember[]> {
-  const records = await searchBitableRecords("团码", code, LOCK_TABLE_ID);
+  const records = await searchBitableRecords(
+    "团码",
+    code,
+    LOCK_TABLE_ID,
+    20,
+    LOCK_APP_TOKEN
+  );
   return records
     .filter((r) => fieldText(r.fields["状态"]) !== "已退款")
     .map((r) => ({
@@ -69,7 +76,11 @@ async function getTeamMembers(code: string): Promise<TeamMember[]> {
 
 async function cityFull(session: string): Promise<boolean> {
   if (session === "线上") return false;
-  const records = await listBitableRecords(LOCK_TABLE_ID, ["场次", "状态"]);
+  const records = await listBitableRecords(
+    LOCK_TABLE_ID,
+    ["场次", "状态"],
+    LOCK_APP_TOKEN
+  );
   const taken = records.filter(
     (r) => r["场次"] === session && r["状态"] !== "已退款"
   ).length;
@@ -243,7 +254,11 @@ export async function POST(req: Request) {
 
   // 锁位涉及真实付款，写入失败必须如实报错，不能像留资那样静默吞掉
   try {
-    const recordId = await createBitableRecord(fields, LOCK_TABLE_ID);
+    const recordId = await createBitableRecord(
+      fields,
+      LOCK_TABLE_ID,
+      LOCK_APP_TOKEN
+    );
     let teamCount = 0;
     if (teamCode) {
       try {

@@ -13,9 +13,12 @@ const TABLE_ID = process.env.FEISHU_BITABLE_TABLE_ID || "tblWYdnuPsa86tTp";
 // AI 罗盘测评结果表（与线索表同 base，应用权限自动覆盖）
 export const COMPASS_TABLE_ID =
   process.env.FEISHU_COMPASS_TABLE_ID || "tblmMoNLy8WKTJcI";
-// 618 锁位表（与线索表同 base）
+// 618 锁位表：独立私密 base（应用自有 owner，写入不依赖任何人为授权；
+// 同事默认不可见，需要谁看就把 base 单独分享为"可阅读"）
+export const LOCK_APP_TOKEN =
+  process.env.FEISHU_LOCK_APP_TOKEN || "IrGKbwczXa33ZRsC104cM8WsnKs";
 export const LOCK_TABLE_ID =
-  process.env.FEISHU_LOCK_TABLE_ID || "tblXurrEtCeVYc7H";
+  process.env.FEISHU_LOCK_TABLE_ID || "tbll5i7M32yTQK88";
 
 export const feishuConfigured = Boolean(APP_SECRET);
 
@@ -91,13 +94,14 @@ async function feishuFetch<T extends { code: number; msg: string }>(
 // 向多维表格写一条记录，返回 record_id
 export async function createBitableRecord(
   fields: LeadFields,
-  tableId: string = TABLE_ID
+  tableId: string = TABLE_ID,
+  appToken: string = APP_TOKEN
 ): Promise<string> {
   const json = await feishuFetch<{
     code: number;
     msg: string;
     data?: { record?: { record_id?: string } };
-  }>(`${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records`, {
+  }>(`${FEISHU_BASE}/bitable/v1/apps/${appToken}/tables/${tableId}/records`, {
     method: "POST",
     body: JSON.stringify({ fields }),
   });
@@ -121,7 +125,8 @@ export async function searchBitableRecords(
   fieldName: string,
   value: string,
   tableId: string = TABLE_ID,
-  limit = 20
+  limit = 20,
+  appToken: string = APP_TOKEN
 ): Promise<{ recordId: string; fields: Record<string, unknown> }[]> {
   const json = await feishuFetch<{
     code: number;
@@ -130,7 +135,7 @@ export async function searchBitableRecords(
       items?: { record_id: string; fields: Record<string, unknown> }[];
     };
   }>(
-    `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/search?page_size=${limit}`,
+    `${FEISHU_BASE}/bitable/v1/apps/${appToken}/tables/${tableId}/records/search?page_size=${limit}`,
     {
       method: "POST",
       body: JSON.stringify({
@@ -154,7 +159,8 @@ export async function searchBitableRecords(
 // 拉取整表指定字段（锁位余位统计用）。自动翻页，表内记录量级在几百条，开销可控。
 export async function listBitableRecords(
   tableId: string,
-  fieldNames: string[]
+  fieldNames: string[],
+  appToken: string = APP_TOKEN
 ): Promise<Record<string, unknown>[]> {
   const all: Record<string, unknown>[] = [];
   let pageToken = "";
@@ -169,7 +175,7 @@ export async function listBitableRecords(
         page_token?: string;
       };
     }>(
-      `${FEISHU_BASE}/bitable/v1/apps/${APP_TOKEN}/tables/${tableId}/records/search?${qs}`,
+      `${FEISHU_BASE}/bitable/v1/apps/${appToken}/tables/${tableId}/records/search?${qs}`,
       {
         method: "POST",
         body: JSON.stringify({ field_names: fieldNames }),
