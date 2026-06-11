@@ -38,7 +38,7 @@ function loadImage(src: string): Promise<HTMLImageElement> {
 
 // 在海报底部留白区画：二维码 + 钩子文案 + 扫码提示，返回合成后的 PNG dataURL
 async function buildPoster(idx: number, link: string): Promise<string> {
-  const bg = await loadImage(`/posters/poster-${idx}.png`);
+  const bg = await loadImage(`/posters/poster-${idx}.jpg`);
   const W = bg.naturalWidth || 1086;
   const H = bg.naturalHeight || 1448;
   const canvas = document.createElement("canvas");
@@ -107,13 +107,14 @@ async function buildPoster(idx: number, link: string): Promise<string> {
   ctx.font = `bold ${subSize}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
   ctx.fillText("拼团价 3984 · 618 先锁位全额抵学费", tx, ty);
 
-  return canvas.toDataURL("image/png");
+  return canvas.toDataURL("image/jpeg", 0.85);
 }
 
 export default function ShareKit({ teamCode }: { teamCode: string }) {
   const link = `${SITE_URL}/lock?t=${teamCode}`;
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const [busyIdx, setBusyIdx] = useState<number | null>(null);
+  const [preview, setPreview] = useState<string | null>(null);
   const [err, setErr] = useState("");
 
   async function copyText(i: number) {
@@ -126,17 +127,12 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
     }
   }
 
-  async function downloadPoster(n: number) {
+  async function generatePoster(n: number) {
     setBusyIdx(n);
     setErr("");
     try {
       const dataUrl = await buildPoster(n, link);
-      const a = document.createElement("a");
-      a.href = dataUrl;
-      a.download = `拼团海报-${teamCode}-${n}.png`;
-      document.body.appendChild(a);
-      a.click();
-      a.remove();
+      setPreview(dataUrl);
     } catch {
       setErr("海报生成失败，请重试，或直接复制上方文案分享");
     } finally {
@@ -186,7 +182,7 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
 
       {/* ② 海报 */}
       <p className="mt-5 text-sm font-semibold text-white/80">
-        ② 下载海报发朋友圈（已带你的专属二维码，朋友长按即可加入）
+        ② 点"生成"后长按图片保存到相册 / 直接转发（已带你的专属二维码）
       </p>
       <div className="mt-2 grid grid-cols-2 gap-3 sm:grid-cols-4">
         {Array.from({ length: POSTER_COUNT }).map((_, idx) => {
@@ -195,13 +191,13 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
             <div key={n} className="overflow-hidden rounded-xl border border-white/10">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={`/posters/poster-${n}.png`}
+                src={`/posters/poster-${n}.jpg`}
                 alt={`拼团海报 ${n}`}
                 className="aspect-[3/4] w-full object-cover"
               />
               <button
                 type="button"
-                onClick={() => downloadPoster(n)}
+                onClick={() => generatePoster(n)}
                 disabled={busyIdx === n}
                 className="flex w-full items-center justify-center gap-1 bg-fuchsia-500/25 py-2 text-xs font-semibold text-fuchsia-50 hover:bg-fuchsia-500/40 disabled:opacity-60"
               >
@@ -211,7 +207,7 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
                   </>
                 ) : (
                   <>
-                    <Download className="h-3.5 w-3.5" /> 下载
+                    <Download className="h-3.5 w-3.5" /> 生成
                   </>
                 )}
               </button>
