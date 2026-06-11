@@ -482,6 +482,7 @@ export default function LockClient() {
   const [qrMissing, setQrMissing] = useState(false);
   const [groupQrMissing, setGroupQrMissing] = useState(false);
   const [copied, setCopied] = useState(false);
+  const [bannerCopied, setBannerCopied] = useState(false);
   const [showModify, setShowModify] = useState(false);
   const [result, setResult] = useState<{
     teamCode?: string;
@@ -509,6 +510,24 @@ export default function LockClient() {
   const benefits = mode === "team" ? TEAM_BENEFITS : SOLO_BENEFITS;
   const shareUrl = result.teamCode ? `${SITE_URL}/lock?t=${result.teamCode}` : "";
 
+  // 横幅一键复制：朋友点开分享链接后，接力转发同一个团（带开团人名字+进度+链接）
+  async function copyBannerShare() {
+    if (!joinTeam) return;
+    const link = `${SITE_URL}/lock?t=${joinTeam.code}`;
+    const remain = joinTeam.size - joinTeam.count;
+    const text =
+      `${joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团\n` +
+      `拼团价 3984（早鸟 4980 打 8 折）· 当前 ${joinTeam.count}/${joinTeam.size} 人，还差 ${remain} 人成团。点击下方链接即可加入拼团。\n` +
+      link;
+    try {
+      await navigator.clipboard.writeText(text);
+      setBannerCopied(true);
+      setTimeout(() => setBannerCopied(false), 2000);
+    } catch {
+      setJoinTeamError("复制失败，请手动长按选择文字复制");
+    }
+  }
+
   async function copyShare() {
     try {
       await navigator.clipboard.writeText(
@@ -524,7 +543,7 @@ export default function LockClient() {
   async function submit() {
     setError("");
     if (!session) return setError("请先选择报名场次");
-    if (!name.trim()) return setError("请填写姓名");
+    if (!name.trim()) return setError("请填写微信名");
     if (!contact.trim()) return setError("请填写手机号或微信号");
     if (!payRef.trim())
       return setError("请填写付款单号或转账备注（用于核验到账）");
@@ -577,6 +596,39 @@ export default function LockClient() {
   return (
     <main className="min-h-screen bg-black text-white">
       <div className="mx-auto max-w-3xl px-5 py-12 sm:py-16">
+        {/* 来自分享链接：开团人邀请横幅（置顶醒目，社交裂变钩子） */}
+        {joinTeam && !joinTeam.complete && (
+          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-fuchsia-400/50 bg-gradient-to-r from-purple-500/25 to-fuchsia-500/20 p-4 shadow-lg shadow-fuchsia-500/10">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/30 text-fuchsia-100">
+              <Users className="h-5 w-5" />
+            </div>
+            <div className="text-sm leading-relaxed">
+              <div className="font-bold text-fuchsia-100">
+                {joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团
+              </div>
+              <div className="mt-0.5 text-white/70">
+                拼团价 <strong className="text-emerald-300">3984</strong>
+                （早鸟 4980 打 8 折）· 当前 {joinTeam.count}/{joinTeam.size} 人，还差{" "}
+                {joinTeam.size - joinTeam.count} 人成团
+              </div>
+              <button
+                type="button"
+                onClick={copyBannerShare}
+                className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-fuchsia-500/30 px-3 py-1.5 text-xs font-semibold text-fuchsia-50 transition hover:bg-fuchsia-500/45"
+              >
+                {bannerCopied ? (
+                  <>
+                    <Check className="h-3.5 w-3.5" /> 已复制邀请文案
+                  </>
+                ) : (
+                  <>
+                    <Copy className="h-3.5 w-3.5" /> 复制分享链接
+                  </>
+                )}
+              </button>
+            </div>
+          </div>
+        )}
         {/* 头部 */}
         <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-300">
           <span className="h-px w-8 bg-gradient-to-r from-purple-400 to-fuchsia-400" />
@@ -871,7 +923,7 @@ export default function LockClient() {
                 <p className="mt-2">
                   付款时请在<strong>备注</strong>里写：
                   <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-emerald-200">
-                    {mode === "team" ? "拼团+你的姓名" : "锁位+你的姓名"}
+                    {mode === "team" ? "拼团+你的微信名" : "锁位+你的微信名"}
                   </code>
                 </p>
                 <p className="mt-2 text-white/50">
@@ -895,7 +947,7 @@ export default function LockClient() {
               <input
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                placeholder="姓名（与转账备注一致）*"
+                placeholder="你的微信昵称（务必填群里的微信名）*"
                 className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
               />
               <input
