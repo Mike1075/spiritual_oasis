@@ -18,6 +18,7 @@ import {
   Users,
   X,
 } from "lucide-react";
+import ShareKit from "./ShareKit";
 
 const SESSIONS = [
   { key: "深圳线下", label: "深圳 · 线下" },
@@ -839,6 +840,10 @@ export default function LockClient() {
                   团码 {result.teamCode} · 朋友也可在本页选"3 人拼团"手动加入
                 </p>
               </div>
+            )}
+
+            {result.teamCode && !result.teamComplete && (
+              <ShareKit teamCode={result.teamCode} />
             )}
 
             {/* 成功页再推一次群 */}
