@@ -67,3 +67,40 @@ export async function streamChatMessages(
     },
   });
 }
+
+// 文生图（/mas-life/demo「10 年后」用）:MiniMax image-01,返回图片 URL(有时效,调用方负责落库)
+export async function generateImage(
+  prompt: string,
+  aspectRatio = "3:4"
+): Promise<string> {
+  if (!API_KEY) throw new Error("MINIMAX_API_KEY 未配置");
+  const res = await fetch(`${BASE_URL}/image_generation`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${API_KEY}`,
+    },
+    body: JSON.stringify({
+      model: process.env.MINIMAX_IMAGE_MODEL || "image-01",
+      prompt: prompt.slice(0, 1500),
+      aspect_ratio: aspectRatio,
+      response_format: "url",
+      n: 1,
+      // 不用官方 prompt 改写:改写可能丢掉「无文字/无人脸」硬约束
+      prompt_optimizer: false,
+    }),
+  });
+  const json = (await res.json().catch(() => null)) as {
+    data?: { image_urls?: string[] };
+    base_resp?: { status_code?: number; status_msg?: string };
+  } | null;
+  const url = json?.data?.image_urls?.[0];
+  if (!res.ok || !url) {
+    throw new Error(
+      `文生图失败: ${json?.base_resp?.status_code ?? res.status} ${
+        json?.base_resp?.status_msg ?? ""
+      }`
+    );
+  }
+  return url;
+}

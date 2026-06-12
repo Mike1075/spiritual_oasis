@@ -1,8 +1,9 @@
 "use client";
 
 import { useState } from "react";
+import { createPortal } from "react-dom";
 import QRCode from "qrcode";
-import { Check, Copy, Download, Loader2 } from "lucide-react";
+import { Check, Copy, Download, Loader2, X } from "lucide-react";
 
 const SITE_URL = "https://www.spiritual-oasis.net";
 const POSTER_COUNT = 8;
@@ -27,13 +28,32 @@ const TEXT_TEMPLATES = [
   },
 ];
 
-function loadImage(src: string): Promise<HTMLImageElement> {
+export function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
     const img = new Image();
     img.onload = () => resolve(img);
     img.onerror = reject;
     img.src = src;
   });
+}
+
+// 二维码合成:生成二维码并带白色衬底画到画布指定位置(拼团海报 / 10年后分享卡共用)
+export async function drawQrOnCanvas(
+  ctx: CanvasRenderingContext2D,
+  link: string,
+  x: number,
+  y: number,
+  size: number
+): Promise<void> {
+  const qrDataUrl = await QRCode.toDataURL(link, {
+    width: size,
+    margin: 1,
+    color: { dark: "#2a1c10", light: "#ffffff" },
+  });
+  const qrImg = await loadImage(qrDataUrl);
+  ctx.fillStyle = "#ffffff";
+  ctx.fillRect(x - 6, y - 6, size + 12, size + 12);
+  ctx.drawImage(qrImg, x, y, size, size);
 }
 
 // 在海报底部留白区画：二维码 + 钩子文案 + 扫码提示，返回合成后的 PNG dataURL
@@ -57,17 +77,9 @@ async function buildPoster(idx: number, link: string): Promise<string> {
   // 二维码（左侧）
   const pad = W * 0.06;
   const qrSize = Math.round(cardH * 0.72);
-  const qrDataUrl = await QRCode.toDataURL(link, {
-    width: qrSize,
-    margin: 1,
-    color: { dark: "#2a1c10", light: "#ffffff" },
-  });
-  const qrImg = await loadImage(qrDataUrl);
   const qrX = pad;
   const qrY = cardY + (cardH - qrSize) / 2;
-  ctx.fillStyle = "#ffffff";
-  ctx.fillRect(qrX - 6, qrY - 6, qrSize + 12, qrSize + 12);
-  ctx.drawImage(qrImg, qrX, qrY, qrSize, qrSize);
+  await drawQrOnCanvas(ctx, link, qrX, qrY, qrSize);
 
   // 右侧文案
   const tx = qrX + qrSize + W * 0.05;
@@ -220,6 +232,38 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
       <p className="mt-3 text-xs text-white/45">
         海报上的二维码就是你的专属拼团链接，朋友扫码进来加入的是你的团，人满即成团。
       </p>
+
+      {/* 合成海报弹层:让用户长按的是"带二维码的合成图",而不是网格里的原始底图。
+          挂 body Portal,避免祖先 transform 让 fixed 失效(同 PayRefHelp 的坑) */}
+      {preview &&
+        createPortal(
+          <div
+            className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-black/90 p-5"
+            onClick={() => setPreview(null)}
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src={preview}
+              alt="带专属二维码的拼团海报"
+              className="max-h-[72vh] w-auto max-w-full rounded-xl border border-white/20"
+              onClick={(e) => e.stopPropagation()}
+            />
+            <p className="mt-4 text-center text-sm font-semibold text-white">
+              长按图片保存到相册 / 直接转发给朋友
+            </p>
+            <p className="mt-1 text-center text-xs text-white/55">
+              这张已带你的专属二维码，朋友扫码即可加入你的团
+            </p>
+            <button
+              type="button"
+              onClick={() => setPreview(null)}
+              className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-white/30 px-5 py-2 text-sm text-white/80 hover:bg-white/10"
+            >
+              <X className="h-4 w-4" /> 关闭
+            </button>
+          </div>,
+          document.body
+        )}
     </div>
   );
 }
