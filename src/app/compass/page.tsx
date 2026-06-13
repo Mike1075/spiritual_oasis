@@ -748,6 +748,28 @@ function CompassFlow() {
               </div>
             )}
 
+            {/* 彩蛋入口:用刚生成的定位资料看 10 年后,带上联系方式免重填 */}
+            <Link
+              href={`/mas-life/demo?c=${encodeURIComponent(contact.trim())}${
+                name.trim() ? `&n=${encodeURIComponent(name.trim())}` : ""
+              }`}
+              className="mb-6 block rounded-2xl border border-fuchsia-400/40 bg-gradient-to-br from-purple-600/20 via-fuchsia-600/15 to-pink-500/10 p-5 transition hover:border-fuchsia-300/60 active:scale-[0.99]"
+            >
+              <div className="mb-1 flex items-center gap-2 text-lg font-bold">
+                <Sparkles className="h-5 w-5 text-fuchsia-300" />
+                彩蛋：看见 10 年后的你
+              </div>
+              <p className="mb-3 text-sm leading-relaxed text-gray-300">
+                AI 用你刚生成的定位资料，写一封
+                <b className="text-white">来自 10 年后的信</b>
+                ，再画一张 10 年后某个普通而美好的瞬间。
+              </p>
+              <span className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 py-3.5 font-bold text-white">
+                打开我的 10 年后
+                <ArrowRight className="h-5 w-5" />
+              </span>
+            </Link>
+
             <div className="mb-6 rounded-2xl border border-white/10 bg-white/[0.03] p-5">
               <Markdown text={buildReport(analyzeText, premortemText, direction)} />
             </div>

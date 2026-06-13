@@ -71,6 +71,17 @@ export default async function CompassReportPage({
             <p className="mt-4 text-xs leading-relaxed text-gray-500">
               本报告由 AI 根据本人回答现场生成，是思考工具而非专业建议；标注（需核实）的数字请自行验证。
             </p>
+
+            {/* 彩蛋入口:报告主人凭测评时的手机号+称呼进时光机 */}
+            <Link
+              href="/mas-life/demo"
+              className="mt-6 block rounded-2xl border border-fuchsia-400/40 bg-gradient-to-br from-purple-600/20 via-fuchsia-600/15 to-pink-500/10 p-5 transition hover:border-fuchsia-300/60 active:scale-[0.99]"
+            >
+              <div className="mb-1 text-lg font-bold">✨ 彩蛋：看见 10 年后的你</div>
+              <p className="text-sm leading-relaxed text-gray-300">
+                做过测评就能进时光机——AI 写一封来自 10 年后的信，再画一张未来某个瞬间。凭测评时的手机号进入。
+              </p>
+            </Link>
           </>
         ) : (
           <div className="rounded-2xl border border-white/10 bg-white/5 p-6 text-center">

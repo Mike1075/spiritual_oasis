@@ -4,7 +4,7 @@
 // 手机号+称呼 双因子匹配罗盘测评记录 → 并发生成 POV 图(MiniMax 文生图)
 // + 10 年故事(MiniMax 流式) → 分享链接 + canvas 合成带二维码的分享卡
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Link from "next/link";
 import {
@@ -193,6 +193,17 @@ export default function DemoClient() {
   const [copied, setCopied] = useState(false);
   const started = useRef(false);
 
+  // 罗盘完成页带 ?c=手机号&n=称呼 跳过来:预填并直接开跑,免得用户重填一遍
+  useEffect(() => {
+    const sp = new URLSearchParams(window.location.search);
+    const c = (sp.get("c") || "").trim();
+    const n = (sp.get("n") || "").trim();
+    if (c) setContact(c);
+    if (n) setName(n);
+    if (c.length >= 4 && n) submit(c, n);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   const shareLink = recId ? `${SITE_URL}/mas-life/demo/r/${recId}` : "";
   const { text: storyText, thinking } = visibleStory(storyRaw);
 
@@ -275,17 +286,19 @@ export default function DemoClient() {
     }
   }
 
-  async function submit() {
+  async function submit(cArg?: string, nArg?: string) {
+    const c = (cArg ?? contact).trim();
+    const n = (nArg ?? name).trim();
     setError("");
-    if (!contact.trim()) return setError("请填写手机号");
-    if (!name.trim()) return setError("请填写称呼（与做罗盘测评时填的一致）");
+    if (!c) return setError("请填写手机号");
+    if (!n) return setError("请填写称呼（与做罗盘测评时填的一致）");
     if (started.current) return;
     setStep("checking");
     try {
       const res = await fetch("/api/mas-life/demo/find", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ contact: contact.trim(), name: name.trim() }),
+        body: JSON.stringify({ contact: c, name: n }),
       });
       const j = (await res.json()) as FindResp;
       if (!j.ok) {
@@ -296,7 +309,7 @@ export default function DemoClient() {
       if (j.limited) return setStep("limited");
       started.current = true;
       setRecId(j.id || "");
-      setDisplayName(j.name || name.trim());
+      setDisplayName(j.name || n);
       setStep("result");
       if (j.cached) {
         setStoryRaw(j.story || "");
@@ -387,7 +400,7 @@ export default function DemoClient() {
             )}
             <button
               type="button"
-              onClick={submit}
+              onClick={() => submit()}
               disabled={step === "checking"}
               className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-8 py-4 text-base font-bold shadow-[0_0_30px_rgba(217,70,239,0.35)] transition hover:opacity-90 disabled:opacity-50"
             >
