@@ -467,6 +467,170 @@ function ModifyPanel() {
   );
 }
 
+type RecoverInfo = {
+  name: string;
+  status: string;
+  session: string;
+  hasTeam: boolean;
+  teamCode?: string;
+  teamCount?: number;
+  teamSize?: number;
+  teamComplete?: boolean;
+  members?: string[];
+};
+
+// 找回拼团链接/二维码：凭"手机号 + 姓名/微信昵称"找回（开过团或已拼团成功、但忘存链接/海报的学员）。
+// 命中后展示拼团状态 + 团进度，并复用 ShareKit 重建专属链接与带二维码的海报。
+function RecoverPanel() {
+  const [contact, setContact] = useState("");
+  const [name, setName] = useState("");
+  const [info, setInfo] = useState<RecoverInfo | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState("");
+  const [copied, setCopied] = useState(false);
+
+  async function find() {
+    if (!contact.trim() || !name.trim())
+      return setError("请填写手机号和姓名/微信昵称");
+    setBusy(true);
+    setError("");
+    setInfo(null);
+    try {
+      const res = await fetch("/api/lock/recover", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ contact, name }),
+      });
+      const j = await res.json();
+      setBusy(false);
+      if (j.ok) setInfo(j as RecoverInfo);
+      else setError(j.error || "没找到匹配的记录");
+    } catch {
+      setBusy(false);
+      setError("网络异常，请重试");
+    }
+  }
+
+  const link =
+    info?.hasTeam && info.teamCode ? `${SITE_URL}/lock?t=${info.teamCode}` : "";
+
+  async function copyLink() {
+    if (!link) return;
+    try {
+      await navigator.clipboard.writeText(link);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      /* 旧浏览器降级：手动长按复制 */
+    }
+  }
+
+  const inputCls =
+    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400";
+  const btnCls =
+    "rounded-xl border border-fuchsia-400/50 px-4 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15 disabled:opacity-40";
+
+  return (
+    <div className="mt-3 rounded-2xl border border-white/15 bg-white/[0.04] p-5">
+      <div className="text-sm font-bold text-white/85">
+        找回我的拼团链接 / 二维码
+      </div>
+      <p className="mt-1 text-xs text-white/50">
+        开过团或已拼团成功，但忘了保存链接、没存海报？填当时锁位用的
+        <b className="text-white/70">手机号 + 姓名 / 微信昵称</b>（早期要求填姓名）即可找回。
+      </p>
+      <div className="mt-3 grid gap-2 sm:grid-cols-3">
+        <input
+          value={contact}
+          onChange={(e) => setContact(e.target.value)}
+          placeholder="手机号"
+          inputMode="tel"
+          className={inputCls}
+        />
+        <input
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+          placeholder="姓名 / 微信昵称"
+          className={inputCls}
+        />
+        <button type="button" onClick={find} disabled={busy} className={btnCls}>
+          {busy ? "查找中…" : "找回拼团链接"}
+        </button>
+      </div>
+
+      {error && (
+        <p className="mt-3 rounded-xl border border-red-400/40 bg-red-500/10 px-4 py-2.5 text-sm text-red-300">
+          {error}
+        </p>
+      )}
+
+      {info && (
+        <div className="mt-4 rounded-2xl border border-fuchsia-400/30 bg-fuchsia-500/5 p-4">
+          <div className="text-sm font-semibold text-fuchsia-100">
+            找到你的记录啦，{info.name} 👋
+          </div>
+          <div className="mt-1 text-xs text-white/65">
+            状态：{info.status}
+            {info.session ? ` · ${info.session}` : ""}
+          </div>
+
+          {info.hasTeam && info.teamCode ? (
+            <>
+              <div className="mt-3 text-xs text-white/70">
+                团码 <b className="text-fuchsia-200">{info.teamCode}</b> ·{" "}
+                {info.teamCount}/{info.teamSize} 人
+                {info.teamComplete ? " · 已成团 🎉" : "（还差人，可继续邀请）"}
+              </div>
+              {info.members && info.members.length > 0 && (
+                <div className="mt-2 flex flex-wrap gap-2">
+                  {info.members.map((m, i) => (
+                    <span
+                      key={i}
+                      className="rounded-lg bg-fuchsia-500/25 px-2.5 py-1 text-xs text-white/80"
+                    >
+                      {m}
+                    </span>
+                  ))}
+                </div>
+              )}
+
+              {/* 拼团链接（快速复制） */}
+              <div className="mt-3 flex items-center gap-2 rounded-xl border border-white/10 bg-black/30 p-2.5">
+                <span className="flex-1 break-all text-xs text-fuchsia-300">
+                  {link}
+                </span>
+                <button
+                  type="button"
+                  onClick={copyLink}
+                  className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-fuchsia-500/30 px-2.5 py-1 text-xs font-semibold text-fuchsia-50 hover:bg-fuchsia-500/45"
+                >
+                  {copied ? (
+                    <>
+                      <Check className="h-3.5 w-3.5" /> 已复制
+                    </>
+                  ) : (
+                    <>
+                      <Copy className="h-3.5 w-3.5" /> 复制链接
+                    </>
+                  )}
+                </button>
+              </div>
+
+              {/* 复用 ShareKit：朋友圈文案 + 8 张带专属二维码的海报（点生成后长按保存） */}
+              <ShareKit teamCode={info.teamCode} />
+            </>
+          ) : (
+            <p className="mt-3 text-xs text-white/65">
+              你当前是<b className="text-white/80">个人锁位</b>，没有拼团链接。如果想转成
+              3 人拼团（拼团价更低）来开团，请用上方“自助修改”切换为拼团；遇到问题联系群内客服。
+            </p>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
 export default function LockClient() {
   const [mode, setMode] = useState<"solo" | "team">("solo");
   const [joinTeam, setJoinTeam] = useState<JoinTeam | null>(null);
@@ -485,6 +649,7 @@ export default function LockClient() {
   const [copied, setCopied] = useState(false);
   const [bannerCopied, setBannerCopied] = useState(false);
   const [showModify, setShowModify] = useState(false);
+  const [showRecover, setShowRecover] = useState(false);
   const [result, setResult] = useState<{
     teamCode?: string;
     teamCount?: number;
@@ -708,6 +873,16 @@ export default function LockClient() {
           已提交过但选错了？点这里自助修改（个人锁位 ⇄ 拼团 / 改场次）
         </button>
         {showModify && <ModifyPanel />}
+
+        {/* 找回拼团链接/二维码入口 */}
+        <button
+          type="button"
+          onClick={() => setShowRecover((v) => !v)}
+          className="mt-2 block text-xs text-white/50 underline underline-offset-4 hover:text-white/80"
+        >
+          忘了保存拼团链接 / 没存拼团海报？点这里凭手机号+姓名找回
+        </button>
+        {showRecover && <RecoverPanel />}
 
         {/* 拼团说明 / 来自分享链接的团进度 */}
         {mode === "team" && (

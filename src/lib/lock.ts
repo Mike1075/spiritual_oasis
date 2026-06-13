@@ -142,3 +142,69 @@ export async function findLockRecord(
     note: fieldText(match.fields["备注"]),
   };
 }
+
+function norm(s: string): string {
+  return (s || "").replace(/\s+/g, "").toLowerCase();
+}
+
+export type RecoverResult = {
+  recordId: string;
+  name: string;
+  contact: string;
+  session: string;
+  status: string;
+  teamCode: string;
+};
+
+// 凭"手机号 + 姓名/微信昵称"双因子找回记录（早期锁位要求填姓名）。
+// 用于学员找回拼团链接与二维码：忘记保存链接/海报的人，无需付款单号也能自助找回。
+// 两个因子都要对上才算命中（手机号匹配 + 姓名/昵称匹配），避免只凭姓名撞名而暴露他人记录。
+// 同时按"手机/微信"和"姓名"两路搜索再合并，兼容当时填在哪个字段。
+export async function findByContactName(
+  contact: string,
+  name: string
+): Promise<RecoverResult | null> {
+  const c = norm(contact);
+  const n = norm(name);
+  if (!c || !n) return null;
+
+  const seen = new Map<
+    string,
+    { recordId: string; fields: Record<string, unknown> }
+  >();
+  for (const [field, val] of [
+    ["手机/微信", contact],
+    ["姓名", name],
+  ] as const) {
+    try {
+      const recs = await searchBitableRecords(
+        field,
+        val,
+        LOCK_TABLE_ID,
+        20,
+        LOCK_APP_TOKEN
+      );
+      for (const r of recs) seen.set(r.recordId, r);
+    } catch {
+      /* 单路搜索失败不阻断另一路 */
+    }
+  }
+
+  const match = [...seen.values()].find((r) => {
+    if (fieldText(r.fields["状态"]) === "已退款") return false;
+    const fc = norm(fieldText(r.fields["手机/微信"]));
+    const fn = norm(fieldText(r.fields["姓名"]));
+    const contactHit = !!fc && (fc.includes(c) || c.includes(fc));
+    const nameHit = !!fn && (fn === n || fn.includes(n) || n.includes(fn));
+    return contactHit && nameHit;
+  });
+  if (!match) return null;
+  return {
+    recordId: match.recordId,
+    name: fieldText(match.fields["姓名"]),
+    contact: fieldText(match.fields["手机/微信"]),
+    session: fieldText(match.fields["场次"]),
+    status: fieldText(match.fields["状态"]),
+    teamCode: fieldText(match.fields["团码"]),
+  };
+}
