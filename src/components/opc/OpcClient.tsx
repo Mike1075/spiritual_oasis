@@ -32,6 +32,7 @@ import {
   type OpcIdentityId,
 } from "@/data/opc";
 import Markdown from "@/components/compass/Markdown";
+import CityPolicies from "@/components/opc/CityPolicies";
 
 type Step = "intro" | "identity" | "quiz" | "result" | "gate" | "done";
 
@@ -271,6 +272,14 @@ function OpcFlow() {
               <ArrowRight className="h-5 w-5" />
             </button>
 
+            <Link
+              href="/opc/policies"
+              className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/5 py-3 text-sm text-sky-300 transition hover:border-sky-400/50 hover:bg-white/10"
+            >
+              <Building2 className="h-4 w-4" />
+              不测了，直接看全国各城政策库
+            </Link>
+
             {history.length > 0 && (
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
                 <p className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-sky-300">
@@ -379,6 +388,9 @@ function OpcFlow() {
                 {result.city.reason}
               </p>
             </div>
+
+            {/* 推荐城市的真实政策(读飞书政策库) */}
+            <CityPolicies city={result.city.city} />
 
             {/* 五步注册清单 */}
             <div className="mb-5 rounded-2xl border border-white/10 bg-white/[0.03] p-5">

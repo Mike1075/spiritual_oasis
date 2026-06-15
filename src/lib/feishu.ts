@@ -13,6 +13,9 @@ const TABLE_ID = process.env.FEISHU_BITABLE_TABLE_ID || "tblWYdnuPsa86tTp";
 // AI 罗盘测评结果表（与线索表同 base，应用权限自动覆盖）
 export const COMPASS_TABLE_ID =
   process.env.FEISHU_COMPASS_TABLE_ID || "tblmMoNLy8WKTJcI";
+// OPC 城市政策库（与线索表同 base，应用权限自动覆盖）—— /opc/policies 政策库页 + 结果页嵌入读取
+export const OPC_POLICY_TABLE_ID =
+  process.env.FEISHU_OPC_POLICY_TABLE_ID || "tbl8rtvjE1cve76m";
 // 618 锁位表：独立私密 base（应用自有 owner，写入不依赖任何人为授权；
 // 同事默认不可见，需要谁看就把 base 单独分享为"可阅读"）
 export const LOCK_APP_TOKEN =
