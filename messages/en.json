@@ -8,7 +8,8 @@
     "dao": "Co-Creation DAO",
     "community": "Community",
     "cofounders": "Co-Founders",
-    "about": "About"
+    "about": "About",
+    "mindos": "MindOS"
   },
   "hero": {
     "title": "Spiritual Oasis",
@@ -134,5 +135,21 @@
     "joinNow": "Join Now",
     "comingSoon": "Coming Soon",
     "loading": "Loading..."
+  },
+  "mindos": {
+    "badge": "Live Now",
+    "title": "MindOS",
+    "subtitle": "A Mirror of Presence",
+    "description": "It won't give advice or make decisions for you, nor rush to comfort you—it simply stays with you, reflecting the answers already within.",
+    "cta": "Enter MindOS",
+    "note": "An early experiment, not therapy or medical care. Conversations are saved anonymously—please don't share your real name, phone, or identifying details.",
+    "features": {
+      "presence": "Simply Present",
+      "presenceDesc": "No judgment, no lectures—the space is yours to fill",
+      "voice": "Talk to It",
+      "voiceDesc": "Natural voice conversation, interrupt anytime, just like talking to a person",
+      "anonymous": "Anonymous · No Trace",
+      "anonymousDesc": "No signup, no name needed—just walk in and begin"
+    }
   }
 }

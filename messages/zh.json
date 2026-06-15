@@ -8,7 +8,8 @@
     "dao": "共建DAO",
     "community": "全球社区",
     "cofounders": "共建者",
-    "about": "关于我们"
+    "about": "关于我们",
+    "mindos": "心镜"
   },
   "hero": {
     "title": "心灵家园",
@@ -134,5 +135,21 @@
     "joinNow": "立即加入",
     "comingSoon": "敬请期待",
     "loading": "加载中..."
+  },
+  "mindos": {
+    "badge": "现在可体验",
+    "title": "心镜 · MindOS",
+    "subtitle": "一面在场的镜子",
+    "description": "它不给建议、不替你做决定，也不急着安慰你——只是安静地陪着，照见你心里本来就有的答案。",
+    "cta": "进入心镜",
+    "note": "很早期的实验，不是心理治疗或医疗。对话匿名保存，请勿写真实姓名、电话等身份信息。",
+    "features": {
+      "presence": "只是在场",
+      "presenceDesc": "不评判、不说教，把空间留给你自己慢慢说",
+      "voice": "可以对它说话",
+      "voiceDesc": "支持语音对话，像跟人聊天一样自然，随时可打断",
+      "anonymous": "匿名 · 不留痕",
+      "anonymousDesc": "无需注册、不用留名字，进来就能开始"
+    }
   }
 }

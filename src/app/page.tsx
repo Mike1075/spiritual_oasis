@@ -4,6 +4,7 @@ import Hero from "@/components/sections/Hero";
 import MasLifePreview from "@/components/sections/MasLifePreview";
 import Plan2026 from "@/components/sections/Plan2026";
 import AcademyPreview from "@/components/sections/AcademyPreview";
+import MindosPreview from "@/components/sections/MindosPreview";
 import MetaversePreview from "@/components/sections/MetaversePreview";
 import CommunityPreview from "@/components/sections/CommunityPreview";
 import HolidaySection from "@/components/sections/HolidaySection";
@@ -19,6 +20,7 @@ export default function Home() {
       {showHoliday && <HolidaySection />}
       <Plan2026 />
       <AcademyPreview />
+      <MindosPreview />
       <MetaversePreview />
       <CommunityPreview />
     </>

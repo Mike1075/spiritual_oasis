@@ -22,6 +22,8 @@ export default function Header() {
     { href: "/calendar", label: t("calendar") },
     { href: "/mas-life", label: t("masLife") },
     { href: "/academy", label: t("academy") },
+    // 心镜部署在独立子域名(外站),新标签打开
+    { href: "https://mind.spiritual-oasis.net", label: t("mindos"), external: true },
     { href: "/metaverse", label: t("metaverse") },
     { href: "/dao", label: t("dao") },
     { href: "/community", label: t("community") },
@@ -45,15 +47,27 @@ export default function Header() {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.href}
-                href={item.href}
-                className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
-              >
-                {item.label}
-              </Link>
-            ))}
+            {navItems.map((item) =>
+              item.external ? (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {item.label}
+                </a>
+              ) : (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className="text-gray-300 hover:text-white transition-colors duration-200 text-sm font-medium"
+                >
+                  {item.label}
+                </Link>
+              )
+            )}
           </div>
 
           {/* Right side actions */}
@@ -75,16 +89,29 @@ export default function Header() {
         {isMenuOpen && (
           <div className="md:hidden bg-black/95 backdrop-blur-lg rounded-b-2xl pb-6">
             <div className="flex flex-col space-y-4 px-4">
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  onClick={() => setIsMenuOpen(false)}
-                  className="text-gray-300 hover:text-white transition-colors duration-200 py-2 border-b border-gray-800"
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems.map((item) =>
+                item.external ? (
+                  <a
+                    key={item.href}
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-gray-300 hover:text-white transition-colors duration-200 py-2 border-b border-gray-800"
+                  >
+                    {item.label}
+                  </a>
+                ) : (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    onClick={() => setIsMenuOpen(false)}
+                    className="text-gray-300 hover:text-white transition-colors duration-200 py-2 border-b border-gray-800"
+                  >
+                    {item.label}
+                  </Link>
+                )
+              )}
             </div>
           </div>
         )}

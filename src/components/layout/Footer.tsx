@@ -52,6 +52,16 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <a
+                  href="https://mind.spiritual-oasis.net"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-gray-400 hover:text-purple-400 transition-colors"
+                >
+                  {nav("mindos")}
+                </a>
+              </li>
+              <li>
                 <Link
                   href="/community"
                   className="text-gray-400 hover:text-purple-400 transition-colors"
