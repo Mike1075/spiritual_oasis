@@ -18,6 +18,8 @@ import {
   Quote,
   ExternalLink,
   PlayCircle,
+  Building2,
+  MapPin,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
@@ -633,6 +635,69 @@ export default function MasLifePage() {
               </p>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* ============ OPC：一人公司决策工具（测评 + 全国政策库） ============ */}
+      <section className="border-t border-white/5 bg-gradient-to-b from-black via-gray-950 to-black px-5 py-24 sm:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-12 text-center">
+            <Eyebrow>
+              <span className="mx-auto">真要落地，政策也得吃透</span>
+            </Eyebrow>
+            <h2 className="text-3xl font-bold leading-snug md:text-5xl">
+              该不该开「一人公司」？
+              <span className="bg-gradient-to-r from-purple-300 to-emerald-300 bg-clip-text text-transparent">
+                落在哪座城？
+              </span>
+            </h2>
+            <p className="mx-auto mt-4 max-w-2xl text-gray-400">
+              升级成一人公司，不只是装系统——还有真金白银的政策红利。两个免费工具，帮你把「开不开、在哪开」想清楚。
+            </p>
+          </div>
+
+          <div className="grid gap-5 md:grid-cols-2">
+            {/* 适配测评 */}
+            <Link
+              href="/opc"
+              className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition hover:border-emerald-400/40 hover:bg-white/[0.05]"
+            >
+              <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/30 to-emerald-400/30 ring-1 ring-white/10">
+                <Compass className="h-7 w-7 text-emerald-300" />
+              </span>
+              <h3 className="text-xl font-bold">一人公司适配测评</h3>
+              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-gray-300">
+                答 6 题，当场给你<b className="text-white">适配度评分</b>、推荐落地城市（按算力 / 税优 / 生态 / 跨境合规成本类型）、五步注册清单与两大避坑。
+              </p>
+              <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-emerald-300 transition group-hover:gap-3">
+                开始测评 · 免费 3 分钟
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+
+            {/* 全国政策库 */}
+            <Link
+              href="/opc/policies"
+              className="group flex flex-col rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition hover:border-emerald-400/40 hover:bg-white/[0.05]"
+            >
+              <span className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-purple-500/30 to-emerald-400/30 ring-1 ring-white/10">
+                <Building2 className="h-7 w-7 text-emerald-300" />
+              </span>
+              <h3 className="text-xl font-bold">全国 OPC 城市政策库</h3>
+              <p className="mt-3 flex-1 text-[15px] leading-relaxed text-gray-300">
+                覆盖全国数十城的<b className="text-white">算力券、落户补贴、免租工位、税收优惠</b>，每条都带核实状态与官方出处，一站查清。
+              </p>
+              <span className="mt-6 inline-flex items-center gap-1.5 font-semibold text-emerald-300 transition group-hover:gap-3">
+                <MapPin className="h-4 w-4" />
+                浏览全国政策库
+                <ArrowRight className="h-4 w-4" />
+              </span>
+            </Link>
+          </div>
+
+          <p className="mx-auto mt-6 max-w-2xl text-center text-xs leading-relaxed text-gray-600">
+            政策数字均为示例整理，以官方最新政策为准，仅供参考、不构成财税法律建议。
+          </p>
         </div>
       </section>
 
