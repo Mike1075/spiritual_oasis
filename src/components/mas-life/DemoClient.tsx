@@ -228,6 +228,8 @@ export default function DemoClient() {
 
   async function genStory(id: string) {
     setStoryErr("");
+    setStoryRaw("");
+    setStoryDone(false);
     try {
       const res = await fetch("/api/mas-life/demo/story", {
         method: "POST",
@@ -508,9 +510,16 @@ export default function DemoClient() {
                   </p>
                 )}
                 {storyErr && (
-                  <p className="rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-2.5 text-sm text-amber-300">
-                    {storyErr}
-                  </p>
+                  <div className="rounded-xl border border-amber-400/40 bg-amber-500/10 px-4 py-3">
+                    <p className="text-sm text-amber-300">{storyErr}</p>
+                    <button
+                      type="button"
+                      onClick={() => recId && genStory(recId)}
+                      className="mt-2.5 inline-flex items-center gap-1.5 rounded-full border border-amber-300/50 px-4 py-1.5 text-xs font-semibold text-amber-100 transition hover:bg-amber-400/15"
+                    >
+                      <Sparkles className="h-3.5 w-3.5" /> 重新生成故事
+                    </button>
+                  </div>
                 )}
               </div>
             </div>

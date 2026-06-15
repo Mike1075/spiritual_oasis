@@ -192,6 +192,44 @@ export async function listBitableRecords(
   return all;
 }
 
+// 把图片字节永久存进飞书云盘（parent_type=bitable_image，挂在本 base 下），返回 file_token。
+// 用途：MiniMax 文生图返回的 OSS 链接 24h 过期，生成时立即落盘换成永久 token，杜绝过期空图。
+export async function uploadBitableMedia(
+  bytes: ArrayBuffer,
+  fileName: string,
+  appToken: string = APP_TOKEN
+): Promise<string> {
+  const token = await getTenantToken();
+  const form = new FormData();
+  form.append("file_name", fileName);
+  form.append("parent_type", "bitable_image");
+  form.append("parent_node", appToken);
+  form.append("size", String(bytes.byteLength));
+  form.append("file", new Blob([bytes]), fileName);
+  const res = await fetch(`${FEISHU_BASE}/drive/v1/medias/upload_all`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` }, // 不要手动设 Content-Type，让 fetch 带 multipart boundary
+    body: form,
+  });
+  const json = (await res.json()) as {
+    code: number;
+    msg: string;
+    data?: { file_token?: string };
+  };
+  if (json.code !== 0 || !json.data?.file_token) {
+    throw new Error(`飞书素材上传失败: ${json.code} ${json.msg}`);
+  }
+  return json.data.file_token;
+}
+
+// 按 file_token 取回素材字节流（永久有效，服务端用 tenant token 现取）。返回原始 Response 供流式透传。
+export async function downloadBitableMedia(fileToken: string): Promise<Response> {
+  const token = await getTenantToken();
+  return fetch(`${FEISHU_BASE}/drive/v1/medias/${fileToken}/download`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
 // 读取单条记录（分享页用）
 export async function getBitableRecord(
   recordId: string,

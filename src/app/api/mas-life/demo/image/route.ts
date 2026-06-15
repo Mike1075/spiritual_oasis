@@ -3,6 +3,7 @@ import { generateImage } from "@/lib/minimax";
 import {
   getBitableRecord,
   updateBitableRecord,
+  uploadBitableMedia,
   COMPASS_TABLE_ID,
 } from "@/lib/feishu";
 import { fieldText } from "@/lib/demo";
@@ -89,12 +90,21 @@ export async function POST(req: Request) {
   if (fieldText(record["手机/微信"]).trim() !== contact) {
     return NextResponse.json({ ok: false, error: "无权访问" }, { status: 403 });
   }
-  if (fieldText(record["demo图URL"]).trim()) {
+  // 只有已存成飞书永久素材（feishu:<token>）才算缓存命中；
+  // 老记录里残留的 MiniMax OSS 链接（http，24h 过期）视为未缓存，走下面重新生成并迁移。
+  if (fieldText(record["demo图URL"]).trim().startsWith("feishu:")) {
     return NextResponse.json({ ok: true, cached: true, url: `/api/mas-life/demo/img/${id}` });
   }
   try {
+    // 1) MiniMax 出图（返回的 OSS 链接 24h 过期）
     const rawUrl = await generateImage(buildImagePrompt(record, id), "3:4");
-    await updateBitableRecord(id, { demo图URL: rawUrl }, COMPASS_TABLE_ID);
+    // 2) 立刻把字节下载下来，落进飞书云盘换永久 file_token——杜绝过期空图
+    const imgRes = await fetch(rawUrl);
+    if (!imgRes.ok) throw new Error(`下载生成图失败 ${imgRes.status}`);
+    const bytes = await imgRes.arrayBuffer();
+    // 第三参用默认 app_token（罗盘表与线索表同 base）；素材挂在该 base 下
+    const fileToken = await uploadBitableMedia(bytes, `mindos-${id}.jpg`);
+    await updateBitableRecord(id, { demo图URL: `feishu:${fileToken}` }, COMPASS_TABLE_ID);
     return NextResponse.json({ ok: true, url: `/api/mas-life/demo/img/${id}` });
   } catch (err) {
     console.error("[mas-life/demo/image] 生成失败：", err);

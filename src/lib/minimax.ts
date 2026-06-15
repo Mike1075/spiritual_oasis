@@ -69,38 +69,46 @@ export async function streamChatMessages(
 }
 
 // 文生图（/mas-life/demo「10 年后」用）:MiniMax image-01,返回图片 URL(有时效,调用方负责落库)
+// ⚠️ 跨境打国内端点 + TokenPlan 限流,实测偶发 base_resp 非 0 / 空结果——给 3 次重试,
+//   实测一次重试基本能救回。返回的 OSS 链接 24h 过期,调用方须立即落盘成永久素材。
 export async function generateImage(
   prompt: string,
-  aspectRatio = "3:4"
+  aspectRatio = "3:4",
+  retries = 2
 ): Promise<string> {
   if (!API_KEY) throw new Error("MINIMAX_API_KEY 未配置");
-  const res = await fetch(`${BASE_URL}/image_generation`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${API_KEY}`,
-    },
-    body: JSON.stringify({
-      model: process.env.MINIMAX_IMAGE_MODEL || "image-01",
-      prompt: prompt.slice(0, 1500),
-      aspect_ratio: aspectRatio,
-      response_format: "url",
-      n: 1,
-      // 不用官方 prompt 改写:改写可能丢掉「无文字/无人脸」硬约束
-      prompt_optimizer: false,
-    }),
-  });
-  const json = (await res.json().catch(() => null)) as {
-    data?: { image_urls?: string[] };
-    base_resp?: { status_code?: number; status_msg?: string };
-  } | null;
-  const url = json?.data?.image_urls?.[0];
-  if (!res.ok || !url) {
-    throw new Error(
-      `文生图失败: ${json?.base_resp?.status_code ?? res.status} ${
+  let lastErr = "";
+  for (let i = 0; i <= retries; i++) {
+    try {
+      const res = await fetch(`${BASE_URL}/image_generation`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${API_KEY}`,
+        },
+        body: JSON.stringify({
+          model: process.env.MINIMAX_IMAGE_MODEL || "image-01",
+          prompt: prompt.slice(0, 1500),
+          aspect_ratio: aspectRatio,
+          response_format: "url",
+          n: 1,
+          // 不用官方 prompt 改写:改写可能丢掉「无文字/无人脸」硬约束
+          prompt_optimizer: false,
+        }),
+      });
+      const json = (await res.json().catch(() => null)) as {
+        data?: { image_urls?: string[] };
+        base_resp?: { status_code?: number; status_msg?: string };
+      } | null;
+      const url = json?.data?.image_urls?.[0];
+      if (res.ok && url) return url;
+      lastErr = `${json?.base_resp?.status_code ?? res.status} ${
         json?.base_resp?.status_msg ?? ""
-      }`
-    );
+      }`;
+    } catch (e) {
+      lastErr = e instanceof Error ? e.message : String(e);
+    }
+    if (i < retries) await new Promise((r) => setTimeout(r, 800 * (i + 1)));
   }
-  return url;
+  throw new Error(`文生图失败(重试 ${retries + 1} 次): ${lastErr}`);
 }

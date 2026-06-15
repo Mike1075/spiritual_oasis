@@ -69,7 +69,9 @@ export async function POST(req: Request) {
         id: cachedRec.recordId,
         name: isPlaceholderName(savedName) ? name : savedName,
         story: fieldText(cachedRec.fields["demo故事"]).trim(),
-        imageUrl: fieldText(cachedRec.fields["demo图URL"]).trim()
+        // 仅当图已存成飞书永久素材才回 URL;老的 OSS 链(http,会过期)当作没图,
+        // 让前端走 genImage 重新生成并迁移成永久素材
+        imageUrl: fieldText(cachedRec.fields["demo图URL"]).trim().startsWith("feishu:")
           ? `/api/mas-life/demo/img/${cachedRec.recordId}`
           : null,
       });
