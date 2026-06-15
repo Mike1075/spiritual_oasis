@@ -8,11 +8,13 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import {
   ArrowLeft,
+  ArrowRight,
   Building2,
   ExternalLink,
   MapPin,
   Search,
   ShieldCheck,
+  Sparkles,
   Users,
 } from "lucide-react";
 import type { OpcPolicy } from "@/lib/opcPolicies";
@@ -279,9 +281,47 @@ export default function PolicyLibrary({ items }: { items: OpcPolicy[] }) {
           传闻类已剔除。
         </p>
 
+        {/* 顶部转化 CTA */}
+        <Link
+          href="/opc"
+          className="group mb-5 flex items-center justify-between gap-3 rounded-2xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/15 via-sky-500/10 to-transparent p-4 transition hover:border-emerald-400/70"
+        >
+          <div>
+            <p className="flex items-center gap-1.5 text-[15px] font-bold text-white">
+              <Sparkles className="h-4 w-4 text-emerald-300" />
+              测一测:哪座城市最适合你做 AI 一人公司?
+            </p>
+            <p className="mt-0.5 text-xs leading-relaxed text-gray-400">
+              答 6 题 · 2 分钟 · 出你的适配度 + 推荐城市 + 五步注册清单
+            </p>
+          </div>
+          <span className="flex shrink-0 items-center gap-1 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 px-3.5 py-2.5 text-sm font-bold text-emerald-950 transition group-hover:scale-[1.03]">
+            免费测
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        </Link>
+
         <Suspense fallback={<p className="py-10 text-gray-500">加载中…</p>}>
           <Library items={items} />
         </Suspense>
+
+        {/* 底部转化 CTA(浏览完再接一次) */}
+        <Link
+          href="/opc"
+          className="mt-8 block rounded-2xl border border-sky-400/40 bg-gradient-to-br from-sky-600/15 via-cyan-600/10 to-emerald-500/10 p-5 text-center transition hover:border-sky-400/70"
+        >
+          <p className="text-lg font-extrabold text-white">
+            看完政策,还是拿不准落在哪座城?
+          </p>
+          <p className="mx-auto mb-3 mt-1 max-w-md text-sm leading-relaxed text-gray-300">
+            你这门生意的核心成本是算力、税、生态还是跨境,决定了最该落地的城市。
+            答 6 题,当场给你适配度、推荐城市和五步注册清单。
+          </p>
+          <span className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-sky-500 to-emerald-500 px-6 py-3 text-base font-bold text-white">
+            测一测我该落哪座城
+            <ArrowRight className="h-5 w-5" />
+          </span>
+        </Link>
 
         <p className="mt-8 border-t border-white/10 pt-4 text-xs leading-relaxed text-gray-500">
           说明:政策时效性强，所有补贴 / 税率 / 门槛数字以官方最新文件为准，申领前请到当地市场监管 /
