@@ -32,6 +32,9 @@ import {
   type Track,
 } from "@/data/compass";
 import Markdown from "@/components/compass/Markdown";
+// radar-auto 2026-06-15: GEO（FAQPage schema + AI 摘要块）
+import { JsonLdFaq, GeoSummary } from "@/components/geo/Geo";
+import { COMPASS_FAQ } from "@/data/geoFaq";
 
 type Step =
   | "intro"
@@ -355,6 +358,8 @@ function CompassFlow() {
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-[#0b1220] via-black to-black text-white">
+      {/* radar-auto 2026-06-15: FAQPage 结构化数据 */}
+      <JsonLdFaq items={COMPASS_FAQ} />
       <div className="h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-emerald-400" />
       <div className="mx-auto w-full max-w-xl px-5 pb-20 pt-8">
         <Link
@@ -393,6 +398,10 @@ function CompassFlow() {
                 高考生选的是专业，职场人选的是赛道——但本质是同一道题：把自己押在哪。
               </b>
             </p>
+            {/* radar-auto 2026-06-15: AI 摘要块（首屏可见，明确观点 + 场景 + 品牌词） */}
+            <GeoSummary label="罗盘是什么" className="mb-6">
+              AI 定位罗盘是心灵家园出品的免费定位测评：11 题约 6 分钟，AI 基于你的真实回答现场推演优势资产、三条候选方向，并做“预死亡推演”。它不是星座式娱乐测试，而是帮高考生选专业、职场人选赛道看清“该把自己押在哪”的思考工具；留联系方式可保存报告、随时回看。
+            </GeoSummary>
             <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-gray-300">
               <ShieldCheck className="mb-2 h-5 w-5 text-emerald-400" />
               这不是又一个「测测你像哪种人」的星座题。答完题后，AI
