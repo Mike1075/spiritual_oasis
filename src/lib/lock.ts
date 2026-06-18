@@ -20,6 +20,35 @@ export const IDENTITY_SET = new Set([
 export const TEAM_SIZE = 3;
 export const TEAM_CODE_RE = /^P[A-Z2-9]{6}$/;
 
+// 拼团价：早鸟结束后新团按原价 6980 的 8 折；6/18 前开的"老团"锁定当初早鸟 8 折价。
+export const TEAM_PRICE_NEW = 5584;
+export const TEAM_BALANCE_NEW = 4966; // 5584 - 618
+export const TEAM_PRICE_LEGACY = 3984;
+export const TEAM_BALANCE_LEGACY = 3366; // 3984 - 618
+// 老团分界：2026-06-18 24:00 CST（= 6/19 00:00 +08:00 = 6/18 16:00 UTC）。
+// 此刻之前开的团 = 老团，锁定 3984，尾款须 6/30 前补齐；此后开的团 = 新团 5584。
+export const LEGACY_TEAM_CUTOFF_MS = Date.UTC(2026, 5, 18, 16, 0, 0);
+export const LEGACY_TEAM_BALANCE_DEADLINE = "6 月 30 日";
+
+// 团是否为老团：以开团人（最早一条记录）的创建时间判断。
+// 取不到创建时间时回落为"新团"（显示新价，最终以客服核验为准，不会少收）。
+export function isLegacyTeam(members: TeamMember[]): boolean {
+  const opened = Math.min(
+    ...members.map((m) => (m.createdTime > 0 ? m.createdTime : Infinity))
+  );
+  return Number.isFinite(opened) && opened < LEGACY_TEAM_CUTOFF_MS;
+}
+
+export function teamPricing(legacy: boolean): {
+  legacy: boolean;
+  price: number;
+  balance: number;
+} {
+  return legacy
+    ? { legacy: true, price: TEAM_PRICE_LEGACY, balance: TEAM_BALANCE_LEGACY }
+    : { legacy: false, price: TEAM_PRICE_NEW, balance: TEAM_BALANCE_NEW };
+}
+
 // 团码字符集去掉 0/O/1/I/L 等易混淆字符；P 前缀代表"拼"
 const CODE_CHARS = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
 
@@ -56,6 +85,7 @@ export type TeamMember = {
   name: string;
   contact: string;
   verified: boolean;
+  createdTime: number; // 记录创建时间（毫秒）；用于判断老团/新团
 };
 
 // 取一个团的有效成员（已退款不算）
@@ -74,6 +104,7 @@ export async function getTeamMembers(code: string): Promise<TeamMember[]> {
       name: fieldText(r.fields["姓名"]),
       contact: fieldText(r.fields["手机/微信"]),
       verified: fieldText(r.fields["状态"]) === "已核验",
+      createdTime: r.createdTime,
     }));
 }
 

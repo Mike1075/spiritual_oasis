@@ -86,7 +86,16 @@ type JoinTeam = {
   complete: boolean;
   leader: string;
   members: string[];
+  // 老团（6/18 前开）锁定当初拼团价 3984，尾款须 6/30 前补齐；新团按 6980 八折 5584
+  legacy?: boolean;
+  price?: number;
+  balance?: number;
 };
+
+// 拼团价兜底（接口未返回时按新团显示，最终以客服核验为准）
+const TEAM_PRICE_NEW = 5584;
+const TEAM_BALANCE_NEW = 4966;
+const LEGACY_BALANCE_DEADLINE = "6 月 30 日";
 
 type ModifySummary = {
   name: string;
@@ -655,6 +664,9 @@ export default function LockClient() {
     teamCode?: string;
     teamCount?: number;
     teamComplete?: boolean;
+    teamLegacy?: boolean;
+    teamPrice?: number;
+    teamBalance?: number;
   }>({});
 
   // 带 ?t=团码 进来 = 拼团分享落地：拉团进度并直接进入拼团模式
@@ -682,9 +694,13 @@ export default function LockClient() {
     if (!joinTeam) return;
     const link = `${SITE_URL}/lock?t=${joinTeam.code}`;
     const remain = joinTeam.size - joinTeam.count;
+    const price = joinTeam.price ?? TEAM_PRICE_NEW;
+    const priceNote = joinTeam.legacy
+      ? `拼团价 ${price}（开团时锁定价，尾款 ${LEGACY_BALANCE_DEADLINE}前补齐）`
+      : `拼团价 ${price}（原价 6980 打 8 折）`;
     const text =
       `${joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团\n` +
-      `拼团价 5584（原价 6980 打 8 折）· 当前 ${joinTeam.count}/${joinTeam.size} 人，还差 ${remain} 人成团。点击下方链接即可加入拼团。\n` +
+      `${priceNote}· 当前 ${joinTeam.count}/${joinTeam.size} 人，还差 ${remain} 人成团。点击下方链接即可加入拼团。\n` +
       link;
     try {
       await navigator.clipboard.writeText(text);
@@ -696,9 +712,13 @@ export default function LockClient() {
   }
 
   async function copyShare() {
+    const price = result.teamPrice ?? TEAM_PRICE_NEW;
+    const priceNote = result.teamLegacy
+      ? `拼团价 ${price}（开团时锁定价，尾款 ${LEGACY_BALANCE_DEADLINE}前补齐）`
+      : `拼团价 ${price}（原价 6980 打 8 折）`;
     try {
       await navigator.clipboard.writeText(
-        `我在拼「人生方向设计」3 人团，拼团价 5584（原价 6980 打 8 折），618 元锁位入团：${shareUrl}`
+        `我在拼「人生方向设计」3 人团，${priceNote}，618 元锁位入团：${shareUrl}`
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -742,12 +762,18 @@ export default function LockClient() {
         teamCode?: string;
         teamCount?: number;
         teamComplete?: boolean;
+        teamLegacy?: boolean;
+        teamPrice?: number;
+        teamBalance?: number;
       };
       if (j.ok) {
         setResult({
           teamCode: j.teamCode,
           teamCount: j.teamCount,
           teamComplete: j.teamComplete,
+          teamLegacy: j.teamLegacy,
+          teamPrice: j.teamPrice,
+          teamBalance: j.teamBalance,
         });
         setStatus("done");
       } else {
@@ -774,9 +800,21 @@ export default function LockClient() {
                 {joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团
               </div>
               <div className="mt-0.5 text-white/70">
-                拼团价 <strong className="text-emerald-300">5584</strong>
-                （原价 6980 打 8 折）· 当前 {joinTeam.count}/{joinTeam.size} 人，还差{" "}
+                拼团价{" "}
+                <strong className="text-emerald-300">
+                  {joinTeam.price ?? TEAM_PRICE_NEW}
+                </strong>
+                {joinTeam.legacy
+                  ? "（开团时锁定价）"
+                  : "（原价 6980 打 8 折）"}
+                · 当前 {joinTeam.count}/{joinTeam.size} 人，还差{" "}
                 {joinTeam.size - joinTeam.count} 人成团
+                {joinTeam.legacy && (
+                  <span className="mt-0.5 block text-amber-300">
+                    老团福利：锁定当初拼团价，成团后尾款请于{" "}
+                    {LEGACY_BALANCE_DEADLINE}前补齐。
+                  </span>
+                )}
               </div>
               <button
                 type="button"
@@ -974,8 +1012,12 @@ export default function LockClient() {
                 <p className="mx-auto mt-3 max-w-md rounded-xl border border-emerald-400/30 bg-black/30 p-3 text-sm leading-relaxed text-white/75">
                   <strong className="text-emerald-200">接下来：</strong>
                   客服核验三位的 618 到账后会逐一联系你们，发放专属报名通道——
-                  <strong>开课前补尾款 4966</strong>（618 + 4966 = 拼团价
-                  5584）即完成报名，之后等开课通知就行。
+                  <strong>
+                    {result.teamLegacy ? "请于 " + LEGACY_BALANCE_DEADLINE + "前补尾款 " : "开课前补尾款 "}
+                    {result.teamBalance ?? TEAM_BALANCE_NEW}
+                  </strong>
+                  （618 + {result.teamBalance ?? TEAM_BALANCE_NEW} = 拼团价{" "}
+                  {result.teamPrice ?? TEAM_PRICE_NEW}）即完成报名，之后等开课通知就行。
                 </p>
               )}
             </div>
@@ -1019,7 +1061,7 @@ export default function LockClient() {
             )}
 
             {result.teamCode && !result.teamComplete && (
-              <ShareKit teamCode={result.teamCode} />
+              <ShareKit teamCode={result.teamCode} price={result.teamPrice} />
             )}
 
             {/* 成功页再推一次群 */}

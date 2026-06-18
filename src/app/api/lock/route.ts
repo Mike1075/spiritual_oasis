@@ -15,6 +15,8 @@ import {
   getTeamMembers,
   cityFull,
   countActiveRecords,
+  isLegacyTeam,
+  teamPricing,
 } from "@/lib/lock";
 
 export const runtime = "nodejs";
@@ -34,6 +36,7 @@ export async function GET(req: Request) {
         { status: 404 }
       );
     }
+    const pricing = teamPricing(isLegacyTeam(members));
     return NextResponse.json({
       ok: true,
       team: {
@@ -43,6 +46,8 @@ export async function GET(req: Request) {
         complete: members.length >= TEAM_SIZE,
         leader: maskName(members[0]?.name ?? ""),
         members: members.map((m) => maskName(m.name)),
+        // 老团锁定当初拼团价；新团按 6980 八折
+        ...pricing,
       },
     });
   } catch (err) {
@@ -134,6 +139,7 @@ export async function POST(req: Request) {
 
   let teamCode = "";
   let noteTag = "";
+  let teamLegacy = false; // 参团：继承所加入团的老/新价；开团：恒为新团
 
   if (mode === "team-join") {
     teamCode = (body.teamCode || "").trim().toUpperCase();
@@ -164,6 +170,7 @@ export async function POST(req: Request) {
         );
       }
       // 并发同时加入同一个团的竞态由客服核验时兜底（第 4 人退款或转开新团）
+      teamLegacy = isLegacyTeam(members);
     } catch (err) {
       console.error("[lock] 参团校验失败：", err);
       return NextResponse.json(
@@ -216,12 +223,16 @@ export async function POST(req: Request) {
         teamCount = mode === "team-create" ? 1 : 0;
       }
     }
+    const pricing = teamCode ? teamPricing(teamLegacy) : null;
     return NextResponse.json({
       ok: true,
       recordId,
       teamCode: teamCode || undefined,
       teamCount: teamCode ? teamCount : undefined,
       teamComplete: teamCode ? teamCount >= TEAM_SIZE : undefined,
+      teamLegacy: pricing?.legacy,
+      teamPrice: pricing?.price,
+      teamBalance: pricing?.balance,
     });
   } catch (err) {
     console.error("[lock] 写入飞书失败：", err, fields);

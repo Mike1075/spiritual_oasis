@@ -9,24 +9,26 @@ const SITE_URL = "https://www.spiritual-oasis.net";
 const POSTER_COUNT = 8;
 const HOOK = "28 天，给自己装一个会帮你的人生系统";
 
-// 朋友圈文案模板（复制时文末自动拼接专属链接）
-const TEXT_TEMPLATES = [
-  {
-    label: "走心版",
-    body:
-      "我在做一件事——用 28 天给自己装一套 AI 人生系统：先帮我看清自己该往哪走，再替我把方向跑成真东西。\n现在 3 人成团有特别价。如果你也想给自己一个重新设计人生的机会，跟我拼一个 👇",
-  },
-  {
-    label: "直接版",
-    body:
-      "「人生方向设计」3 人拼团开团啦！原价 6980，拼团价 5584（8 折），618 元先锁位、全额抵学费。\n还差人成团，来跟我凑一桌 👇",
-  },
-  {
-    label: "提问版",
-    body:
-      "你有多久没认真想过：我到底该往哪走？\n这门课用 AI 帮你把「人生方向」设计出来，还替你一步步执行。我已经开团了，3 人成团价 5584，一起 👇",
-  },
-];
+const DEFAULT_TEAM_PRICE = 5584;
+
+// 朋友圈文案模板（复制时文末自动拼接专属链接）；价格随团动态（老团锁定当初价）
+function textTemplates(price: number) {
+  return [
+    {
+      label: "走心版",
+      body:
+        "我在做一件事——用 28 天给自己装一套 AI 人生系统：先帮我看清自己该往哪走，再替我把方向跑成真东西。\n现在 3 人成团有特别价。如果你也想给自己一个重新设计人生的机会，跟我拼一个 👇",
+    },
+    {
+      label: "直接版",
+      body: `「人生方向设计」3 人拼团开团啦！拼团价 ${price}，618 元先锁位、全额抵学费。\n还差人成团，来跟我凑一桌 👇`,
+    },
+    {
+      label: "提问版",
+      body: `你有多久没认真想过：我到底该往哪走？\n这门课用 AI 帮你把「人生方向」设计出来，还替你一步步执行。我已经开团了，3 人成团价 ${price}，一起 👇`,
+    },
+  ];
+}
 
 export function loadImage(src: string): Promise<HTMLImageElement> {
   return new Promise((resolve, reject) => {
@@ -57,7 +59,11 @@ export async function drawQrOnCanvas(
 }
 
 // 在海报底部留白区画：二维码 + 钩子文案 + 扫码提示，返回合成后的 PNG dataURL
-async function buildPoster(idx: number, link: string): Promise<string> {
+async function buildPoster(
+  idx: number,
+  link: string,
+  price: number
+): Promise<string> {
   const bg = await loadImage(`/posters/poster-${idx}.jpg`);
   const W = bg.naturalWidth || 1086;
   const H = bg.naturalHeight || 1448;
@@ -117,13 +123,20 @@ async function buildPoster(idx: number, link: string): Promise<string> {
   ty += subSize * 1.5;
   ctx.fillStyle = "#b3541e";
   ctx.font = `bold ${subSize}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
-  ctx.fillText("拼团价 5584 · 618 先锁位全额抵学费", tx, ty);
+  ctx.fillText(`拼团价 ${price} · 618 先锁位全额抵学费`, tx, ty);
 
   return canvas.toDataURL("image/jpeg", 0.85);
 }
 
-export default function ShareKit({ teamCode }: { teamCode: string }) {
+export default function ShareKit({
+  teamCode,
+  price = DEFAULT_TEAM_PRICE,
+}: {
+  teamCode: string;
+  price?: number;
+}) {
   const link = `${SITE_URL}/lock?t=${teamCode}`;
+  const templates = textTemplates(price);
   const [copiedIdx, setCopiedIdx] = useState<number | null>(null);
   const [busyIdx, setBusyIdx] = useState<number | null>(null);
   const [preview, setPreview] = useState<string | null>(null);
@@ -131,7 +144,7 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
 
   async function copyText(i: number) {
     try {
-      await navigator.clipboard.writeText(`${TEXT_TEMPLATES[i].body}\n${link}`);
+      await navigator.clipboard.writeText(`${templates[i].body}\n${link}`);
       setCopiedIdx(i);
       setTimeout(() => setCopiedIdx((v) => (v === i ? null : v)), 2000);
     } catch {
@@ -143,7 +156,7 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
     setBusyIdx(n);
     setErr("");
     try {
-      const dataUrl = await buildPoster(n, link);
+      const dataUrl = await buildPoster(n, link, price);
       setPreview(dataUrl);
     } catch {
       setErr("海报生成失败，请重试，或直接复制上方文案分享");
@@ -163,7 +176,7 @@ export default function ShareKit({ teamCode }: { teamCode: string }) {
         ① 复制文案发朋友圈
       </p>
       <div className="mt-2 space-y-2">
-        {TEXT_TEMPLATES.map((t, i) => (
+        {templates.map((t, i) => (
           <div key={i} className="rounded-xl border border-white/10 bg-black/30 p-3">
             <div className="flex items-center justify-between gap-3">
               <span className="text-xs font-bold text-fuchsia-200">{t.label}</span>

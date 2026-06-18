@@ -131,12 +131,19 @@ export async function searchBitableRecords(
   tableId: string = TABLE_ID,
   limit = 20,
   appToken: string = APP_TOKEN
-): Promise<{ recordId: string; fields: Record<string, unknown> }[]> {
+): Promise<
+  { recordId: string; fields: Record<string, unknown>; createdTime: number }[]
+> {
   const json = await feishuFetch<{
     code: number;
     msg: string;
     data?: {
-      items?: { record_id: string; fields: Record<string, unknown> }[];
+      items?: {
+        record_id: string;
+        fields: Record<string, unknown>;
+        // automatic_fields:true 时飞书返回创建时间（毫秒）
+        created_time?: number;
+      }[];
     };
   }>(
     `${FEISHU_BASE}/bitable/v1/apps/${appToken}/tables/${tableId}/records/search?page_size=${limit}`,
@@ -157,6 +164,7 @@ export async function searchBitableRecords(
   return (json.data?.items ?? []).map((r) => ({
     recordId: r.record_id,
     fields: r.fields,
+    createdTime: Number(r.created_time) || 0,
   }));
 }
 
