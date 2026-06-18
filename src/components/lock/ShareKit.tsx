@@ -19,12 +19,12 @@ const TEXT_TEMPLATES = [
   {
     label: "直接版",
     body:
-      "「人生方向设计」3 人拼团开团啦！原价 6980，拼团价 3984（早鸟 8 折），618 元先锁位、全额抵学费。\n还差人成团，来跟我凑一桌 👇",
+      "「人生方向设计」3 人拼团开团啦！原价 6980，拼团价 5584（8 折），618 元先锁位、全额抵学费。\n还差人成团，来跟我凑一桌 👇",
   },
   {
     label: "提问版",
     body:
-      "你有多久没认真想过：我到底该往哪走？\n这门课用 AI 帮你把「人生方向」设计出来，还替你一步步执行。我已经开团了，3 人成团价 3984，一起 👇",
+      "你有多久没认真想过：我到底该往哪走？\n这门课用 AI 帮你把「人生方向」设计出来，还替你一步步执行。我已经开团了，3 人成团价 5584，一起 👇",
   },
 ];
 
@@ -117,7 +117,7 @@ async function buildPoster(idx: number, link: string): Promise<string> {
   ty += subSize * 1.5;
   ctx.fillStyle = "#b3541e";
   ctx.font = `bold ${subSize}px -apple-system, "PingFang SC", "Microsoft YaHei", sans-serif`;
-  ctx.fillText("拼团价 3984 · 618 先锁位全额抵学费", tx, ty);
+  ctx.fillText("拼团价 5584 · 618 先锁位全额抵学费", tx, ty);
 
   return canvas.toDataURL("image/jpeg", 0.85);
 }

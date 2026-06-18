@@ -42,7 +42,7 @@ import {
 export const metadata: Metadata = {
   title: "MAS-Life OS — 给你装一个会帮你的系统 | 心灵家园",
   description:
-    "不是一门 AI 课，是 28 天亲手给你装一套会教你想、陪你练、帮你造的活系统。AI 时代普通人改命的必修课。深圳/北京/上海线下 + 线上全球同价，早鸟 4980 至 6/18。",
+    "不是一门 AI 课，是 28 天亲手给你装一套会教你想、陪你练、帮你造的活系统。AI 时代普通人改命的必修课。深圳/北京/上海线下 + 线上全球同价，学费 6980，3 人拼团 8 折。",
 };
 
 const FACTOR_ICONS = [Compass, Brain, Gauge];
@@ -113,7 +113,7 @@ export default function MasLifePage() {
               href="#enroll"
               className="group flex items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-8 py-4 text-lg font-bold transition hover:scale-[1.02]"
             >
-              查看报名方案 · 早鸟 4980
+              查看报名方案 · 学费 6980
               <ArrowRight className="h-5 w-5 transition-transform group-hover:translate-x-1" />
             </Link>
             <Link
@@ -741,7 +741,7 @@ export default function MasLifePage() {
                 人生方向设计 · 28 天课程
               </span>
               <span className="rounded-full border border-rose-400/50 bg-rose-500/10 px-3 py-1 text-xs text-rose-200">
-                三城线下各限 50 席 · 6/18 涨价
+                三城线下各限 50 席 · 报满即止
               </span>
             </div>
             <h2 className="text-3xl font-extrabold leading-tight md:text-5xl">
@@ -752,8 +752,8 @@ export default function MasLifePage() {
               <Spec icon={Calendar} title="开课方式">
                 深圳 / 北京 / 上海线下小班 + 线上全球可报 · 同价同课
               </Spec>
-              <Spec icon={Wallet} title="价格 · 早鸟">
-                <b className="text-emerald-300">早鸟 4980</b>（6/18 前）· 之后 6980
+              <Spec icon={Wallet} title="学费">
+                <b className="text-emerald-300">¥6980</b> · 线上线下同价同课
               </Spec>
               <Spec icon={Award} title="折扣">
                 金卡 / 学生 8 折 · 老学员 75 折 · 3 人拼团 8 折（仅新人）

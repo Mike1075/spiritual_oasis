@@ -37,13 +37,13 @@ const SOLO_BENEFITS = [
   },
   {
     icon: Lock,
-    title: "锁定早鸟价 4980",
-    desc: "6 月 18 日早鸟截止后，已锁位学员依然按 4980 报名（原价 6980）。",
+    title: "锁定你的席位",
+    desc: "学费 6980，线上线下同价。618 元先占位，报名时全额抵扣。",
   },
   {
     icon: ShieldCheck,
-    title: "6/18 前可全额退",
-    desc: "6 月 18 日前申请，锁位金全额退；之后不退，但早鸟价资格永久保留。",
+    title: "开课前可全额退",
+    desc: "改主意了？开课前申请，锁位金 618 全额退还，零风险。",
   },
   {
     icon: MapPin,
@@ -55,13 +55,13 @@ const SOLO_BENEFITS = [
 const TEAM_BENEFITS = [
   {
     icon: Users,
-    title: "3 人成团 · 拼团价 3984",
-    desc: "新朋友专享 8 折（原早鸟价 4980）。618 元入团，成团后尾款 3366。",
+    title: "3 人成团 · 拼团价 5584",
+    desc: "新朋友专享 8 折（原价 6980）。618 元入团，成团后尾款 4966。",
   },
   {
     icon: Lock,
-    title: "入团即锁价，不怕过期",
-    desc: "只要进了团，拼团价 3984 就锁定了——不受 6 月 18 日早鸟截止影响。",
+    title: "入团即锁价",
+    desc: "只要进了团，拼团价 5584 就锁定了——比单独报名省 1396。",
   },
   {
     icon: Copy,
@@ -283,11 +283,11 @@ function ModifyPanel() {
         setDone(
           action === "to-team-join"
             ? `已加入团 ${j.teamCode}（当前 ${j.teamCount}/3 人）`
-            : `已转为 3 人拼团（拼团价 3984），团码 ${j.teamCode}`
+            : `已转为 3 人拼团（拼团价 5584），团码 ${j.teamCode}`
         );
       } else if (action === "to-solo") {
         setShareCode("");
-        setDone("已转为个人锁位（锁定早鸟价 4980）");
+        setDone("已转为个人锁位（学费 6980，618 全额抵扣）");
       } else if (action === "change-session") {
         setDone(`场次已改为 ${j.session}`);
       }
@@ -301,7 +301,7 @@ function ModifyPanel() {
   async function copyShare() {
     try {
       await navigator.clipboard.writeText(
-        `我在拼「人生方向设计」3 人团，拼团价 3984（早鸟 4980 打 8 折），618 元锁位入团：${shareUrl}`
+        `我在拼「人生方向设计」3 人团，拼团价 5584（原价 6980 打 8 折），618 元锁位入团：${shareUrl}`
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -353,7 +353,7 @@ function ModifyPanel() {
             <strong className="text-emerald-200">
               {rec.mode === "team"
                 ? `3 人拼团（${rec.teamCount}/3 · 团码 ${rec.teamCode}）`
-                : "个人锁位（早鸟价 4980）"}
+                : "个人锁位（学费 6980）"}
             </strong>
             <span className="mx-2 text-white/30">|</span>
             场次：<strong className="text-emerald-200">{rec.session}</strong>
@@ -367,7 +367,7 @@ function ModifyPanel() {
                 disabled={busy}
                 className={btnCls}
               >
-                转为 3 人拼团（开团 · 3984）
+                转为 3 人拼团（开团 · 5584）
               </button>
             )}
             {rec.mode === "team" && (
@@ -377,7 +377,7 @@ function ModifyPanel() {
                 disabled={busy}
                 className={btnCls}
               >
-                转为个人锁位（4980）
+                转为个人锁位（6980）
               </button>
             )}
             <select
@@ -645,6 +645,7 @@ export default function LockClient() {
   const [status, setStatus] = useState<"idle" | "submitting" | "done">("idle");
   const [error, setError] = useState("");
   const [qrMissing, setQrMissing] = useState(false);
+  const [paypalMissing, setPaypalMissing] = useState(false);
   const [groupQrMissing, setGroupQrMissing] = useState(false);
   const [copied, setCopied] = useState(false);
   const [bannerCopied, setBannerCopied] = useState(false);
@@ -683,7 +684,7 @@ export default function LockClient() {
     const remain = joinTeam.size - joinTeam.count;
     const text =
       `${joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团\n` +
-      `拼团价 3984（早鸟 4980 打 8 折）· 当前 ${joinTeam.count}/${joinTeam.size} 人，还差 ${remain} 人成团。点击下方链接即可加入拼团。\n` +
+      `拼团价 5584（原价 6980 打 8 折）· 当前 ${joinTeam.count}/${joinTeam.size} 人，还差 ${remain} 人成团。点击下方链接即可加入拼团。\n` +
       link;
     try {
       await navigator.clipboard.writeText(text);
@@ -697,7 +698,7 @@ export default function LockClient() {
   async function copyShare() {
     try {
       await navigator.clipboard.writeText(
-        `我在拼「人生方向设计」3 人团，拼团价 3984（早鸟 4980 打 8 折），618 元锁位入团：${shareUrl}`
+        `我在拼「人生方向设计」3 人团，拼团价 5584（原价 6980 打 8 折），618 元锁位入团：${shareUrl}`
       );
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
@@ -773,8 +774,8 @@ export default function LockClient() {
                 {joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团
               </div>
               <div className="mt-0.5 text-white/70">
-                拼团价 <strong className="text-emerald-300">3984</strong>
-                （早鸟 4980 打 8 折）· 当前 {joinTeam.count}/{joinTeam.size} 人，还差{" "}
+                拼团价 <strong className="text-emerald-300">5584</strong>
+                （原价 6980 打 8 折）· 当前 {joinTeam.count}/{joinTeam.size} 人，还差{" "}
                 {joinTeam.size - joinTeam.count} 人成团
               </div>
               <button
@@ -802,13 +803,13 @@ export default function LockClient() {
         </div>
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
           <span className="bg-gradient-to-r from-purple-300 via-fuchsia-300 to-emerald-300 bg-clip-text text-transparent">
-            锁位通道 · 锁住你的价格
+            锁位通道 · 锁住你的席位
           </span>
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-white/70">
           「人生方向设计」28 天课程 · 深圳 / 北京 / 上海线下 + 线上全球同价。
           用 <strong className="text-emerald-300">618 元</strong>
-          锁住席位和优惠价，全额抵学费。
+          锁住席位，全额抵学费；3 人拼团再享 8 折。
         </p>
 
         {/* 企微群 · 公转私主入口 */}
@@ -849,7 +850,7 @@ export default function LockClient() {
                 : "text-white/60 hover:text-white"
             }`}
           >
-            个人锁位 · 锁早鸟 4980
+            个人锁位 · 学费 6980
           </button>
           <button
             type="button"
@@ -860,7 +861,7 @@ export default function LockClient() {
                 : "text-white/60 hover:text-white"
             }`}
           >
-            3 人拼团 · 新人价 3984
+            3 人拼团 · 新人价 5584
           </button>
         </div>
 
@@ -918,12 +919,12 @@ export default function LockClient() {
             {joinTeam?.complete && (
               <div className="rounded-2xl border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-200">
                 这个团已满 3 人啦。没关系——你可以直接开一个新团，
-                同样锁定拼团价 3984。
+                同样锁定拼团价 5584。
               </div>
             )}
             {joinTeamError && (
               <div className="rounded-2xl border border-amber-400/40 bg-amber-500/10 p-4 text-sm text-amber-200">
-                {joinTeamError}——你可以直接开一个新团，锁定拼团价 3984。
+                {joinTeamError}——你可以直接开一个新团，锁定拼团价 5584。
               </div>
             )}
             <p className="rounded-2xl border border-white/10 bg-white/[0.03] p-4 text-xs leading-relaxed text-white/55">
@@ -973,8 +974,8 @@ export default function LockClient() {
                 <p className="mx-auto mt-3 max-w-md rounded-xl border border-emerald-400/30 bg-black/30 p-3 text-sm leading-relaxed text-white/75">
                   <strong className="text-emerald-200">接下来：</strong>
                   客服核验三位的 618 到账后会逐一联系你们，发放专属报名通道——
-                  <strong>开课前补尾款 3366</strong>（618 + 3366 = 拼团价
-                  3984）即完成报名，之后等开课通知就行。
+                  <strong>开课前补尾款 4966</strong>（618 + 4966 = 拼团价
+                  5584）即完成报名，之后等开课通知就行。
                 </p>
               )}
             </div>
@@ -1116,6 +1117,51 @@ export default function LockClient() {
               </div>
             </div>
 
+            {/* 海外学员：PayPal 收款 */}
+            <div className="mt-4 flex flex-col items-center gap-4 rounded-2xl border border-sky-400/20 bg-sky-500/5 p-6 sm:flex-row sm:items-start">
+              {paypalMissing ? (
+                <div className="flex h-48 w-44 shrink-0 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/25 text-white/40">
+                  <QrCode className="h-8 w-8" />
+                  <span className="px-3 text-center text-xs">
+                    PayPal 码维护中，请向客服索取
+                  </span>
+                </div>
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src="/images/pay-paypal.png"
+                  alt="Spiritual Oasis · 公司 PayPal 收款码（海外学员）"
+                  className="w-44 shrink-0 rounded-xl bg-white object-contain"
+                  onError={() => setPaypalMissing(true)}
+                />
+              )}
+              <div className="text-sm leading-relaxed text-white/70">
+                <p>
+                  <strong className="text-sky-300">海外学员</strong>{" "}
+                  可用{" "}
+                  <strong className="text-white">PayPal</strong>{" "}
+                  支付等值锁位金（约 ¥618，按当日汇率，客服按实收金额确认）。
+                </p>
+                <p className="mt-2">
+                  PayPal 收款邮箱：
+                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-sky-200">
+                    spiritual.oasis.online@gmail.com
+                  </code>
+                </p>
+                <p className="mt-2">
+                  付款时请在<strong>备注 / Note</strong>里写：
+                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-sky-200">
+                    {mode === "team" ? "拼团+你的微信名" : "锁位+你的微信名"}
+                  </code>
+                </p>
+                <p className="mt-2 text-white/50">
+                  PayPal 手续费由付款方承担；付款完成后，把{" "}
+                  <strong>交易单号的最后 5 位</strong>填进下方表单，客服核验到账后
+                  {mode === "team" ? "即入团锁价" : "席位即锁定"}。
+                </p>
+              </div>
+            </div>
+
             {/* 第三步：回填信息 */}
             <h2 className="mt-12 flex items-center gap-2 text-lg font-bold">
               <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-xs">
@@ -1213,18 +1259,17 @@ export default function LockClient() {
           <ol className="list-decimal space-y-1 pl-4">
             <li>锁位金 618 元，报名时全额抵扣学费。</li>
             <li>
-              个人锁位：锁定早鸟价 4980 元（原价 6980）。早鸟价 2026 年 6 月 18 日
-              24:00 截止，已锁位学员在截止后报名仍享早鸟价。
+              个人锁位：学费 6980 元（线上线下同价）。618 元锁定席位，报名时全额抵扣。
             </li>
             <li>
-              3 人拼团（仅限新朋友）：拼团价 3984 元（618 入团 + 成团后尾款
-              3366）。入团即锁定拼团价，不受早鸟截止时间影响。
+              3 人拼团（仅限新朋友）：拼团价 5584 元 = 原价 6980 的 8 折（618 入团 + 成团后尾款
+              4966）。入团即锁定拼团价。
             </li>
             <li>
               开课前未满 3 人：可选全额退还 618 元，或转为当期你可享的最优个人价格报名（二选一）。
             </li>
             <li>
-              个人锁位 6 月 18 日 24:00 前可申请全额退；之后锁位金不退，早鸟价资格保留。
+              个人锁位开课前可申请全额退；开课后锁位金不退。
             </li>
             <li>线下席位（深/京/沪各 50 席）按核验到账顺序锁定，满员后可改报线上或候补。</li>
             <li>金卡会员、老学员折扣在小鹅通报名时自动生效，与拼团不叠加以更优者为准；学生折扣请联系客服核验。</li>
