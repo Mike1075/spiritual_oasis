@@ -23,8 +23,8 @@ export default function MasLifePreview() {
         <div className="os-panel os-panel--live relative overflow-hidden p-8 md:p-12">
           {/* hero 图作为右侧底纹 */}
           <div
-            className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-cover bg-center opacity-20 [mask-image:linear-gradient(to_right,transparent,black)] md:block"
-            style={{ backgroundImage: "url(/images/mas-life/hero-exoskeleton.jpg)" }}
+            className="pointer-events-none absolute inset-y-0 right-0 hidden w-1/2 bg-cover bg-center opacity-30 [mask-image:linear-gradient(to_right,transparent,black)] md:block"
+            style={{ backgroundImage: "url(/images/mas-life/redesign/exoskeleton.jpg)" }}
           />
           <div className="relative mb-5 flex flex-wrap items-center gap-3">
             <span className="os-mono rounded-md border border-[color:var(--os-line-strong)] px-3 py-1 text-xs text-[color:var(--os-dim)]">

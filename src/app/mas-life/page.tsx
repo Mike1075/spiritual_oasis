@@ -64,8 +64,13 @@ export default function MasLifePage() {
       <AssistantWidget />
       {/* ============ HERO · 开机控制台 ============ */}
       <section className="relative overflow-hidden">
-        {/* 机身底纹：发丝网格 + 通电辉光 */}
-        <div className="os-grid absolute inset-0 opacity-[0.45]" />
+        {/* 机身底纹：MJ 控制台氛围图 + 发丝网格 + 通电辉光 */}
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.3]"
+          style={{ backgroundImage: "url(/images/mas-life/redesign/hero-bg.jpg)" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--os-bg)] via-[color:var(--os-bg)]/65 to-[color:var(--os-bg)]/35" />
+        <div className="os-grid absolute inset-0 opacity-[0.35]" />
         <div className="os-glow-you absolute -top-32 left-1/4 h-[640px] w-[640px]" />
         <div className="os-glow-sys absolute -right-40 top-40 h-[520px] w-[520px]" />
 
@@ -328,7 +333,11 @@ export default function MasLifePage() {
         id="path"
         className="relative scroll-mt-16 overflow-hidden border-t border-[color:var(--os-line)] px-5 py-24 sm:px-8"
       >
-        <div className="os-grid absolute inset-0 opacity-[0.3]" />
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.14]"
+          style={{ backgroundImage: "url(/images/mas-life/redesign/network-bg.jpg)" }}
+        />
+        <div className="os-grid absolute inset-0 opacity-[0.25]" />
         <div className="relative mx-auto max-w-6xl">
           <div className="max-w-2xl">
             <div className="os-label os-label--you mb-4">你的 AI 事业之路 / path</div>
