@@ -68,7 +68,7 @@ export default function MasLifePage() {
         {/* 机身底纹：MJ 控制台氛围图 + 发丝网格 + 通电辉光 */}
         <div
           className="absolute inset-0 bg-cover bg-center opacity-[0.65]"
-          style={{ backgroundImage: "url(/images/mas-life/redesign/exoskeleton.jpg)" }}
+          style={{ backgroundImage: "url(/images/mas-life/redesign/hero-bg.jpg)" }}
         />
         {/* 左→右压暗护左侧标题；底部淡出接下文 */}
         <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--os-bg)] via-[color:var(--os-bg)]/80 to-[color:var(--os-bg)]/35" />
