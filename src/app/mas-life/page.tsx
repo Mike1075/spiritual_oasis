@@ -66,11 +66,13 @@ export default function MasLifePage() {
       <section className="relative overflow-hidden">
         {/* 机身底纹：MJ 控制台氛围图 + 发丝网格 + 通电辉光 */}
         <div
-          className="absolute inset-0 bg-cover bg-center opacity-[0.3]"
+          className="absolute inset-0 bg-cover bg-center opacity-[0.65]"
           style={{ backgroundImage: "url(/images/mas-life/redesign/hero-bg.jpg)" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--os-bg)] via-[color:var(--os-bg)]/65 to-[color:var(--os-bg)]/35" />
-        <div className="os-grid absolute inset-0 opacity-[0.35]" />
+        {/* 左→右压暗护左侧标题；底部淡出接下文 */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[color:var(--os-bg)] via-[color:var(--os-bg)]/80 to-[color:var(--os-bg)]/35" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[color:var(--os-bg)] via-transparent to-[color:var(--os-bg)]/40" />
+        <div className="os-grid absolute inset-0 opacity-[0.25]" />
         <div className="os-glow-you absolute -top-32 left-1/4 h-[640px] w-[640px]" />
         <div className="os-glow-sys absolute -right-40 top-40 h-[520px] w-[520px]" />
 
