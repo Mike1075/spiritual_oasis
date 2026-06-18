@@ -1,11 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Sparkles, Calendar, Wallet, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight,
+  Sparkles,
+  Calendar,
+  Wallet,
+  ShieldCheck,
+  Users,
+} from "lucide-react";
 
 const HIGHLIGHTS = [
   { icon: Calendar, text: "28 天 · 深/京/沪线下 + 线上全球同价" },
-  { icon: Wallet, text: "学费 6980 · 学生 / 3 人拼团 8 折" },
+  { icon: Wallet, text: "学费 6980 · 学生/金卡 8 折 · 老学员 75 折" },
   { icon: ShieldCheck, text: "第一天学不会，100% 全额退款" },
 ];
 
@@ -53,6 +60,20 @@ export default function MasLifePreview() {
               </li>
             ))}
           </ul>
+
+          {/* 拼团促销入口（首页直达锁位/拼团页） */}
+          <Link
+            href="/lock"
+            className="relative mb-5 flex items-center justify-between gap-3 rounded-2xl border border-fuchsia-400/40 bg-fuchsia-500/10 px-5 py-3.5 transition hover:bg-fuchsia-500/15"
+          >
+            <span className="flex items-center gap-2 text-sm font-semibold text-fuchsia-100">
+              <Users className="h-5 w-5 shrink-0 text-fuchsia-300" />
+              3 人拼团 ¥5584 · 立省 1396，618 先锁位
+            </span>
+            <span className="flex shrink-0 items-center gap-1 text-sm font-bold text-fuchsia-200">
+              去拼团 <ArrowRight className="h-4 w-4" />
+            </span>
+          </Link>
 
           <div className="relative flex flex-col gap-3 sm:flex-row">
             <Link

@@ -837,7 +837,7 @@ export default function LockClient() {
         {/* 头部 */}
         <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-300">
           <span className="h-px w-8 bg-gradient-to-r from-purple-400 to-fuchsia-400" />
-          仅限受邀 · 私域专属通道
+          3 人拼团 · 锁位通道
         </div>
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
           <span className="bg-gradient-to-r from-purple-300 via-fuchsia-300 to-emerald-300 bg-clip-text text-transparent">

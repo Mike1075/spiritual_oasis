@@ -20,6 +20,9 @@ import {
   PlayCircle,
   Building2,
   MapPin,
+  Users,
+  Tag,
+  GraduationCap,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
@@ -763,7 +766,60 @@ export default function MasLifePage() {
               </Spec>
             </div>
 
-            <div className="mt-8 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-relaxed text-gray-300">
+            {/* 省钱方案：三档折扣 + 拼团直达入口 */}
+            <div className="mt-8 rounded-2xl border border-fuchsia-400/30 bg-fuchsia-500/[0.07] p-5">
+              <div className="flex items-center gap-2 text-sm font-bold text-fuchsia-100">
+                <Tag className="h-4 w-4" /> 省钱方案 · 原价 ¥6980
+              </div>
+              <div className="mt-3 grid gap-2.5 sm:grid-cols-3">
+                <div className="rounded-xl border border-white/10 bg-black/20 p-3.5">
+                  <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                    <GraduationCap className="h-3.5 w-3.5" /> 学生 / 金卡 8 折
+                  </div>
+                  <div className="mt-1 text-xl font-extrabold text-emerald-300">
+                    ¥5584
+                  </div>
+                  <div className="mt-0.5 text-[11px] text-gray-500">
+                    学生凭学生证 · 进意向群核验
+                  </div>
+                </div>
+                <div className="rounded-xl border border-white/10 bg-black/20 p-3.5">
+                  <div className="flex items-center gap-1.5 text-xs text-gray-400">
+                    <Award className="h-3.5 w-3.5" /> 老学员 75 折
+                  </div>
+                  <div className="mt-1 text-xl font-extrabold text-emerald-300">
+                    ¥5235
+                  </div>
+                  <div className="mt-0.5 text-[11px] text-gray-500">
+                    小鹅通报名自动显示
+                  </div>
+                </div>
+                <div className="rounded-xl border border-fuchsia-400/40 bg-fuchsia-500/10 p-3.5">
+                  <div className="flex items-center gap-1.5 text-xs text-fuchsia-200">
+                    <Users className="h-3.5 w-3.5" /> 3 人拼团 8 折（新人）
+                  </div>
+                  <div className="mt-1 text-xl font-extrabold text-fuchsia-200">
+                    ¥5584
+                  </div>
+                  <div className="mt-0.5 text-[11px] text-fuchsia-300/80">
+                    立省 1396 · 618 先锁位全额抵学费
+                  </div>
+                </div>
+              </div>
+              <Link
+                href="/lock"
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-fuchsia-500 to-purple-500 py-3.5 text-base font-bold text-white transition hover:opacity-90 active:scale-[0.99]"
+              >
+                <Users className="h-5 w-5" />
+                发起 / 加入 3 人拼团 · 立省 1396
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <p className="mt-2 text-center text-[11px] text-fuchsia-200/60">
+                最多叠加 2 个折扣；学生与老学员折扣二选一。拼团仅限新朋友。
+              </p>
+            </div>
+
+            <div className="mt-6 rounded-2xl border border-white/10 bg-black/20 p-5 text-sm leading-relaxed text-gray-300">
               <b className="text-white">你会带走：</b>
               一套真在跑的「硅基外骨骼」+ 你的方向方案 + 你的第一个真产品 +
               一块诚实仪表盘。课程结束，系统带走，一直跑。
@@ -790,8 +846,8 @@ export default function MasLifePage() {
               还在犹豫？先免费做 AI 时代定位自测
             </Link>
             <p className="mt-3 text-center text-xs text-gray-400">
-              点「立即报名」直达小鹅通，金卡 / 老学员折扣自动显示；学生 8 折、3
-              人拼团（仅新人）及 618 锁位通道请进意向群找客服。
+              点「立即报名」直达小鹅通，金卡 / 老学员折扣自动显示；学生 8
+              折凭学生证进意向群核验；3 人拼团点上方「发起 / 加入 3 人拼团」即可。
             </p>
           </div>
         </div>
