@@ -21,6 +21,7 @@ import {
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
+import HeroDashboard from "@/components/mas-life/HeroDashboard";
 import { osDisplay, osMono } from "@/lib/masosFonts";
 import {
   MIDLIFE,
@@ -88,9 +89,9 @@ export default function MasLifePage() {
           </div>
         </div>
 
-        <div className="relative mx-auto grid w-full max-w-6xl gap-12 px-5 pb-20 pt-16 sm:px-8 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:pt-24">
-          {/* 左：主张 */}
-          <div className="os-reveal">
+        <div className="relative mx-auto w-full max-w-6xl px-5 pb-20 pt-16 sm:px-8 lg:pt-24">
+          {/* 主张 */}
+          <div className="os-reveal max-w-2xl">
             <div className="os-label mb-6">
               <span className="text-[color:var(--os-you)]">
                 [ 一人公司操作系统 · 认证交付网络 ]
@@ -151,60 +152,10 @@ export default function MasLifePage() {
               还在犹豫？先免费做一次 AI 定位自测 →
             </Link>
           </div>
-
-          {/* 右：签名元素 —— 诚实仪表盘（活控制台） */}
-          <div className="os-reveal os-panel os-panel--live overflow-hidden" style={{ animationDelay: "0.12s" }}>
-            <div className="flex items-center justify-between border-b border-[color:var(--os-line)] px-5 py-3">
-              <span className="os-mono text-[11px] tracking-[0.14em] text-[color:var(--os-dim)]">
-                诚实仪表盘 / honest-dashboard
-              </span>
-              <span className="os-mono flex items-center gap-1.5 text-[11px] text-[color:var(--os-sys)]">
-                <span className="os-dot" /> live
-              </span>
-            </div>
-
-            <div className="space-y-5 p-5">
-              <div>
-                <div className="os-label os-label--you">今天最重要的事</div>
-                <div className="mt-1.5 flex items-center gap-2 text-lg font-semibold">
-                  <span className="text-[color:var(--os-you)]">→</span>
-                  写出你的赛道一页纸
-                </div>
-              </div>
-
-              <div className="os-rule" />
-
-              <div>
-                <div className="os-label">昨夜系统替你跑</div>
-                <div className="os-mono mt-1.5 text-sm text-[color:var(--os-text)]">
-                  3 个任务 · 生成 12 段文案 · 自检 2 轮
-                </div>
-              </div>
-
-              <div className="os-rule" />
-
-              <div>
-                <div className="mb-1.5 flex items-center justify-between">
-                  <span className="os-label">本月成本</span>
-                  <span className="os-mono text-sm text-[color:var(--os-text)]">
-                    ¥38 / <span className="text-[color:var(--os-dim)]">¥119 封顶</span>
-                  </span>
-                </div>
-                <div className="os-gauge">
-                  <span style={{ width: "32%" }} />
-                </div>
-              </div>
-
-              <div className="os-rule" />
-
-              <div className="os-mono flex items-center gap-2 text-xs text-[color:var(--os-dim)]">
-                <span className="text-[color:var(--os-you)]">你管 Why</span>
-                <span className="text-[color:var(--os-faint)]">·</span>
-                <span className="text-[color:var(--os-sys)]">系统管执行</span>
-              </div>
-            </div>
-          </div>
         </div>
+
+        {/* 签名元素 —— 诚实仪表盘（右侧抽屉，点击把手滑出/缩回；移动端隐藏）*/}
+        <HeroDashboard />
 
         {/* 信任数字条 —— 仪表读数 */}
         <div className="relative mx-auto max-w-6xl px-5 pb-20 sm:px-8">

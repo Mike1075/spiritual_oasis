@@ -289,6 +289,22 @@ html {
   background: linear-gradient(90deg, var(--os-sys), var(--os-you));
 }
 
+/* hero 仪表盘抽屉把手：呼吸式闪烁辉光，吸引点击 */
+.masos .os-tab-flicker {
+  animation: os-flicker 1.9s ease-in-out infinite;
+}
+@keyframes os-flicker {
+  0%,
+  100% {
+    box-shadow: -6px 0 20px -6px rgba(45, 212, 191, 0.45);
+    border-color: rgba(45, 212, 191, 0.45);
+  }
+  50% {
+    box-shadow: -8px 0 26px -4px rgba(245, 165, 36, 0.55);
+    border-color: rgba(245, 165, 36, 0.6);
+  }
+}
+
 /* 滚动揭示（尊重 reduced-motion） */
 .masos .os-reveal {
   opacity: 0;
@@ -308,6 +324,9 @@ html {
     transform: none;
   }
   .masos .os-dot {
+    animation: none;
+  }
+  .masos .os-tab-flicker {
     animation: none;
   }
 }
