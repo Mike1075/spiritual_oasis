@@ -122,7 +122,7 @@ export default function AssistantWidget() {
         <button
           type="button"
           onClick={() => setOpen(true)}
-          className="fixed bottom-5 right-4 z-40 flex items-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-4 py-3 font-bold text-white shadow-lg shadow-fuchsia-500/30 transition active:scale-95"
+          className="fixed bottom-5 right-4 z-40 flex items-center gap-2 rounded-full bg-[#f5a524] px-4 py-3 font-bold text-[#1a1205] shadow-lg shadow-[#f5a524]/30 transition hover:bg-[#ffb83a] active:scale-95"
         >
           <MessageCircle className="h-5 w-5" />
           问我
@@ -131,10 +131,10 @@ export default function AssistantWidget() {
 
       {/* 聊天面板 */}
       {open && (
-        <div className="fixed bottom-0 right-0 z-50 flex h-[72vh] w-full flex-col overflow-hidden rounded-t-3xl border border-white/15 bg-zinc-900 shadow-2xl sm:bottom-5 sm:right-4 sm:h-[560px] sm:w-[380px] sm:rounded-3xl">
-          <div className="flex items-center justify-between border-b border-white/10 bg-gradient-to-r from-purple-600/30 to-fuchsia-600/30 px-4 py-3">
+        <div className="fixed bottom-0 right-0 z-50 flex h-[72vh] w-full flex-col overflow-hidden rounded-t-3xl border border-white/15 bg-[#101219] shadow-2xl sm:bottom-5 sm:right-4 sm:h-[560px] sm:w-[380px] sm:rounded-3xl">
+          <div className="flex items-center justify-between border-b border-white/10 bg-white/[0.03] px-4 py-3">
             <div className="flex items-center gap-2 font-bold text-white">
-              <Sparkles className="h-4 w-4 text-fuchsia-300" />
+              <Sparkles className="h-4 w-4 text-[#2dd4bf]" />
               课程 AI 助手
             </div>
             <button
@@ -156,7 +156,7 @@ export default function AssistantWidget() {
                 <div
                   className={`max-w-[85%] whitespace-pre-wrap rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                     m.role === "user"
-                      ? "bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white"
+                      ? "bg-[#f5a524] text-[#1a1205]"
                       : "bg-white/10 text-white/85"
                   }`}
                 >
@@ -177,7 +177,7 @@ export default function AssistantWidget() {
                     key={q}
                     type="button"
                     onClick={() => send(q)}
-                    className="rounded-full border border-fuchsia-400/50 px-3 py-1.5 text-xs text-fuchsia-200 transition hover:bg-fuchsia-500/15"
+                    className="rounded-full border border-[#2dd4bf]/50 px-3 py-1.5 text-xs text-[#2dd4bf] transition hover:bg-[#2dd4bf]/15"
                   >
                     {q}
                   </button>
@@ -195,14 +195,14 @@ export default function AssistantWidget() {
                   if (e.key === "Enter" && !e.nativeEvent.isComposing) send(input);
                 }}
                 placeholder="输入你的问题…"
-                className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/35 focus:border-fuchsia-400"
+                className="flex-1 rounded-xl border border-white/15 bg-black/40 px-3.5 py-2.5 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#2dd4bf]"
               />
               <button
                 type="button"
                 onClick={() => send(input)}
                 disabled={busy || !input.trim()}
                 aria-label="发送"
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 text-white disabled:opacity-40"
+                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#f5a524] text-[#1a1205] disabled:opacity-40"
               >
                 {busy ? (
                   <Loader2 className="h-4 w-4 animate-spin" />

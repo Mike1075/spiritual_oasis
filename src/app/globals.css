@@ -140,3 +140,174 @@ html {
   -webkit-text-fill-color: transparent;
   background-clip: text;
 }
+
+/* ============================================================
+   MAS-Life OS · "诚实机器/仪表盘" 设计系统（作用域锁在 .masos）
+   双色编码课程内核(人机分工)：琥珀=你 / 青蓝=系统
+   ============================================================ */
+.masos {
+  --os-bg: #0a0b0f;
+  --os-panel: #101219;
+  --os-panel-2: #151823;
+  --os-line: rgba(130, 142, 170, 0.16);
+  --os-line-strong: rgba(130, 142, 170, 0.32);
+  --os-text: #e9eaf0;
+  --os-dim: #888da0;
+  --os-faint: #5a5f70;
+  --os-you: #f5a524; /* 琥珀 = 你：决策 / 行动 / CTA */
+  --os-you-soft: rgba(245, 165, 36, 0.12);
+  --os-sys: #2dd4bf; /* 青蓝 = 系统：运行 / 数据 / 状态 */
+  --os-sys-soft: rgba(45, 212, 191, 0.1);
+
+  background: var(--os-bg);
+  color: var(--os-text);
+  font-family: var(--font-os-display), "PingFang SC", "Noto Sans SC",
+    system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* 等宽"系统读数"声音：标签 / 数据 / 状态行 / 价格 —— 整套 OS 的识别主线索 */
+.masos .os-mono {
+  font-family: var(--font-os-mono), ui-monospace, "SF Mono", monospace;
+  font-feature-settings: "tnum" 1;
+}
+.masos .os-label {
+  font-family: var(--font-os-mono), ui-monospace, monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--os-sys);
+}
+.masos .os-label--you {
+  color: var(--os-you);
+}
+.masos .os-label--dim {
+  color: var(--os-dim);
+}
+
+/* 发丝网格底纹（仪表面板的"机身"质感） */
+.masos .os-grid {
+  background-image: linear-gradient(var(--os-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--os-line) 1px, transparent 1px);
+  background-size: 56px 56px;
+}
+/* 中心"通电"辉光 */
+.masos .os-glow-you {
+  background: radial-gradient(
+    60% 60% at 50% 40%,
+    var(--os-you-soft),
+    transparent 70%
+  );
+}
+.masos .os-glow-sys {
+  background: radial-gradient(
+    55% 55% at 50% 50%,
+    var(--os-sys-soft),
+    transparent 70%
+  );
+}
+
+/* 仪表模块：发丝边框面板，可带顶部状态条 */
+.masos .os-panel {
+  background: var(--os-panel);
+  border: 1px solid var(--os-line);
+  border-radius: 14px;
+}
+.masos .os-panel--live {
+  border-color: rgba(45, 212, 191, 0.28);
+  box-shadow: 0 0 0 1px rgba(45, 212, 191, 0.06),
+    0 24px 60px -30px rgba(45, 212, 191, 0.25);
+}
+.masos .os-rule {
+  height: 1px;
+  background: var(--os-line);
+}
+
+/* 运行状态灯（青蓝，呼吸） */
+.masos .os-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 999px;
+  background: var(--os-sys);
+  box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.55);
+  animation: os-pulse 2.4s ease-out infinite;
+}
+@keyframes os-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(45, 212, 191, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 7px rgba(45, 212, 191, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(45, 212, 191, 0);
+  }
+}
+
+/* 按钮：琥珀实心(你的动作) / 发丝幽灵(次级) —— 方角(rounded-md)，非药丸 */
+.masos .os-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.55rem;
+  border-radius: 10px;
+  font-weight: 600;
+  transition: transform 0.12s ease, background 0.15s ease, border-color 0.15s ease;
+}
+.masos .os-btn:active {
+  transform: translateY(1px);
+}
+.masos .os-btn-you {
+  background: var(--os-you);
+  color: #1a1205;
+  box-shadow: 0 18px 40px -20px rgba(245, 165, 36, 0.7);
+}
+.masos .os-btn-you:hover {
+  background: #ffb83a;
+}
+.masos .os-btn-ghost {
+  background: transparent;
+  color: var(--os-text);
+  border: 1px solid var(--os-line-strong);
+}
+.masos .os-btn-ghost:hover {
+  border-color: var(--os-sys);
+  background: var(--os-sys-soft);
+}
+
+/* 仪表读数条（成本/进度的"诚实账本"母题） */
+.masos .os-gauge {
+  height: 6px;
+  border-radius: 999px;
+  background: rgba(130, 142, 170, 0.18);
+  overflow: hidden;
+}
+.masos .os-gauge > span {
+  display: block;
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--os-sys), var(--os-you));
+}
+
+/* 滚动揭示（尊重 reduced-motion） */
+.masos .os-reveal {
+  opacity: 0;
+  transform: translateY(14px);
+  animation: os-reveal-in 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+@keyframes os-reveal-in {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .masos .os-reveal {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+  .masos .os-dot {
+    animation: none;
+  }
+}

@@ -19,6 +19,7 @@ import {
   X,
 } from "lucide-react";
 import ShareKit from "./ShareKit";
+import { osDisplay, osMono } from "@/lib/masosFonts";
 
 const SESSIONS = [
   { key: "深圳线下", label: "深圳 · 线下" },
@@ -116,7 +117,7 @@ function PayRefHelp() {
         type="button"
         aria-label="如何找到付款单号"
         onClick={() => setOpen(true)}
-        className="text-white/40 transition hover:text-fuchsia-300"
+        className="text-white/40 transition hover:text-[#f5a524]"
       >
         <HelpCircle className="h-5 w-5" />
       </button>
@@ -145,13 +146,13 @@ function PayRefHelp() {
               </button>
             </div>
             <p className="mt-1 text-xs text-white/50">
-              只需要填单号的<strong className="text-emerald-300">最后 5 位数字</strong>
+              只需要填单号的<strong className="text-[#2dd4bf]">最后 5 位数字</strong>
               ，用于客服核对到账。
             </p>
 
             <div className="mt-4 space-y-4 text-sm leading-relaxed text-white/75">
               <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <div className="font-bold text-emerald-200">
+                <div className="font-bold text-[#2dd4bf]">
                   微信支付（最常用）
                 </div>
                 <ol className="mt-1.5 list-decimal space-y-1 pl-4">
@@ -161,13 +162,13 @@ function PayRefHelp() {
                   </li>
                   <li>找到 <strong>-618.00（深圳市心灵家园）</strong>那笔，点进去</li>
                   <li>
-                    看「<strong className="text-emerald-300">交易单号</strong>」
+                    看「<strong className="text-[#2dd4bf]">交易单号</strong>」
                     ——一长串数字
                   </li>
                   <li>
                     填<strong>最后 5 位</strong>。例：单号是
-                    4500…83<strong className="text-emerald-300">714084</strong>
-                    ，就填 <strong className="text-emerald-300">14084</strong>
+                    4500…83<strong className="text-[#2dd4bf]">714084</strong>
+                    ，就填 <strong className="text-[#2dd4bf]">14084</strong>
                   </li>
                 </ol>
                 <p className="mt-2 text-xs text-amber-300/90">
@@ -177,30 +178,30 @@ function PayRefHelp() {
               </div>
 
               <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <div className="font-bold text-emerald-200">支付宝</div>
+                <div className="font-bold text-[#2dd4bf]">支付宝</div>
                 <ol className="mt-1.5 list-decimal space-y-1 pl-4">
                   <li>支付宝 → 右下角「我的」→「账单」</li>
                   <li>找到 618 那笔（深圳市心灵家园 / 收钱码收款），点进去</li>
                   <li>
                     看「订单号」；没有的话点底部「更多」，看
-                    「<strong className="text-emerald-300">支付宝交易号</strong>」
+                    「<strong className="text-[#2dd4bf]">支付宝交易号</strong>」
                   </li>
                   <li>填最后 5 位</li>
                 </ol>
               </div>
 
               <div className="rounded-xl border border-white/10 bg-white/5 p-4">
-                <div className="font-bold text-emerald-200">云闪付</div>
+                <div className="font-bold text-[#2dd4bf]">云闪付</div>
                 <p className="mt-1.5">
                   「我的」→「交易记录」→ 点开 618 那笔 → 订单号后 5 位。
                 </p>
               </div>
 
-              <div className="rounded-xl border border-fuchsia-400/30 bg-fuchsia-500/10 p-4">
-                <div className="font-bold text-fuchsia-200">实在找不到？</div>
+              <div className="rounded-xl border border-[#f5a524]/30 bg-[#f5a524]/10 p-4">
+                <div className="font-bold text-[#f5a524]">实在找不到？</div>
                 <p className="mt-1.5">
                   在单号栏填「付款日期+时间」，例如 6 月 10 日 16:04 付的，就填{" "}
-                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-emerald-200">
+                  <code className="rounded bg-white/10 px-1.5 py-0.5 text-[#2dd4bf]">
                     0610-1604
                   </code>
                   ，并保存好付款截图——客服按金额和时间一样能对上账。
@@ -211,7 +212,7 @@ function PayRefHelp() {
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="mt-5 w-full rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-6 py-3 font-bold text-white"
+              className="mt-5 w-full rounded-full bg-[#f5a524] px-6 py-3 font-bold text-[#1a1205]"
             >
               知道了，去填写
             </button>
@@ -320,9 +321,9 @@ function ModifyPanel() {
   }
 
   const inputCls =
-    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400";
+    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524]";
   const btnCls =
-    "rounded-xl border border-fuchsia-400/50 px-4 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15 disabled:opacity-40";
+    "rounded-xl border border-[#f5a524]/50 px-4 py-2.5 text-sm font-semibold text-[#f5a524] transition hover:bg-[#f5a524]/15 disabled:opacity-40";
 
   return (
     <div className="mt-3 rounded-2xl border border-white/15 bg-white/[0.04] p-5">
@@ -359,13 +360,13 @@ function ModifyPanel() {
         <div className="mt-4 rounded-xl border border-white/10 bg-black/30 p-4">
           <div className="text-sm">
             当前：
-            <strong className="text-emerald-200">
+            <strong className="text-[#2dd4bf]">
               {rec.mode === "team"
                 ? `3 人拼团（${rec.teamCount}/3 · 团码 ${rec.teamCode}）`
                 : "个人锁位（学费 6980）"}
             </strong>
             <span className="mx-2 text-white/30">|</span>
-            场次：<strong className="text-emerald-200">{rec.session}</strong>
+            场次：<strong className="text-[#2dd4bf]">{rec.session}</strong>
           </div>
 
           <div className="mt-3 flex flex-wrap items-center gap-2">
@@ -441,19 +442,19 @@ function ModifyPanel() {
       )}
 
       {done && (
-        <p className="mt-3 rounded-xl border border-emerald-400/40 bg-emerald-500/10 px-4 py-2.5 text-sm text-emerald-200">
+        <p className="mt-3 rounded-xl border border-[#2dd4bf]/40 bg-[#2dd4bf]/10 px-4 py-2.5 text-sm text-[#2dd4bf]">
           ✅ {done}
         </p>
       )}
       {shareCode && (
         <div className="mt-2 flex items-center gap-2">
-          <code className="min-w-0 flex-1 truncate rounded-xl bg-white/10 px-3 py-2.5 text-xs text-emerald-200">
+          <code className="min-w-0 flex-1 truncate rounded-xl bg-white/10 px-3 py-2.5 text-xs text-[#2dd4bf]">
             {shareUrl}
           </code>
           <button
             type="button"
             onClick={copyShare}
-            className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 px-4 py-2.5 text-sm font-bold"
+            className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#f5a524] to-[#f5a524] px-4 py-2.5 text-sm font-bold"
           >
             {copied ? (
               <>
@@ -535,9 +536,9 @@ function RecoverPanel() {
   }
 
   const inputCls =
-    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400";
+    "rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524]";
   const btnCls =
-    "rounded-xl border border-fuchsia-400/50 px-4 py-2.5 text-sm font-semibold text-fuchsia-200 transition hover:bg-fuchsia-500/15 disabled:opacity-40";
+    "rounded-xl border border-[#f5a524]/50 px-4 py-2.5 text-sm font-semibold text-[#f5a524] transition hover:bg-[#f5a524]/15 disabled:opacity-40";
 
   return (
     <div className="mt-3 rounded-2xl border border-white/15 bg-white/[0.04] p-5">
@@ -574,8 +575,8 @@ function RecoverPanel() {
       )}
 
       {info && (
-        <div className="mt-4 rounded-2xl border border-fuchsia-400/30 bg-fuchsia-500/5 p-4">
-          <div className="text-sm font-semibold text-fuchsia-100">
+        <div className="mt-4 rounded-2xl border border-[#f5a524]/30 bg-[#f5a524]/5 p-4">
+          <div className="text-sm font-semibold text-[#f5a524]">
             找到你的记录啦，{info.name} 👋
           </div>
           <div className="mt-1 text-xs text-white/65">
@@ -586,7 +587,7 @@ function RecoverPanel() {
           {info.hasTeam && info.teamCode ? (
             <>
               <div className="mt-3 text-xs text-white/70">
-                团码 <b className="text-fuchsia-200">{info.teamCode}</b> ·{" "}
+                团码 <b className="text-[#f5a524]">{info.teamCode}</b> ·{" "}
                 {info.teamCount}/{info.teamSize} 人
                 {info.teamComplete ? " · 已成团 🎉" : "（还差人，可继续邀请）"}
               </div>
@@ -595,7 +596,7 @@ function RecoverPanel() {
                   {info.members.map((m, i) => (
                     <span
                       key={i}
-                      className="rounded-lg bg-fuchsia-500/25 px-2.5 py-1 text-xs text-white/80"
+                      className="rounded-lg bg-[#f5a524]/25 px-2.5 py-1 text-xs text-white/80"
                     >
                       {m}
                     </span>
@@ -605,13 +606,13 @@ function RecoverPanel() {
 
               {/* 拼团链接（快速复制） */}
               <div className="mt-3 flex items-center gap-2 rounded-xl border border-white/10 bg-black/30 p-2.5">
-                <span className="flex-1 break-all text-xs text-fuchsia-300">
+                <span className="flex-1 break-all text-xs text-[#f5a524]">
                   {link}
                 </span>
                 <button
                   type="button"
                   onClick={copyLink}
-                  className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-fuchsia-500/30 px-2.5 py-1 text-xs font-semibold text-fuchsia-50 hover:bg-fuchsia-500/45"
+                  className="inline-flex shrink-0 items-center gap-1 rounded-lg bg-[#f5a524]/30 px-2.5 py-1 text-xs font-semibold text-[#f5a524] hover:bg-[#f5a524]/45"
                 >
                   {copied ? (
                     <>
@@ -787,21 +788,21 @@ export default function LockClient() {
   }
 
   return (
-    <main className="min-h-screen bg-black text-white">
+    <main className={`${osDisplay.variable} ${osMono.variable} masos min-h-screen`}>
       <div className="mx-auto max-w-3xl px-5 py-12 sm:py-16">
         {/* 来自分享链接：开团人邀请横幅（置顶醒目，社交裂变钩子） */}
         {joinTeam && !joinTeam.complete && (
-          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-fuchsia-400/50 bg-gradient-to-r from-purple-500/25 to-fuchsia-500/20 p-4 shadow-lg shadow-fuchsia-500/10">
-            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-fuchsia-500/30 text-fuchsia-100">
+          <div className="mb-6 flex items-center gap-3 rounded-2xl border border-[#f5a524]/50 bg-gradient-to-r from-[#f5a524]/25 to-[#f5a524]/20 p-4 shadow-lg shadow-[#f5a524]/10">
+            <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#f5a524]/30 text-[#f5a524]">
               <Users className="h-5 w-5" />
             </div>
             <div className="text-sm leading-relaxed">
-              <div className="font-bold text-fuchsia-100">
+              <div className="font-bold text-[#f5a524]">
                 {joinTeam.leader} 邀请你一起拼「人生方向设计」3 人团
               </div>
               <div className="mt-0.5 text-white/70">
                 拼团价{" "}
-                <strong className="text-emerald-300">
+                <strong className="text-[#2dd4bf]">
                   {joinTeam.price ?? TEAM_PRICE_NEW}
                 </strong>
                 {joinTeam.legacy
@@ -819,7 +820,7 @@ export default function LockClient() {
               <button
                 type="button"
                 onClick={copyBannerShare}
-                className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-fuchsia-500/30 px-3 py-1.5 text-xs font-semibold text-fuchsia-50 transition hover:bg-fuchsia-500/45"
+                className="mt-3 inline-flex items-center gap-1.5 rounded-lg bg-[#f5a524]/30 px-3 py-1.5 text-xs font-semibold text-[#f5a524] transition hover:bg-[#f5a524]/45"
               >
                 {bannerCopied ? (
                   <>
@@ -835,23 +836,23 @@ export default function LockClient() {
           </div>
         )}
         {/* 头部 */}
-        <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-widest text-fuchsia-300">
-          <span className="h-px w-8 bg-gradient-to-r from-purple-400 to-fuchsia-400" />
+        <div className="mb-3 flex items-center gap-2 text-xs uppercase tracking-widest text-[#f5a524]">
+          <span className="h-px w-8 bg-gradient-to-r from-[#f5a524] to-[#f5a524]" />
           3 人拼团 · 锁位通道
         </div>
         <h1 className="text-3xl font-bold leading-tight sm:text-4xl">
-          <span className="bg-gradient-to-r from-purple-300 via-fuchsia-300 to-emerald-300 bg-clip-text text-transparent">
+          <span className="bg-gradient-to-r from-[#f5a524] via-[#f5a524] to-[#2dd4bf] bg-clip-text text-transparent">
             锁位通道 · 锁住你的席位
           </span>
         </h1>
         <p className="mt-3 text-sm leading-relaxed text-white/70">
           「人生方向设计」28 天课程 · 深圳 / 北京 / 上海线下 + 线上全球同价。
-          用 <strong className="text-emerald-300">618 元</strong>
+          用 <strong className="text-[#2dd4bf]">618 元</strong>
           锁住席位，全额抵学费；3 人拼团再享 8 折。
         </p>
 
         {/* 企微群 · 公转私主入口 */}
-        <div className="mt-6 flex items-center gap-4 rounded-2xl border border-emerald-400/30 bg-emerald-400/10 p-4">
+        <div className="mt-6 flex items-center gap-4 rounded-2xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 p-4">
           {groupQrMissing ? (
             <div className="flex h-24 w-24 shrink-0 items-center justify-center rounded-lg border border-dashed border-white/25 text-white/40">
               <QrCode className="h-6 w-6" />
@@ -866,7 +867,7 @@ export default function LockClient() {
             />
           )}
           <div className="text-sm leading-relaxed">
-            <div className="flex items-center gap-1.5 font-bold text-emerald-200">
+            <div className="flex items-center gap-1.5 font-bold text-[#2dd4bf]">
               <MessageCircle className="h-4 w-4" />
               先进群，再锁位
             </div>
@@ -884,7 +885,7 @@ export default function LockClient() {
             onClick={() => setMode("solo")}
             className={`rounded-xl px-4 py-3 text-sm font-bold transition ${
               mode === "solo"
-                ? "bg-gradient-to-r from-purple-500 to-fuchsia-500"
+                ? "bg-gradient-to-r from-[#f5a524] to-[#f5a524]"
                 : "text-white/60 hover:text-white"
             }`}
           >
@@ -895,7 +896,7 @@ export default function LockClient() {
             onClick={() => setMode("team")}
             className={`rounded-xl px-4 py-3 text-sm font-bold transition ${
               mode === "team"
-                ? "bg-gradient-to-r from-purple-500 to-fuchsia-500"
+                ? "bg-gradient-to-r from-[#f5a524] to-[#f5a524]"
                 : "text-white/60 hover:text-white"
             }`}
           >
@@ -927,8 +928,8 @@ export default function LockClient() {
         {mode === "team" && (
           <div className="mt-4 space-y-3">
             {joinTeam && !joinTeam.complete && (
-              <div className="rounded-2xl border border-fuchsia-400/40 bg-fuchsia-500/15 p-4">
-                <div className="flex items-center gap-2 font-bold text-fuchsia-200">
+              <div className="rounded-2xl border border-[#f5a524]/40 bg-[#f5a524]/15 p-4">
+                <div className="flex items-center gap-2 font-bold text-[#f5a524]">
                   <Users className="h-4 w-4" />
                   你正在加入 {joinTeam.leader} 的 3 人团
                 </div>
@@ -938,7 +939,7 @@ export default function LockClient() {
                       key={i}
                       className={`flex h-9 flex-1 items-center justify-center rounded-lg text-xs font-semibold ${
                         i < joinTeam.count
-                          ? "bg-fuchsia-500/40 text-white"
+                          ? "bg-[#f5a524]/40 text-white"
                           : "border border-dashed border-white/25 text-white/40"
                       }`}
                     >
@@ -982,7 +983,7 @@ export default function LockClient() {
               className="rounded-2xl border border-white/10 bg-white/5 p-4"
             >
               <div className="flex items-center gap-2 font-semibold">
-                <b.icon className="h-4 w-4 text-fuchsia-300" />
+                <b.icon className="h-4 w-4 text-[#f5a524]" />
                 {b.title}
               </div>
               <p className="mt-1.5 text-sm leading-relaxed text-white/60">
@@ -994,10 +995,10 @@ export default function LockClient() {
 
         {status === "done" ? (
           /* 成功态 */
-          <div className="mt-10 rounded-3xl border border-emerald-400/30 bg-emerald-400/10 p-6 sm:p-8">
+          <div className="mt-10 rounded-3xl border border-[#2dd4bf]/30 bg-[#2dd4bf]/10 p-6 sm:p-8">
             <div className="text-center">
-              <BadgeCheck className="mx-auto h-12 w-12 text-emerald-300" />
-              <h2 className="mt-4 text-2xl font-bold text-emerald-200">
+              <BadgeCheck className="mx-auto h-12 w-12 text-[#2dd4bf]" />
+              <h2 className="mt-4 text-2xl font-bold text-[#2dd4bf]">
                 {result.teamCode
                   ? result.teamComplete
                     ? "恭喜，3 人团已拼成！"
@@ -1009,8 +1010,8 @@ export default function LockClient() {
                 （{session}）。请<strong>保存好付款凭证截图</strong>。
               </p>
               {result.teamCode && result.teamComplete && (
-                <p className="mx-auto mt-3 max-w-md rounded-xl border border-emerald-400/30 bg-black/30 p-3 text-sm leading-relaxed text-white/75">
-                  <strong className="text-emerald-200">接下来：</strong>
+                <p className="mx-auto mt-3 max-w-md rounded-xl border border-[#2dd4bf]/30 bg-black/30 p-3 text-sm leading-relaxed text-white/75">
+                  <strong className="text-[#2dd4bf]">接下来：</strong>
                   客服核验三位的 618 到账后会逐一联系你们，发放专属报名通道——
                   <strong>
                     {result.teamLegacy ? "请于 " + LEGACY_BALANCE_DEADLINE + "前补尾款 " : "开课前补尾款 "}
@@ -1026,7 +1027,7 @@ export default function LockClient() {
             {result.teamCode && !result.teamComplete && (
               <div className="mt-6 rounded-2xl border border-white/15 bg-black/30 p-5">
                 <div className="flex items-center gap-2 font-bold">
-                  <Users className="h-4 w-4 text-fuchsia-300" />
+                  <Users className="h-4 w-4 text-[#f5a524]" />
                   当前 {result.teamCount ?? 1}/3 人 · 还差{" "}
                   {3 - (result.teamCount ?? 1)} 人成团
                 </div>
@@ -1035,13 +1036,13 @@ export default function LockClient() {
                   入团的人也会拿到这个链接，可以继续接力分享。
                 </p>
                 <div className="mt-3 flex items-center gap-2">
-                  <code className="min-w-0 flex-1 truncate rounded-xl bg-white/10 px-3 py-2.5 text-xs text-emerald-200">
+                  <code className="min-w-0 flex-1 truncate rounded-xl bg-white/10 px-3 py-2.5 text-xs text-[#2dd4bf]">
                     {shareUrl}
                   </code>
                   <button
                     type="button"
                     onClick={copyShare}
-                    className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 px-4 py-2.5 text-sm font-bold"
+                    className="flex shrink-0 items-center gap-1.5 rounded-xl bg-gradient-to-r from-[#f5a524] to-[#f5a524] px-4 py-2.5 text-sm font-bold"
                   >
                     {copied ? (
                       <>
@@ -1073,7 +1074,7 @@ export default function LockClient() {
                 className="h-24 w-24 shrink-0 rounded-lg bg-white object-contain"
               />
               <p className="text-sm leading-relaxed text-white/70">
-                <strong className="text-emerald-200">最后一步：</strong>
+                <strong className="text-[#2dd4bf]">最后一步：</strong>
                 扫码进意向群，发"已锁位"，客服会优先为你核验
                 {result.teamCode ? "，并帮你的团撮合补位。" : "。"}
               </p>
@@ -1083,7 +1084,7 @@ export default function LockClient() {
           <>
             {/* 第一步：选场次 */}
             <h2 className="mt-12 flex items-center gap-2 text-lg font-bold">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-xs">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-[#f5a524] to-[#f5a524] text-xs">
                 1
               </span>
               选择报名场次
@@ -1098,8 +1099,8 @@ export default function LockClient() {
                     onClick={() => setSession(s.key)}
                     className={`rounded-2xl border p-4 text-left transition ${
                       active
-                        ? "border-fuchsia-400 bg-fuchsia-500/20"
-                        : "border-white/15 bg-white/5 hover:border-fuchsia-400/60"
+                        ? "border-[#f5a524] bg-[#f5a524]/20"
+                        : "border-white/15 bg-white/5 hover:border-[#f5a524]/60"
                     }`}
                   >
                     <div className="text-sm font-semibold">{s.label}</div>
@@ -1113,7 +1114,7 @@ export default function LockClient() {
 
             {/* 第二步：扫码付款 */}
             <h2 className="mt-12 flex items-center gap-2 text-lg font-bold">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-xs">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-[#f5a524] to-[#f5a524] text-xs">
                 2
               </span>
               扫码支付 618 元锁位金
@@ -1140,12 +1141,12 @@ export default function LockClient() {
                   扫码向{" "}
                   <strong className="text-white">深圳市心灵家园</strong>{" "}
                   公司账户支付{" "}
-                  <strong className="text-emerald-300">618 元</strong>
+                  <strong className="text-[#2dd4bf]">618 元</strong>
                   （支持微信 / 支付宝 / 云闪付）。
                 </p>
                 <p className="mt-2">
                   付款时请在<strong>备注</strong>里写：
-                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-emerald-200">
+                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-[#2dd4bf]">
                     {mode === "team" ? "拼团+你的微信名" : "锁位+你的微信名"}
                   </code>
                 </p>
@@ -1153,14 +1154,14 @@ export default function LockClient() {
                   付款完成后，把<strong>交易单号的最后 5 位</strong>填进下方表单，
                   客服核验到账后{mode === "team" ? "即入团锁价" : "席位即锁定"}。
                   不知道单号在哪？点单号输入框旁的{" "}
-                  <HelpCircle className="inline h-4 w-4 text-fuchsia-300" />{" "}
+                  <HelpCircle className="inline h-4 w-4 text-[#f5a524]" />{" "}
                   看图文教程。
                 </p>
               </div>
             </div>
 
             {/* 海外学员：PayPal 收款 */}
-            <div className="mt-4 flex flex-col items-center gap-4 rounded-2xl border border-sky-400/20 bg-sky-500/5 p-6 sm:flex-row sm:items-start">
+            <div className="mt-4 flex flex-col items-center gap-4 rounded-2xl border border-[#2dd4bf]/20 bg-[#2dd4bf]/5 p-6 sm:flex-row sm:items-start">
               {paypalMissing ? (
                 <div className="flex h-48 w-44 shrink-0 flex-col items-center justify-center gap-2 rounded-xl border border-dashed border-white/25 text-white/40">
                   <QrCode className="h-8 w-8" />
@@ -1179,20 +1180,20 @@ export default function LockClient() {
               )}
               <div className="text-sm leading-relaxed text-white/70">
                 <p>
-                  <strong className="text-sky-300">海外学员</strong>{" "}
+                  <strong className="text-[#2dd4bf]">海外学员</strong>{" "}
                   可用{" "}
                   <strong className="text-white">PayPal</strong>{" "}
                   支付等值锁位金（约 ¥618，按当日汇率，客服按实收金额确认）。
                 </p>
                 <p className="mt-2">
                   PayPal 收款邮箱：
-                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-sky-200">
+                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-[#2dd4bf]">
                     spiritual.oasis.online@gmail.com
                   </code>
                 </p>
                 <p className="mt-2">
                   付款时请在<strong>备注 / Note</strong>里写：
-                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-sky-200">
+                  <code className="mx-1 rounded bg-white/10 px-2 py-0.5 text-[#2dd4bf]">
                     {mode === "team" ? "拼团+你的微信名" : "锁位+你的微信名"}
                   </code>
                 </p>
@@ -1206,7 +1207,7 @@ export default function LockClient() {
 
             {/* 第三步：回填信息 */}
             <h2 className="mt-12 flex items-center gap-2 text-lg font-bold">
-              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 text-xs">
+              <span className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-r from-[#f5a524] to-[#f5a524] text-xs">
                 3
               </span>
               回填信息，完成{mode === "team" ? "入团" : "锁位"}
@@ -1216,19 +1217,19 @@ export default function LockClient() {
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 placeholder="你的微信昵称（务必填群里的微信名）*"
-                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
+                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524]"
               />
               <input
                 value={contact}
                 onChange={(e) => setContact(e.target.value)}
                 placeholder="手机号或微信号 *"
-                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
+                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524]"
               />
               {mode === "solo" ? (
                 <select
                   value={identity}
                   onChange={(e) => setIdentity(e.target.value)}
-                  className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none focus:border-fuchsia-400"
+                  className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none focus:border-[#f5a524]"
                 >
                   {IDENTITIES.map((i) => (
                     <option key={i} value={i} className="bg-black">
@@ -1246,7 +1247,7 @@ export default function LockClient() {
                   value={payRef}
                   onChange={(e) => setPayRef(e.target.value)}
                   placeholder="付款单号后5位 *（点 ? 看哪里找）"
-                  className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 pr-11 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400"
+                  className="w-full rounded-xl border border-white/15 bg-black/40 px-4 py-3 pr-11 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524]"
                 />
                 <span className="absolute right-3 top-1/2 -translate-y-1/2">
                   <PayRefHelp />
@@ -1256,7 +1257,7 @@ export default function LockClient() {
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="备注（选填）"
-                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-fuchsia-400 sm:col-span-2"
+                className="rounded-xl border border-white/15 bg-black/40 px-4 py-3 text-sm outline-none placeholder:text-white/35 focus:border-[#f5a524] sm:col-span-2"
               />
             </div>
 
@@ -1270,7 +1271,7 @@ export default function LockClient() {
               type="button"
               onClick={submit}
               disabled={status === "submitting"}
-              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-purple-500 to-fuchsia-500 px-8 py-4 text-lg font-bold transition hover:opacity-90 disabled:opacity-50"
+              className="mt-5 flex w-full items-center justify-center gap-2 rounded-full bg-gradient-to-r from-[#f5a524] to-[#f5a524] px-8 py-4 text-lg font-bold transition hover:opacity-90 disabled:opacity-50"
             >
               {status === "submitting" ? (
                 <>

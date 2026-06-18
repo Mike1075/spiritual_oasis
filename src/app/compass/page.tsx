@@ -32,6 +32,7 @@ import {
   type Track,
 } from "@/data/compass";
 import Markdown from "@/components/compass/Markdown";
+import { osDisplay, osMono } from "@/lib/masosFonts";
 
 type Step =
   | "intro"
@@ -354,14 +355,14 @@ function CompassFlow() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-[#0b1220] via-black to-black text-white">
-      <div className="h-1 bg-gradient-to-r from-purple-500 via-fuchsia-500 to-emerald-400" />
+    <div className={`${osDisplay.variable} ${osMono.variable} masos min-h-screen`}>
+      <div className="h-1 bg-gradient-to-r from-[#f5a524] via-[#f5a524] to-[#2dd4bf]" />
       <div className="mx-auto w-full max-w-xl px-5 pb-20 pt-8">
         <Link
           href="/mas-life"
           className="mb-6 inline-flex items-center gap-2 text-sm text-gray-400 transition-colors hover:text-white"
         >
-          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-purple-500 to-emerald-400 text-xs font-bold">
+          <span className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-[#f5a524] to-[#2dd4bf] text-xs font-bold">
             SO
           </span>
           心灵家园 · MAS-Life OS
@@ -378,13 +379,13 @@ function CompassFlow() {
                 className="aspect-[16/9] w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
-              <span className="absolute bottom-3 left-4 inline-flex items-center gap-1.5 rounded-full border border-emerald-400/60 bg-black/50 px-3 py-1 text-xs text-emerald-300 backdrop-blur">
+              <span className="absolute bottom-3 left-4 inline-flex items-center gap-1.5 rounded-full border border-[#2dd4bf]/60 bg-black/50 px-3 py-1 text-xs text-[#2dd4bf] backdrop-blur">
                 <Compass className="h-3.5 w-3.5" />
                 AI 定位罗盘 · 直播专属福利
               </span>
             </div>
             <h1 className="mb-3 text-3xl font-extrabold leading-snug">
-              AI 时代，<span className="text-emerald-400">你的位置</span>在哪？
+              AI 时代，<span className="text-[#2dd4bf]">你的位置</span>在哪？
             </h1>
             <p className="mb-5 text-[15px] leading-relaxed text-gray-300">
               未来五年，全球 39% 的核心技能会变，9200 万个岗位会消失、1.7
@@ -394,7 +395,7 @@ function CompassFlow() {
               </b>
             </p>
             <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-5 text-sm leading-relaxed text-gray-300">
-              <ShieldCheck className="mb-2 h-5 w-5 text-emerald-400" />
+              <ShieldCheck className="mb-2 h-5 w-5 text-[#2dd4bf]" />
               这不是又一个「测测你像哪种人」的星座题。答完题后，AI
               会基于你的真实回答现场推演：
               <b className="text-white">
@@ -407,7 +408,7 @@ function CompassFlow() {
                 setStep("identity");
                 window.scrollTo(0, 0);
               }}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 py-4 text-lg font-bold text-emerald-950 transition active:scale-[0.99]"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2dd4bf] to-[#2dd4bf] py-4 text-lg font-bold text-[#06251f] transition active:scale-[0.99]"
             >
               开始（11 题 · AI 现场分析 · 约 6 分钟）
               <ArrowRight className="h-5 w-5" />
@@ -415,7 +416,7 @@ function CompassFlow() {
 
             {history.length > 0 && (
               <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
-                <p className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-sky-300">
+                <p className="mb-2.5 flex items-center gap-1.5 text-sm font-semibold text-[#2dd4bf]">
                   <History className="h-4 w-4" />
                   你在本机保存过 {history.length} 份报告
                 </p>
@@ -424,7 +425,7 @@ function CompassFlow() {
                     <Link
                       key={h.id}
                       href={`/compass/r/${h.id}`}
-                      className="block rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-sm transition hover:border-emerald-400/60"
+                      className="block rounded-lg border border-white/10 bg-black/30 px-3.5 py-2.5 text-sm transition hover:border-[#2dd4bf]/60"
                     >
                       {h.title || "我的定位报告"}
                     </Link>
@@ -460,7 +461,7 @@ function CompassFlow() {
                     setIdx(0);
                     window.scrollTo(0, 0);
                   }}
-                  className="block w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-emerald-400/60 hover:bg-white/[0.08] active:scale-[0.99]"
+                  className="block w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left transition hover:border-[#2dd4bf]/60 hover:bg-white/[0.08] active:scale-[0.99]"
                 >
                   <span className="text-[15px] font-semibold">{it.label}</span>
                   <span className="ml-2 text-xs text-gray-400">{it.hint}</span>
@@ -475,7 +476,7 @@ function CompassFlow() {
           <section>
             <div className="mb-2 h-1.5 overflow-hidden rounded-full bg-white/10">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-sky-400 transition-all duration-300"
+                className="h-full rounded-full bg-gradient-to-r from-[#2dd4bf] to-[#2dd4bf] transition-all duration-300"
                 style={{ width: `${(idx / (questions.length + 2)) * 100}%` }}
               />
             </div>
@@ -490,7 +491,7 @@ function CompassFlow() {
                 <button
                   key={o.label}
                   onClick={() => pick(o.label, o.key)}
-                  className="block w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left text-[15px] transition hover:border-emerald-400/60 hover:bg-white/[0.08] active:scale-[0.99]"
+                  className="block w-full rounded-xl border border-white/10 bg-white/[0.04] px-4 py-3.5 text-left text-[15px] transition hover:border-[#2dd4bf]/60 hover:bg-white/[0.08] active:scale-[0.99]"
                 >
                   {o.label}
                 </button>
@@ -504,7 +505,7 @@ function CompassFlow() {
           <section>
             <div className="mb-2 h-1.5 overflow-hidden rounded-full bg-white/10">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-emerald-400 to-sky-400 transition-all duration-300"
+                className="h-full rounded-full bg-gradient-to-r from-[#2dd4bf] to-[#2dd4bf] transition-all duration-300"
                 style={{
                   width: `${((questions.length + openIdx) / (questions.length + 2)) * 100}%`,
                 }}
@@ -529,7 +530,7 @@ function CompassFlow() {
               }
               placeholder={OPEN_QUESTIONS[openIdx].placeholder}
               rows={4}
-              className="mb-3 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-[15px] leading-relaxed outline-none placeholder:text-gray-600 focus:border-emerald-400"
+              className="mb-3 w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-[15px] leading-relaxed outline-none placeholder:text-gray-600 focus:border-[#2dd4bf]"
             />
             <button
               onClick={() => {
@@ -543,7 +544,7 @@ function CompassFlow() {
                 }
               }}
               disabled={openIdx === 0 && !openPlay.trim()}
-              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 py-4 text-lg font-bold text-emerald-950 transition active:scale-[0.99] disabled:opacity-50"
+              className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2dd4bf] to-[#2dd4bf] py-4 text-lg font-bold text-[#06251f] transition active:scale-[0.99] disabled:opacity-50"
             >
               {openIdx === 0 ? "下一题" : "让 AI 开始分析"}
               <ArrowRight className="h-5 w-5" />
@@ -580,7 +581,7 @@ function CompassFlow() {
             {streamErr && <StreamError msg={streamErr} onRetry={runAnalyze} />}
 
             {step === "direction" && (
-              <div className="mt-6 overflow-hidden rounded-2xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 to-sky-500/10">
+              <div className="mt-6 overflow-hidden rounded-2xl border border-[#2dd4bf]/40 bg-gradient-to-br from-[#2dd4bf]/10 to-[#2dd4bf]/10">
                 <div className="relative">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
@@ -592,7 +593,7 @@ function CompassFlow() {
                 </div>
                 <div className="p-5 pt-3">
                 <div className="mb-1 flex items-center gap-2 text-lg font-bold">
-                  <Swords className="h-5 w-5 text-emerald-300" />
+                  <Swords className="h-5 w-5 text-[#2dd4bf]" />
                   选一条方向，做「预死亡推演」
                 </div>
                 <p className="mb-4 text-sm leading-relaxed text-gray-300">
@@ -608,7 +609,7 @@ function CompassFlow() {
                     <button
                       key={d}
                       onClick={() => void runPremortem(d)}
-                      className="block w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-left text-[15px] transition hover:border-emerald-400/60 active:scale-[0.99]"
+                      className="block w-full rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-left text-[15px] transition hover:border-[#2dd4bf]/60 active:scale-[0.99]"
                     >
                       {d}
                     </button>
@@ -618,12 +619,12 @@ function CompassFlow() {
                       value={customDirection}
                       onChange={(e) => setCustomDirection(e.target.value.slice(0, 80))}
                       placeholder="或自己写一个方向…"
-                      className="flex-1 rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-600 focus:border-emerald-400"
+                      className="flex-1 rounded-xl border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-600 focus:border-[#2dd4bf]"
                     />
                     <button
                       onClick={() => void runPremortem(customDirection)}
                       disabled={!customDirection.trim()}
-                      className="rounded-xl bg-emerald-500 px-4 font-bold text-emerald-950 transition active:scale-[0.99] disabled:opacity-50"
+                      className="rounded-xl bg-[#2dd4bf] px-4 font-bold text-[#06251f] transition active:scale-[0.99] disabled:opacity-50"
                     >
                       推演
                     </button>
@@ -660,10 +661,10 @@ function CompassFlow() {
             {step === "gate" && (
               <form
                 onSubmit={submitGate}
-                className="mt-6 rounded-2xl border border-emerald-400/40 bg-gradient-to-br from-emerald-500/10 to-sky-500/10 p-5"
+                className="mt-6 rounded-2xl border border-[#2dd4bf]/40 bg-gradient-to-br from-[#2dd4bf]/10 to-[#2dd4bf]/10 p-5"
               >
                 <div className="mb-1 flex items-center gap-2 text-lg font-bold">
-                  <Sparkles className="h-5 w-5 text-emerald-300" />
+                  <Sparkles className="h-5 w-5 text-[#2dd4bf]" />
                   保存这份报告
                 </div>
                 <p className="mb-4 text-sm leading-relaxed text-gray-300">
@@ -675,19 +676,19 @@ function CompassFlow() {
                   value={name}
                   onChange={(e) => setName(e.target.value)}
                   placeholder="称呼（选填）"
-                  className="mb-3 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-500 focus:border-emerald-400"
+                  className="mb-3 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-500 focus:border-[#2dd4bf]"
                 />
                 <input
                   value={contact}
                   onChange={(e) => setContact(e.target.value)}
                   placeholder="手机号 / 微信号 *"
-                  className="mb-1 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-500 focus:border-emerald-400"
+                  className="mb-1 w-full rounded-lg border border-white/10 bg-black/30 px-4 py-3 text-[15px] outline-none placeholder:text-gray-500 focus:border-[#2dd4bf]"
                 />
                 {gateErr && <p className="mt-1 text-sm text-rose-400">{gateErr}</p>}
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-emerald-500 to-emerald-400 py-4 text-lg font-bold text-emerald-950 transition active:scale-[0.99] disabled:opacity-60"
+                  className="mt-3 flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#2dd4bf] to-[#2dd4bf] py-4 text-lg font-bold text-[#06251f] transition active:scale-[0.99] disabled:opacity-60"
                 >
                   {submitting ? (
                     <>
@@ -713,7 +714,7 @@ function CompassFlow() {
         {step === "done" && (
           <section>
             <div className="mb-6 text-center">
-              <CheckCircle2 className="mx-auto mb-3 h-14 w-14 text-emerald-400" />
+              <CheckCircle2 className="mx-auto mb-3 h-14 w-14 text-[#2dd4bf]" />
               <h2 className="mb-1 text-2xl font-extrabold">报告已保存</h2>
               <p className="text-sm text-gray-400">
                 {identity?.label} · {archetypeLabel} · {direction}
@@ -722,7 +723,7 @@ function CompassFlow() {
 
             {shareUrl ? (
               <div className="mb-6 rounded-2xl border border-white/10 bg-white/5 p-5">
-                <p className="mb-2 text-sm font-semibold text-sky-300">
+                <p className="mb-2 text-sm font-semibold text-[#2dd4bf]">
                   你的专属报告链接（可转发给朋友/家人，已在本机记住；换设备可凭联系方式
                   <Link href="/compass/find" className="underline underline-offset-2">
                     找回
@@ -730,12 +731,12 @@ function CompassFlow() {
                   ）
                 </p>
                 <div className="flex items-center gap-2">
-                  <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-lg bg-black/40 px-3 py-2.5 text-xs text-emerald-300">
+                  <code className="flex-1 overflow-x-auto whitespace-nowrap rounded-lg bg-black/40 px-3 py-2.5 text-xs text-[#2dd4bf]">
                     {shareUrl}
                   </code>
                   <button
                     onClick={copyShare}
-                    className="flex items-center gap-1 rounded-lg border border-emerald-400/50 px-3 py-2.5 text-sm text-emerald-300 transition hover:bg-emerald-400/10"
+                    className="flex items-center gap-1 rounded-lg border border-[#2dd4bf]/50 px-3 py-2.5 text-sm text-[#2dd4bf] transition hover:bg-[#2dd4bf]/10"
                   >
                     {copied ? <CheckCircle2 className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
                     {copied ? "已复制" : "复制"}
@@ -753,10 +754,10 @@ function CompassFlow() {
               href={`/mas-life/demo?c=${encodeURIComponent(contact.trim())}${
                 name.trim() ? `&n=${encodeURIComponent(name.trim())}` : ""
               }`}
-              className="mb-6 block rounded-2xl border border-fuchsia-400/40 bg-gradient-to-br from-purple-600/20 via-fuchsia-600/15 to-pink-500/10 p-5 transition hover:border-fuchsia-300/60 active:scale-[0.99]"
+              className="mb-6 block rounded-2xl border border-[#f5a524]/40 bg-gradient-to-br from-[#f5a524]/20 via-[#f5a524]/15 to-pink-500/10 p-5 transition hover:border-[#f5a524]/60 active:scale-[0.99]"
             >
               <div className="mb-1 flex items-center gap-2 text-lg font-bold">
-                <Sparkles className="h-5 w-5 text-fuchsia-300" />
+                <Sparkles className="h-5 w-5 text-[#f5a524]" />
                 彩蛋：看见 10 年后的你
               </div>
               <p className="mb-3 text-sm leading-relaxed text-gray-300">
@@ -764,7 +765,7 @@ function CompassFlow() {
                 <b className="text-white">来自 10 年后的信</b>
                 ，再画一张 10 年后某个普通而美好的瞬间。
               </p>
-              <span className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 py-3.5 font-bold text-white">
+              <span className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#f5a524] to-[#f5a524] py-3.5 font-bold text-white">
                 打开我的 10 年后
                 <ArrowRight className="h-5 w-5" />
               </span>
@@ -790,7 +791,7 @@ function CompassFlow() {
             </div>
 
             {/* 直播 + 课程 offer */}
-            <div className="mb-5 rounded-2xl border border-purple-400/40 bg-gradient-to-br from-purple-600/15 via-fuchsia-600/10 to-emerald-500/10 p-5">
+            <div className="mb-5 rounded-2xl border border-[#f5a524]/40 bg-gradient-to-br from-[#f5a524]/15 via-[#f5a524]/10 to-[#2dd4bf]/10 p-5">
               <div className="mb-2 text-base font-bold">
                 方向看清了，下一步是把它做出来
               </div>
@@ -814,14 +815,14 @@ function CompassFlow() {
               </p>
               <Link
                 href="/mas-life#enroll"
-                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-purple-500 to-fuchsia-500 py-3.5 font-bold text-white transition active:scale-[0.99]"
+                className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#f5a524] to-[#f5a524] py-3.5 font-bold text-white transition active:scale-[0.99]"
               >
                 看课程详情
                 <ArrowRight className="h-5 w-5" />
               </Link>
               <Link
                 href="/lock"
-                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-xl border border-emerald-400/60 py-3.5 font-bold text-emerald-300 transition hover:bg-emerald-400/10 active:scale-[0.99]"
+                className="mt-2.5 flex w-full items-center justify-center gap-2 rounded-xl border border-[#2dd4bf]/60 py-3.5 font-bold text-[#2dd4bf] transition hover:bg-[#2dd4bf]/10 active:scale-[0.99]"
               >
                 618 元锁定席位 / 3 人拼团 8 折
                 <ArrowRight className="h-5 w-5" />
@@ -833,7 +834,7 @@ function CompassFlow() {
 
             <button
               onClick={restart}
-              className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 py-3 text-sm text-sky-300 transition hover:bg-white/5"
+              className="flex w-full items-center justify-center gap-2 rounded-xl border border-white/10 py-3 text-sm text-[#2dd4bf] transition hover:bg-white/5"
             >
               <RotateCcw className="h-4 w-4" />
               再测一次 / 发给朋友测
@@ -861,13 +862,13 @@ function StreamHeader({
 }) {
   return (
     <div className="mb-4">
-      <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-emerald-400/60 px-3 py-1 text-xs text-emerald-300">
+      <span className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-[#2dd4bf]/60 px-3 py-1 text-xs text-[#2dd4bf]">
         {icon}
         {title}
       </span>
       {waiting && (
         <div className="flex items-center gap-2 rounded-xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-gray-300">
-          <Loader2 className="h-4 w-4 shrink-0 animate-spin text-emerald-400" />
+          <Loader2 className="h-4 w-4 shrink-0 animate-spin text-[#2dd4bf]" />
           {waitingText}
         </div>
       )}
