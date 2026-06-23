@@ -12,17 +12,21 @@ export default function LiquidHero() {
   const [useFluid, setUseFluid] = useState(false);
 
   useEffect(() => {
-    const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    const small = window.matchMedia("(max-width: 768px)").matches;
-    // 探测 WebGL 可用性
-    let webgl = false;
-    try {
-      const c = document.createElement("canvas");
-      webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));
-    } catch {
-      webgl = false;
-    }
-    if (!reduce && !small && webgl) setUseFluid(true);
+    // 延后到下一帧再决定，避免在 effect 体内同步 setState（cascading render）
+    const raf = requestAnimationFrame(() => {
+      const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const small = window.matchMedia("(max-width: 768px)").matches;
+      // 探测 WebGL 可用性
+      let webgl = false;
+      try {
+        const c = document.createElement("canvas");
+        webgl = !!(c.getContext("webgl2") || c.getContext("webgl"));
+      } catch {
+        webgl = false;
+      }
+      if (!reduce && !small && webgl) setUseFluid(true);
+    });
+    return () => cancelAnimationFrame(raf);
   }, []);
 
   return (
