@@ -1,20 +1,18 @@
 import Image from "next/image";
 import Link from "next/link";
-import { HERO } from "@/data/home";
+import { HERO } from "@/data/wayHome";
 
-export default function HeroAwaken() {
+export default function HeroHome() {
   return (
     <section className="relative isolate flex min-h-[94svh] items-end overflow-hidden">
-      {/* 暖光晨景 */}
       <Image
         src="/images/home/hero-dawn.jpg"
-        alt="黎明时分，面向晨光的人"
+        alt="黎明时分，面向晨光、走在回家路上的人"
         fill
         priority
         sizes="100vw"
         className="object-cover object-[60%_center]"
       />
-      {/* 暖色压底，保证文字可读，同时保留上方天光 */}
       <div className="absolute inset-0 bg-gradient-to-t from-[var(--night)] via-[var(--night)]/55 to-transparent" />
       <div className="absolute inset-0 bg-gradient-to-r from-[var(--night)]/55 to-transparent" />
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
-import { CLOSE } from "@/data/home";
+import { CLOSE } from "@/data/wayHome";
 
-export default function ClosingCTA() {
+export default function ClosingHome() {
   return (
     <section className="warm-4 px-6 py-28 text-center sm:py-36">
       <div className="mx-auto max-w-2xl">

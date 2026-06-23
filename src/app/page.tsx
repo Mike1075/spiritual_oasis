@@ -1,17 +1,19 @@
-import HeroAwaken from "@/components/sections/home/HeroAwaken";
-import PainMirror from "@/components/sections/home/PainMirror";
-import PathToClarity from "@/components/sections/home/PathToClarity";
-import Proof from "@/components/sections/home/Proof";
-import ClosingCTA from "@/components/sections/home/ClosingCTA";
+import HeroHome from "@/components/sections/home/HeroHome";
+import WayHome from "@/components/sections/home/WayHome";
+import Companions from "@/components/sections/home/Companions";
+import Needs from "@/components/sections/home/Needs";
+import GuideInvite from "@/components/sections/home/GuideInvite";
+import ClosingHome from "@/components/sections/home/ClosingHome";
 
 export default function Home() {
   return (
     <>
-      <HeroAwaken />
-      <PainMirror />
-      <PathToClarity />
-      <Proof />
-      <ClosingCTA />
+      <HeroHome />
+      <WayHome />
+      <Companions />
+      <Needs />
+      <GuideInvite />
+      <ClosingHome />
     </>
   );
 }
