@@ -17,24 +17,29 @@ export default function LeadForm({
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setState("loading");
-    const fd = new FormData(e.currentTarget);
-    const res = await fetch("/api/lead", {
-      method: "POST",
-      headers: { "content-type": "application/json" },
-      body: JSON.stringify({
-        name: fd.get("name"),
-        contact: fd.get("contact"),
-        note: fd.get("note"),
-        source,
-        pillar,
-      }),
-    });
-    const data = await res.json().catch(() => ({ ok: false }));
-    if (data.ok) {
-      setState("done");
-    } else {
+    try {
+      const fd = new FormData(e.currentTarget);
+      const res = await fetch("/api/lead", {
+        method: "POST",
+        headers: { "content-type": "application/json" },
+        body: JSON.stringify({
+          name: fd.get("name"),
+          contact: fd.get("contact"),
+          note: fd.get("note"),
+          source,
+          pillar,
+        }),
+      });
+      const data = await res.json().catch(() => ({ ok: false }));
+      if (data.ok) {
+        setState("done");
+      } else {
+        setState("error");
+        setMsg(data.error || "提交失败");
+      }
+    } catch {
       setState("error");
-      setMsg(data.error || "提交失败");
+      setMsg("网络错误，请稍后再试");
     }
   }
 
