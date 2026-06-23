@@ -1,28 +1,15 @@
-"use client";
-
-import Hero from "@/components/sections/Hero";
-import MasLifePreview from "@/components/sections/MasLifePreview";
-import Plan2026 from "@/components/sections/Plan2026";
-import AcademyPreview from "@/components/sections/AcademyPreview";
-import MindosPreview from "@/components/sections/MindosPreview";
-import MetaversePreview from "@/components/sections/MetaversePreview";
-import CommunityPreview from "@/components/sections/CommunityPreview";
-import HolidaySection from "@/components/sections/HolidaySection";
-import { isHolidaySeason } from "@/lib/holiday";
+import LiquidHero from "@/components/sections/redesign/LiquidHero";
+import PillarsBento from "@/components/sections/redesign/PillarsBento";
+import PhilosophyStrip from "@/components/sections/redesign/PhilosophyStrip";
+import FeaturedCourses from "@/components/sections/redesign/FeaturedCourses";
 
 export default function Home() {
-  const showHoliday = isHolidaySeason();
-
   return (
     <>
-      <Hero />
-      <MasLifePreview />
-      {showHoliday && <HolidaySection />}
-      <Plan2026 />
-      <AcademyPreview />
-      <MindosPreview />
-      <MetaversePreview />
-      <CommunityPreview />
+      <LiquidHero />
+      <PillarsBento />
+      <PhilosophyStrip />
+      <FeaturedCourses />
     </>
   );
 }
