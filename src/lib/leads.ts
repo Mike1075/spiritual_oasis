@@ -28,9 +28,9 @@ export function parseLead(input: unknown): ParseResult {
       name,
       contact,
       source,
-      pillar: b.pillar ? String(b.pillar).slice(0, 40) : undefined,
-      note: b.note ? String(b.note).slice(0, 500) : undefined,
-      utm: b.utm ? String(b.utm).slice(0, 200) : undefined,
+      pillar: b.pillar ? String(b.pillar).trim().slice(0, 40) : undefined,
+      note: b.note ? String(b.note).trim().slice(0, 500) : undefined,
+      utm: b.utm ? String(b.utm).trim().slice(0, 200) : undefined,
     },
   };
 }

@@ -22,6 +22,9 @@ describe("parseLead", () => {
   it("caps overly long fields", () => {
     const r = parseLead({ name: "x".repeat(100), contact: "y".repeat(100), source: "home" });
     expect(r.ok).toBe(true);
-    if (r.ok) expect(r.data.name.length).toBeLessThanOrEqual(40);
+    if (r.ok) {
+      expect(r.data.name.length).toBeLessThanOrEqual(40);
+      expect(r.data.contact.length).toBeLessThanOrEqual(60);
+    }
   });
 });
