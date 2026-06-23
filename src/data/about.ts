@@ -38,7 +38,7 @@ export const ABOUT: AboutData = {
   // 真实史实取自现有 /about（2020 疫情期线上读书会起步）
   timeline: [
     { year: "2020", zhTitle: "起源", enTitle: "The Beginning", zhDesc: "心灵家园在疫情期间诞生，从线上读书会开始。", enDesc: "Born during the pandemic, starting as an online reading circle." },
-    { year: "2021", zhTitle: "成长", enTitle: "Growth", zhDesc: "建立系统课程体系，首批学员突破一千人。", enDesc: "A structured curriculum took shape; the first 1,000 students joined." },
+    { year: "2021", zhTitle: "成长", enTitle: "Growth", zhDesc: "建立系统课程体系，课程与社群初具规模。", enDesc: "A structured curriculum took shape; the community found its footing." }, // TODO(Mike): 如有可核实的学员规模数据可补具体数字
     { year: "2022", zhTitle: "社区成型", enTitle: "Community", zhDesc: "完善线上社区，开启多城市线下活动。", enDesc: "The online community matured; offline gatherings began across cities." },
     { year: "2023", zhTitle: "扩展", enTitle: "Expansion", zhDesc: "全球社区布局，探索更前沿的协作方式。", enDesc: "A global community footprint and new ways to collaborate." },
     { year: "2024", zhTitle: "深耕", enTitle: "Deepening", zhDesc: "课程与陪伴体系深化，社区共建机制成型。", enDesc: "Courses and companionship deepened; co-building mechanisms formed." },
