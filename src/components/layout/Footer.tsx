@@ -4,6 +4,16 @@ import { useTranslations } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
+const siteMatrix = [
+  { href: "/academy", zh: "心灵大学", en: "Academy" },
+  { href: "/mas-life", zh: "MAS-Life OS", en: "MAS-Life OS" },
+  { href: "https://onepad.spiritual-oasis.net", zh: "爱宝 OnePad", en: "OnePad", external: true },
+  { href: "https://www.futuremind2075.com", zh: "未来教育学院", en: "Future Mind", external: true },
+  { href: "https://mind.spiritual-oasis.net", zh: "心境", en: "Mind", external: true },
+  { href: "https://seth.org.cn", zh: "赛斯对话", en: "Seth Dialogue", external: true },
+  { href: "/about", zh: "关于我们", en: "About" },
+] as const;
+
 export default function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
@@ -102,6 +112,34 @@ export default function Footer() {
               </li>
             </ul>
           </div>
+        </div>
+
+        {/* Site Matrix */}
+        <div className="border-t border-gray-800 mt-8 pt-8">
+          <h4 className="text-white font-medium mb-4">全部入口</h4>
+          <ul className="flex flex-wrap gap-x-6 gap-y-2">
+            {siteMatrix.map((item) => (
+              <li key={item.href}>
+                {"external" in item && item.external ? (
+                  <a
+                    href={item.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+                  >
+                    {item.zh}
+                  </a>
+                ) : (
+                  <Link
+                    href={item.href}
+                    className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
+                  >
+                    {item.zh}
+                  </Link>
+                )}
+              </li>
+            ))}
+          </ul>
         </div>
 
         <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500 text-sm">
