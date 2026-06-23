@@ -13,7 +13,7 @@ export default function PillarsBento() {
             className="rounded-3xl border border-white/10 bg-white/[0.03] p-8 transition hover:border-white/25 hover:bg-white/[0.06]">
             <h2 className="text-2xl font-semibold text-white">{locale === "zh" ? p.titleZh : p.titleEn}</h2>
             <p className="mt-3 text-white/60">{locale === "zh" ? p.descZh : p.descEn}</p>
-            <p className="mt-6 text-sm text-emerald-300">{p.courses.length} 门课程 / 服务 →</p>
+            <p className="mt-6 text-sm text-emerald-300">{locale === "zh" ? `${p.courses.length} 门课程 / 服务 →` : `${p.courses.length} Courses / Services →`}</p>
           </Link>
         ))}
       </div>
