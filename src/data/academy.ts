@@ -61,6 +61,7 @@ export const PILLARS: Pillar[] = [
       { id: "365", titleZh: "365 公益陪伴", titleEn: "365 Daily Companion", blurbZh: "全年每日清晨的陪伴与回应。", blurbEn: "Daily wisdom, all year round.", href: "/365", external: false, format: "service", cover: "/images/academy/365.jpg", recruiting: true },
       { id: "mind", titleZh: "心境", titleEn: "Mind", blurbZh: "记录与照见你的内在状态。", blurbEn: "Reflect your inner state.", href: "https://mind.spiritual-oasis.net", external: true, format: "service", cover: "/images/academy/mind.jpg" },
       { id: "seth-dialogue", titleZh: "赛斯对话", titleEn: "Seth Dialogue", blurbZh: "与赛斯智慧对话。", blurbEn: "Dialogue with Seth's wisdom.", href: "https://seth.org.cn", external: true, format: "service", cover: "/images/academy/seth.jpg" },
+      { id: "seth-wallpaper", titleZh: "365 赛斯壁纸", titleEn: "365 Seth Wallpapers", blurbZh: "每日一张赛斯智慧壁纸，免费下载。", blurbEn: "A daily Seth-wisdom wallpaper, free to download.", href: "https://www.futuremind2075.com/seth365", external: true, format: "service", cover: "/images/academy/seth-wallpaper.jpg" },
     ],
   },
 ];
