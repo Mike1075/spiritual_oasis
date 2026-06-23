@@ -1,6 +1,7 @@
 "use client";
 
 import { useTranslations } from "next-intl";
+import { useLocale } from "next-intl";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -17,6 +18,7 @@ const siteMatrix = [
 export default function Footer() {
   const t = useTranslations("footer");
   const nav = useTranslations("nav");
+  const locale = useLocale();
   const pathname = usePathname();
 
   // 高考留资落地页保持纯净，不显示页脚
@@ -43,16 +45,10 @@ export default function Footer() {
 
           {/* Quick Links */}
           <div>
-            <h4 className="text-white font-medium mb-4">快速链接</h4>
+            <h4 className="text-white font-medium mb-4">
+              {locale === "zh" ? "快速链接" : "Quick Links"}
+            </h4>
             <ul className="space-y-2">
-              <li>
-                <Link
-                  href="/"
-                  className="text-gray-400 hover:text-purple-400 transition-colors"
-                >
-                  {nav("home")}
-                </Link>
-              </li>
               <li>
                 <Link
                   href="/academy"
@@ -62,21 +58,19 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
-                  href="https://mind.spiritual-oasis.net"
-                  target="_blank"
-                  rel="noopener noreferrer"
+                <Link
+                  href="/mas-life"
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
-                  {nav("mindos")}
-                </a>
+                  {nav("masLife")}
+                </Link>
               </li>
               <li>
                 <Link
-                  href="/community"
+                  href="/365"
                   className="text-gray-400 hover:text-purple-400 transition-colors"
                 >
-                  {nav("community")}
+                  {nav("companion365")}
                 </Link>
               </li>
               <li>
@@ -116,7 +110,9 @@ export default function Footer() {
 
         {/* Site Matrix */}
         <div className="border-t border-gray-800 mt-8 pt-8">
-          <h4 className="text-white font-medium mb-4">全部入口</h4>
+          <h4 className="text-white font-medium mb-4">
+            {locale === "zh" ? "全部入口" : "All Entrances"}
+          </h4>
           <ul className="flex flex-wrap gap-x-6 gap-y-2">
             {siteMatrix.map((item) => (
               <li key={item.href}>
@@ -127,14 +123,14 @@ export default function Footer() {
                     rel="noopener noreferrer"
                     className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
                   >
-                    {item.zh}
+                    {locale === "zh" ? item.zh : item.en}
                   </a>
                 ) : (
                   <Link
                     href={item.href}
                     className="text-gray-400 hover:text-purple-400 transition-colors text-sm"
                   >
-                    {item.zh}
+                    {locale === "zh" ? item.zh : item.en}
                   </Link>
                 )}
               </li>
