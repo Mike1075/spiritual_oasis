@@ -1,5 +1,10 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Course } from "@/data/academy";
+
+export function hasCover(cover?: string): boolean {
+  return !!cover && cover.startsWith("/images/");
+}
 
 const FORMAT_LABEL: Record<Course["format"], { zh: string; en: string }> = {
   online: { zh: "线上", en: "Online" },
@@ -14,6 +19,14 @@ export default function CourseCard({ course, locale }: { course: Course; locale:
   const fmt = FORMAT_LABEL[course.format][locale];
   const inner = (
     <div className="group h-full rounded-2xl border border-white/10 bg-white/[0.03] p-5 backdrop-blur transition hover:border-white/25 hover:bg-white/[0.06]">
+      <div className="mb-4 aspect-[16/10] overflow-hidden rounded-xl">
+        {hasCover(course.cover) ? (
+          <Image src={course.cover} alt={title} width={480} height={300}
+            className="h-full w-full object-cover transition group-hover:scale-105" />
+        ) : (
+          <div className="h-full w-full bg-gradient-to-br from-amber-300/20 to-emerald-400/20" />
+        )}
+      </div>
       <div className="mb-3 flex items-center gap-2 text-xs text-white/50">
         <span className="rounded-full border border-white/15 px-2 py-0.5">{fmt}</span>
         {course.recruiting && <span className="rounded-full bg-amber-300/20 px-2 py-0.5 text-amber-200">{locale === "zh" ? "在招" : "Recruiting"}</span>}
