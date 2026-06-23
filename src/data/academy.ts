@@ -44,7 +44,7 @@ export const PILLARS: Pillar[] = [
     descZh: "以赛斯资料为核心的课程与练习。",
     descEn: "Courses and practices centered on the Seth material.",
     courses: [
-      { id: "kuayue", titleZh: "跨越意识", titleEn: "Crossing Dimensions", blurbZh: "门罗式焦点层级闭关，打开意识的星门。", blurbEn: "An immersive consciousness retreat.", href: "/courses/kuayue", external: false, format: "retreat", cover: "/images/academy/kuayue.jpg", recruiting: true },
+      { id: "kuayue", titleZh: "跨越意识", titleEn: "Crossing Dimensions", blurbZh: "沉浸式意识探索闭关，打开意识的星门。", blurbEn: "An immersive consciousness retreat.", href: "/courses/kuayue", external: false, format: "retreat", cover: "/images/academy/kuayue.jpg", recruiting: true },
       { id: "canchan", titleZh: "参禅悟道 7 天", titleEn: "7-Day Zen", blurbZh: "七天沉浸，照见本来面目。", blurbEn: "Seven days of immersive practice.", href: "/courses/canchan", external: false, format: "retreat", cover: "/images/academy/canchan.jpg", recruiting: true },
       { id: "sex2dao", titleZh: "以性入道", titleEn: "Tao Through Intimacy", blurbZh: "回到身体，连接更高的自己。", blurbEn: "Return to the body, connect with higher self.", href: "https://sex2dao.spiritual-oasis.net", external: true, format: "retreat", cover: "/images/academy/sex2dao.jpg", recruiting: true },
       { id: "xiaoe-healing", titleZh: "疗愈系列", titleEn: "Healing Series", blurbZh: "OM 疗愈、丰盛之旅、动感冥想等。", blurbEn: "Healing, abundance, dynamic meditation.", href: XIAOE, external: true, format: "online", cover: "/images/academy/healing.jpg" },
