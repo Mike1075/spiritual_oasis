@@ -335,7 +335,7 @@ git add -A && git commit -m "feat(academy): 课程卡渲染封面 + 缺图优雅
 
 ## Task 3（创意/交互，主代理执行，不走子代理管线）: 全站封面/配图生成
 
-**By:** 主代理用 `text-to-image` 技能的 **Agnes AI 免费后端 `gen-image-agnes.sh`（无需登录、OpenAI 兼容、可并发）**。**不写单测**；验收=文件生成 + 页面渲染正常。
+**By:** 主代理用 `text-to-image` 技能的 **codex 后端 `gen-image.sh`（按 Mike 确认无需登录、可直接调用，中文文字渲染最强）**直接生成。**不写单测**；验收=文件生成 + 页面渲染正常。
 
 - [ ] 列出 `academy.ts` 与课程数据里引用的 `cover` 路径清单（如 `/images/academy/mas-life.jpg` 等）。
 - [ ] 用统一风格 prompt（留白、光感、东方意境、不堆元素；暖黑/微光基调与"流动的意识"一致）逐张生成，落到 `public/images/academy/` 对应文件名。
