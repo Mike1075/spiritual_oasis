@@ -330,3 +330,23 @@ html {
     animation: none;
   }
 }
+
+/* 流动的意识 · 暖黑底与呼吸光晕 */
+:root {
+  --ink: #0b0a0d;       /* 暖黑 */
+  --aura-a: #f6c177;    /* 暖金 */
+  --aura-b: #4fd1a5;    /* 极光绿 */
+}
+@keyframes aura-breathe {
+  0%, 100% { transform: translate(-10%, -6%) scale(1); opacity: .55; }
+  50%      { transform: translate(8%, 6%) scale(1.25); opacity: .8; }
+}
+.aura {
+  background: radial-gradient(closest-side, var(--aura-a), transparent 70%),
+              radial-gradient(closest-side, var(--aura-b), transparent 70%);
+  filter: blur(60px);
+  animation: aura-breathe 14s ease-in-out infinite;
+}
+@media (prefers-reduced-motion: reduce) {
+  .aura { animation: none; }
+}
