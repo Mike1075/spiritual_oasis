@@ -1,15 +1,12 @@
 {
   "nav": {
-    "home": "首页",
-    "calendar": "365课程",
-    "masLife": "MAS-Life",
     "academy": "心灵大学",
-    "metaverse": "心灵元宇宙",
-    "dao": "共建DAO",
-    "community": "全球社区",
-    "cofounders": "共建者",
-    "about": "关于我们",
-    "mindos": "心镜"
+    "masLife": "MAS-Life OS",
+    "kuayue": "跨越意识",
+    "canchan": "参禅悟道",
+    "sex2dao": "以性入道",
+    "companion365": "365公益陪伴",
+    "about": "关于我们"
   },
   "hero": {
     "title": "心灵家园",

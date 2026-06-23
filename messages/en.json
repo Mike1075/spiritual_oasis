@@ -1,15 +1,12 @@
 {
   "nav": {
-    "home": "Home",
-    "calendar": "365 Days",
-    "masLife": "MAS-Life",
-    "academy": "Spirit Academy",
-    "metaverse": "Metaverse",
-    "dao": "Co-Creation DAO",
-    "community": "Community",
-    "cofounders": "Co-Founders",
-    "about": "About",
-    "mindos": "MindOS"
+    "academy": "Academy",
+    "masLife": "MAS-Life OS",
+    "kuayue": "Crossing Dimensions",
+    "canchan": "7-Day Zen",
+    "sex2dao": "Tao Through Intimacy",
+    "companion365": "365 Companion",
+    "about": "About"
   },
   "hero": {
     "title": "Spiritual Oasis",

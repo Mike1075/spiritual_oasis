@@ -18,16 +18,12 @@ export default function Header() {
   }
 
   const navItems = [
-    { href: "/", label: t("home") },
-    { href: "/calendar", label: t("calendar") },
-    { href: "/mas-life", label: t("masLife") },
     { href: "/academy", label: t("academy") },
-    // 心镜部署在独立子域名(外站),新标签打开
-    { href: "https://mind.spiritual-oasis.net", label: t("mindos"), external: true },
-    { href: "/metaverse", label: t("metaverse") },
-    { href: "/dao", label: t("dao") },
-    { href: "/community", label: t("community") },
-    { href: "/cofounders", label: t("cofounders") },
+    { href: "/mas-life", label: t("masLife") },
+    { href: "/courses/kuayue", label: t("kuayue") },
+    { href: "/courses/canchan", label: t("canchan") },
+    { href: "https://sex2dao.spiritual-oasis.net", label: t("sex2dao"), external: true },
+    { href: "/365", label: t("companion365") },
     { href: "/about", label: t("about") },
   ];
 
@@ -46,7 +42,7 @@ export default function Header() {
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-5">
             {navItems.map((item) =>
               item.external ? (
                 <a
