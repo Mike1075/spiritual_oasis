@@ -350,3 +350,34 @@ html {
 @media (prefers-reduced-motion: reduce) {
   .aura { animation: none; }
 }
+
+/* ===== 从内耗到清明 · 暖色觉醒主题（首页） ===== */
+:root {
+  --night: #15110b;   /* 暖墨（内耗·起点） */
+  --dusk:  #2a2014;   /* 暖褐过渡 */
+  --ember: #c2703a;   /* 暖陶土强调 */
+  --dawn:  #eaa94e;   /* 晨金 */
+  --sand:  #e7d8bf;   /* 暖沙 */
+  --cream: #f6efe2;   /* 暖米（清明·终点） */
+  --inkwarm: #2c2418; /* 暖底上的深字 */
+  /* 系统中文衬线栈——人文质感，零下载，跨平台都有 serif */
+  --font-serif: "Songti SC", "STSong", "STSongti", "SimSun", "Noto Serif CJK SC", "Noto Serif SC", Georgia, serif;
+}
+.font-serif-sc { font-family: var(--font-serif); font-weight: 600; }
+
+/* 渐暖分段背景：随滚动从暖墨过渡到暖米，呼应"内耗→清明" */
+.warm-0 { background: var(--night); color: #efe7da; }
+.warm-1 { background: linear-gradient(180deg, var(--night), var(--dusk)); color: #ece2d2; }
+.warm-2 { background: linear-gradient(180deg, var(--dusk), #5a4126); color: #f3ead9; }
+.warm-3 { background: linear-gradient(180deg, #5a4126, var(--sand)); color: var(--inkwarm); }
+.warm-4 { background: var(--cream); color: var(--inkwarm); }
+
+/* 滚动入场：内容默认始终可见；仅在支持 scroll-timeline 且未关动效时增强为上浮淡入。
+   这样 Safari/Firefox 等不支持的浏览器永远不会出现"内容隐形"。 */
+@keyframes rise-in { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: none; } }
+.rise { opacity: 1; }
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .rise { animation: rise-in 0.7s ease-out both; animation-timeline: view(); animation-range: entry 0% cover 20%; }
+  }
+}

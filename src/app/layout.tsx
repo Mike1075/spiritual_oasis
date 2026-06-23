@@ -17,9 +17,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "心灵家园 Spiritual Oasis - 2026全球公益计划",
+  title: "心灵家园 Spiritual Oasis · 从精神内耗，到内在清明",
   description:
-    "从精神内耗到内在清明，通过信念创造实相实现每个人的价值完成。加入2026全年公益计划，踏上终极自由之路。",
+    "懂了那么多道理，依然过不好这一生？心灵家园以赛斯智慧、沉浸式闭关与每日陪伴，陪你看清内心的剧本，把人生的主导权拿回自己手里。",
   keywords: [
     "心灵家园",
     "Spiritual Oasis",

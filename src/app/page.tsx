@@ -1,15 +1,17 @@
-import LiquidHero from "@/components/sections/redesign/LiquidHero";
-import PillarsBento from "@/components/sections/redesign/PillarsBento";
-import PhilosophyStrip from "@/components/sections/redesign/PhilosophyStrip";
-import FeaturedCourses from "@/components/sections/redesign/FeaturedCourses";
+import HeroAwaken from "@/components/sections/home/HeroAwaken";
+import PainMirror from "@/components/sections/home/PainMirror";
+import PathToClarity from "@/components/sections/home/PathToClarity";
+import Proof from "@/components/sections/home/Proof";
+import ClosingCTA from "@/components/sections/home/ClosingCTA";
 
 export default function Home() {
   return (
     <>
-      <LiquidHero />
-      <PillarsBento />
-      <PhilosophyStrip />
-      <FeaturedCourses />
+      <HeroAwaken />
+      <PainMirror />
+      <PathToClarity />
+      <Proof />
+      <ClosingCTA />
     </>
   );
 }
