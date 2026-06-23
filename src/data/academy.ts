@@ -22,7 +22,7 @@ export type Pillar = {
   courses: Course[];
 };
 
-const XIAOE = "https://你的小鹅通地址"; // TODO(Mike): 替换为真实小鹅通店铺地址
+const XIAOE = "https://appvwgstfof3025.h5.xiaoeknow.com"; // 小鹅通店铺 H5（电脑打开自动适配 PC 端）
 
 export const PILLARS: Pillar[] = [
   {
