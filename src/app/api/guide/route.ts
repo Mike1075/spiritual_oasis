@@ -1,5 +1,6 @@
 import { GUIDE_SYSTEM } from "@/lib/guidePrompt";
-import { streamChatMessages, type ChatMessage } from "@/lib/minimax";
+import { type ChatMessage } from "@/lib/minimax";
+import { streamChatWithFallback } from "@/lib/chatFallback";
 
 export const runtime = "nodejs";
 // M 系列先输出思维链再出正文，留足上限
@@ -30,5 +31,5 @@ export async function POST(req: Request) {
     return Response.json({ ok: false, error: "请先说点什么" }, { status: 400 });
   }
 
-  return streamChatMessages(GUIDE_SYSTEM, messages, 2400, 0.6);
+  return streamChatWithFallback(GUIDE_SYSTEM, messages, 2400, 0.6);
 }
