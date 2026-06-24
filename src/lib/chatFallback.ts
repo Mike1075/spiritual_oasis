@@ -11,7 +11,8 @@ const GW_KEY = process.env.AI_GATEWAY_API_KEY || "";
 const GW_MODEL = process.env.FALLBACK_MODEL || "deepseek/deepseek-v4-pro";
 
 // MiniMax 多久没吐出"正文"就判定太慢、切兜底（思考链不算正文）。可用 env 调。
-const FIRST_TOKEN_MS = Number(process.env.MM_FIRST_TOKEN_MS || 15000);
+// 注意：MiniMax 冷启动常需 20-30s，给到 30s 避免误切兜底。
+const FIRST_TOKEN_MS = Number(process.env.MM_FIRST_TOKEN_MS || 30000);
 
 function reqInit(
   key: string,
