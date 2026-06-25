@@ -1,5 +1,6 @@
 // Server component — no "use client"
 import { getSessionByProductKey, yuanFromFen } from "@/lib/catalog";
+import { EnrollButton } from "./EnrollButton";
 
 interface Props {
   productKey: string;
@@ -51,16 +52,14 @@ export default async function SessionEnrollBox({ productKey }: Props) {
         <span className="text-sm text-white/40">· {session.productTitle}</span>
       </div>
 
-      {/* Disabled CTA */}
-      <button
-        type="button"
-        disabled
-        title="站内支付即将开放"
-        className="w-full cursor-not-allowed rounded-xl border border-white/10 bg-white/[0.04] py-3 text-sm font-medium text-white/30"
-      >
-        立即报名
-        <span className="ml-2 text-xs text-amber-400/60">站内支付即将开放</span>
-      </button>
+      {/* 报名支付 */}
+      <EnrollButton
+        sessionId={session.sessionId}
+        name={session.name}
+        priceYuan={price.replace(/^¥/, "")}
+        soldOut={isFull}
+        loginNext={`/courses/${session.productKey}`}
+      />
     </div>
   );
 }
