@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X, Globe } from "lucide-react";
 import LanguageSwitcher from "./LanguageSwitcher";
+import AccountMenu from "./AccountMenu";
 
 export default function Header() {
   const t = useTranslations("nav");
@@ -64,6 +65,7 @@ export default function Header() {
                 </Link>
               )
             )}
+            <AccountMenu />
           </div>
 
           {/* Right side actions */}
@@ -108,6 +110,9 @@ export default function Header() {
                   </Link>
                 )
               )}
+              <div className="pt-1">
+                <AccountMenu />
+              </div>
             </div>
           </div>
         )}
