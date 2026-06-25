@@ -89,6 +89,14 @@ export default function AccountMenu() {
             我的订单
           </Link>
 
+          <Link
+            href="/account/password"
+            onClick={() => setOpen(false)}
+            className="block px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/[0.06] transition-colors"
+          >
+            重置密码
+          </Link>
+
           <button
             onClick={handleSignOut}
             className="w-full text-left px-4 py-2.5 text-sm text-gray-300 hover:text-white hover:bg-white/[0.06] transition-colors border-t border-white/10"
