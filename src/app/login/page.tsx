@@ -169,17 +169,6 @@ function LoginForm() {
             手机验证码登录 &nbsp;<span className="text-xs text-amber-400/60">即将开放</span>
           </button>
         </div>
-
-        <p className="mt-6 text-center text-xs text-white/30">
-          登录即代表你同意{" "}
-          <a href="/terms" className="text-white/50 hover:text-white/70 underline underline-offset-2 transition">
-            服务条款
-          </a>{" "}
-          与{" "}
-          <a href="/privacy" className="text-white/50 hover:text-white/70 underline underline-offset-2 transition">
-            隐私政策
-          </a>
-        </p>
       </div>
     </div>
   );
