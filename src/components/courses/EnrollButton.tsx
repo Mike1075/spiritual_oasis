@@ -23,6 +23,7 @@ export function EnrollButton({
 }) {
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const [paid, setPaid] = useState(false);
   const [checking, setChecking] = useState(false);
 
   if (soldOut) {
@@ -55,7 +56,16 @@ export function EnrollButton({
         {checking ? "…" : "立即报名"}
       </button>
       {open && (
-        <PayModal sessionId={sessionId} name={name} priceYuan={priceYuan} onClose={() => setOpen(false)} />
+        <PayModal
+          sessionId={sessionId}
+          name={name}
+          priceYuan={priceYuan}
+          onPaid={() => setPaid(true)}
+          onClose={() => {
+            setOpen(false);
+            if (paid) router.refresh(); // 付款成功后刷新页面：更新剩余名额 + 切到「已报名」
+          }}
+        />
       )}
     </>
   );

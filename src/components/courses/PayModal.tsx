@@ -15,11 +15,13 @@ export function PayModal({
   name,
   priceYuan,
   onClose,
+  onPaid,
 }: {
   sessionId: string;
   name: string;
   priceYuan: string;
   onClose: () => void;
+  onPaid?: () => void;
 }) {
   const [method, setMethod] = useState<Method>("wxpay");
   const [phase, setPhase] = useState<Phase>("choose");
@@ -60,6 +62,7 @@ export function PayModal({
           if (s.paid) {
             if (pollRef.current) clearInterval(pollRef.current);
             setPhase("paid");
+            onPaid?.();
           }
         } catch { /* 网络抖动，下次再轮 */ }
         if (ticks > 300 && pollRef.current) clearInterval(pollRef.current); // ~10分钟封顶
