@@ -23,8 +23,10 @@ async function sendAliyunSms(phone: string, code: string) {
     Timestamp: new Date().toISOString().replace(/\.\d+Z$/, "Z"),
     Version: "2017-05-25",
     PhoneNumbers: phone,
-    SignName: process.env.ALIYUN_SMS_SIGN_NAME!,
-    TemplateCode: process.env.ALIYUN_SMS_TEMPLATE_CODE!,
+    // 签名写死默认值(非机密,每条短信都显示)；env 可覆盖。当前用「深圳心灵家园」(移动报备中=可发)，
+    // Vercel CLI 存中文 env 偶发空值,故以代码默认值兜底。报备全部成功后可改回长签名。
+    SignName: process.env.ALIYUN_SMS_SIGN_NAME || "深圳心灵家园",
+    TemplateCode: process.env.ALIYUN_SMS_TEMPLATE_CODE || "SMS_335416113",
     TemplateParam: JSON.stringify({ code }),
   };
   const canonical = Object.keys(params).sort().map((k) => `${pe(k)}=${pe(params[k])}`).join("&");
