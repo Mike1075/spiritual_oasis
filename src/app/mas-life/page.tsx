@@ -18,6 +18,12 @@ import {
   Users,
   Tag,
   GraduationCap,
+  Building2,
+  Server,
+  RefreshCw,
+  User,
+  Network,
+  Layers,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
@@ -462,6 +468,150 @@ export default function MasLifePage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ============ 层层递进：解决自己 → 帮别人 → 接住企业（含席位制新功能） ============ */}
+      <section
+        id="enterprise"
+        className="relative scroll-mt-16 overflow-hidden border-t border-[color:var(--os-line)] px-5 py-24 sm:px-8"
+      >
+        <div
+          className="absolute inset-0 bg-cover bg-center opacity-[0.12]"
+          style={{ backgroundImage: "url(/images/mas-life/redesign/network-bg.jpg)" }}
+        />
+        <div className="os-grid absolute inset-0 opacity-[0.25]" />
+        <div className="os-glow-you absolute -right-32 top-10 h-[460px] w-[460px] opacity-50" />
+        <div className="relative mx-auto max-w-6xl">
+          {/* —— 标题 + 三级台阶 —— */}
+          <div className="max-w-2xl">
+            <div className="os-label os-label--you mb-4 inline-flex items-center gap-2">
+              <Layers className="h-4 w-4" /> 这条路能走多远 / the ladder
+            </div>
+            <h2 className="text-3xl font-bold leading-tight md:text-5xl">
+              先解决自己，再帮别人，
+              <br />
+              最后<span className="text-[color:var(--os-you)]">接住一整家企业</span>
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-[color:var(--os-dim)]">
+              同一套系统、同一个认证身份，能力是<span className="text-[color:var(--os-text)]">一层一层往上长</span>的——
+              你先用它解决自己的问题，再用它替别人解决，最终带着它走进企业，接住巨头不愿碰、个人接不动的活。
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {[
+              [User, "第一层 · 解决自己", "给自己装一套会帮你想、陪你练、替你干的系统。把你被困住的那件事，先真做出一个结果。", "sys"],
+              [Network, "第二层 · 帮别人", "拿到认证身份，用同一套系统替个人和小团队交付。你的经验蒸馏成技能，开始接单变现。", "sys"],
+              [Building2, "第三层 · 接住企业", "带着系统走进公司，为全体员工部署、按行业沉淀方案——一次交付，持续续费的席位生意。", "you"],
+            ].map(([Icon, t, d, tone], i) => {
+              const I = Icon as typeof User;
+              const c = tone === "you" ? "var(--os-you)" : "var(--os-sys)";
+              return (
+                <div key={t as string} className="os-panel relative p-6">
+                  <div className="flex items-center gap-2.5">
+                    <I className="h-5 w-5" style={{ color: c }} />
+                    <span className="os-mono text-xs tracking-[0.14em]" style={{ color: c }}>
+                      {`0${i + 1}`}
+                    </span>
+                  </div>
+                  <div className="mt-3 text-lg font-bold text-[color:var(--os-text)]">{t as string}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-[color:var(--os-dim)]">{d as string}</p>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* —— 企业为什么非动不可：老板从「操作员」变「设计者」 —— */}
+          <div className="os-panel os-panel--live mt-8 grid gap-6 p-6 md:grid-cols-[1.25fr_1fr] md:items-center md:p-8">
+            <div>
+              <div className="os-label mb-3">企业面对 AI 冲击 · 老板视角</div>
+              <p className="text-xl font-semibold leading-relaxed text-[color:var(--os-text)] md:text-2xl">
+                AI 越强，会用它的人越不值钱；
+                <span className="text-[color:var(--os-you)]">能设计它、约束它、让它替整个组织干活的人，越稀缺</span>。
+              </p>
+              <p className="mt-4 leading-relaxed text-[color:var(--os-dim)]">
+                对一家公司，AI 的真问题从来不是「要不要给员工开个 AI 账号」——那是
+                <span className="text-[color:var(--os-text)]">操作员</span>思维。真正要做的，是把公司搭成一套自己会跑的系统：
+                创始人定方向、立规矩，每位高管和员工各有一个能自检、能交付的 AI 搭档。这是
+                <span className="text-[color:var(--os-text)]">设计者</span>的活——也是这套系统真正的用武之地。
+              </p>
+            </div>
+            <div className="os-panel p-5">
+              <div className="os-mono text-xs tracking-[0.14em] text-[color:var(--os-dim)]">
+                从操作员到设计者
+              </div>
+              <div className="mt-4 space-y-3 text-sm">
+                <div className="flex items-center gap-2 text-[color:var(--os-faint)] line-through">
+                  <XCircle className="h-4 w-4 shrink-0" /> 一句句问 AI、一个个账号发下去
+                </div>
+                <div className="os-rule my-1" />
+                <div className="flex items-start gap-2 text-[color:var(--os-text)]">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--os-you)]" />
+                  定好目标、搭好系统、放手让它替全员跑——人只在更高维度把关
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* —— 我们的全新功能：席位制企业版 —— */}
+          <div className="mt-14">
+            <div className="os-label os-label--you mb-3 inline-flex items-center gap-2">
+              <Sparkles className="h-4 w-4" /> 全新功能 · 席位制企业版
+            </div>
+            <h3 className="text-2xl font-bold leading-snug text-[color:var(--os-text)] md:text-3xl">
+              一次部署，<span className="text-[color:var(--os-you)]">全员各有一个 AI 分身</span>
+            </h3>
+            <p className="mt-4 max-w-2xl leading-relaxed text-[color:var(--os-dim)]">
+              不是给每人开个 AI 网页账号。<span className="text-[color:var(--os-text)]">席位 = 一个独立人设</span>——
+              一台服务器按员工数开席位，从创始人到高管到一线，每人一套独立的 AI 系统：各自的技能、记忆、口吻，互不串号；统一安装、统一更新、统一管理。
+            </p>
+
+            <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {[
+                [Users, "席位 = 一个独立人设", "每位员工一个独立 AI 人设：独立的技能、记忆、风格。谁的活归谁，互不串号、互不打架。", "you"],
+                [Server, "一次部署，全员开通", "一台服务器、一次安装，按员工数开席位。新人入职加一席，离职释放一席，弹性伸缩。", "sys"],
+                [RefreshCw, "统一远程管理", "人设、技能包、流程模板由后台统一推送更新、远程备份恢复——IT 不用挨台机器装、挨个人教。", "sys"],
+                [Wallet, "成本解耦、看得见", "席位费一次结清；大模型 token 走公司自己的 provider 账单，用多少花多少，不被任何平台绑死。", "you"],
+                [ShieldCheck, "数据主权在你", "系统装在公司自己的机器：数据不出门、断网照常跑、永不被平台封停，合规可审计。", "you"],
+                [GraduationCap, "认证架构师上门交付", "由认证 AI 应用架构师（L2 / L3）落地，把你这行的打法装成「战役包」，接进真实业务流程——交付结果，不是丢个工具。", "sys"],
+              ].map(([Icon, t, d, tone]) => {
+                const I = Icon as typeof Users;
+                const c = tone === "you" ? "var(--os-you)" : "var(--os-sys)";
+                return (
+                  <div key={t as string} className="os-panel p-5">
+                    <div className="flex items-center gap-2.5">
+                      <I className="h-5 w-5" style={{ color: c }} />
+                      <span className="text-base font-bold text-[color:var(--os-text)]">{t as string}</span>
+                    </div>
+                    <p className="mt-2.5 text-sm leading-relaxed text-[color:var(--os-dim)]">{d as string}</p>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* —— 桥接：对学员=你的市场;对企业=直接咨询 —— */}
+          <div className="os-panel os-panel--live mt-8 grid gap-6 p-6 md:grid-cols-[1.3fr_1fr] md:items-center md:p-8">
+            <div>
+              <div className="os-label os-label--you mb-3">这对你意味着什么</div>
+              <p className="text-xl font-semibold leading-relaxed text-[color:var(--os-text)] md:text-2xl">
+                这套企业版，正是你考下认证后<span className="text-[color:var(--os-you)]">要去交付的产品</span>。
+              </p>
+              <p className="mt-4 leading-relaxed text-[color:var(--os-dim)]">
+                中小企业「AI 想落地、落不下去」是一块巨头不愿碰的长尾——一套能多席位部署的系统 + 一个认证架构师身份，就是你接住它的入场资格。你卖的不再是一锤子项目，是会持续续费的席位。
+              </p>
+            </div>
+            <div className="flex flex-col gap-3">
+              <Link href="#enroll" className="os-btn os-btn-you w-full py-3.5 text-base">
+                成为认证架构师，吃下这块市场
+                <ArrowRight className="h-4 w-4" />
+              </Link>
+              <p className="os-mono text-center text-[11px] leading-relaxed text-[color:var(--os-faint)]">
+                企业想直接为团队部署？点右下角 AI 顾问，咨询「企业版席位」方案与报价。
+              </p>
+            </div>
           </div>
         </div>
       </section>
