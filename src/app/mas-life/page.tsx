@@ -20,10 +20,12 @@ import {
   GraduationCap,
   Building2,
   Server,
-  RefreshCw,
   User,
   Network,
   Layers,
+  Scale,
+  Lock,
+  Radar,
 } from "lucide-react";
 import EnrollBar from "@/components/mas-life/EnrollBar";
 import AssistantWidget from "@/components/assistant/AssistantWidget";
@@ -523,59 +525,95 @@ export default function MasLifePage() {
             })}
           </div>
 
-          {/* —— 企业为什么非动不可：老板从「操作员」变「设计者」 —— */}
+          {/* —— 企业为什么非动不可：美的实锤 + 组织跑不跑得赢 AI —— */}
           <div className="os-panel os-panel--live mt-8 grid gap-6 p-6 md:grid-cols-[1.25fr_1fr] md:items-center md:p-8">
             <div>
               <div className="os-label mb-3">企业面对 AI 冲击 · 老板视角</div>
               <p className="text-xl font-semibold leading-relaxed text-[color:var(--os-text)] md:text-2xl">
-                AI 越强，会用它的人越不值钱；
-                <span className="text-[color:var(--os-you)]">能设计它、约束它、让它替整个组织干活的人，越稀缺</span>。
+                AI 进厂，<span className="text-[color:var(--os-you)]">先撞上的是组织，不是技术</span>。
               </p>
               <p className="mt-4 leading-relaxed text-[color:var(--os-dim)]">
-                对一家公司，AI 的真问题从来不是「要不要给员工开个 AI 账号」——那是
-                <span className="text-[color:var(--os-text)]">操作员</span>思维。真正要做的，是把公司搭成一套自己会跑的系统：
-                创始人定方向、立规矩，每位高管和员工各有一个能自检、能交付的 AI 搭档。这是
-                <span className="text-[color:var(--os-text)]">设计者</span>的活——也是这套系统真正的用武之地。
+                美的 2025 年日赚约 1.2 亿、业绩历史最佳，董事长却在最好的时候「向内开刀」——因为
+                1.3 万个 AI 智能体上岗后，真正的对手不是技术，是
+                <span className="text-[color:var(--os-text)]">那套五六层审批、信息孤岛的组织，跑不赢 AI</span>。
+                技术能秒级响应，组织协调却要等几周，效率优势全被组织的迟钝吃掉。
+              </p>
+              <p className="mt-4 leading-relaxed text-[color:var(--os-dim)]">
+                所以对老板，AI 的真问题从来不是「要不要给员工开个 AI 账号」（那是操作员思维），而是
+                <span className="text-[color:var(--os-text)]">你这套「人 + 系统」的架构，AI 一来，是提效，还是被它的效率反过来拖死</span>。
               </p>
             </div>
             <div className="os-panel p-5">
               <div className="os-mono text-xs tracking-[0.14em] text-[color:var(--os-dim)]">
-                从操作员到设计者
+                美的「向内开刀」· 弹药
               </div>
               <div className="mt-4 space-y-3 text-sm">
-                <div className="flex items-center gap-2 text-[color:var(--os-faint)] line-through">
-                  <XCircle className="h-4 w-4 shrink-0" /> 一句句问 AI、一个个账号发下去
-                </div>
-                <div className="os-rule my-1" />
-                <div className="flex items-start gap-2 text-[color:var(--os-text)]">
-                  <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--os-you)]" />
-                  定好目标、搭好系统、放手让它替全员跑——人只在更高维度把关
-                </div>
+                {[
+                  ["1.3 万", "个 AI 智能体上岗，覆盖排产 / 质检 / 物流 / 运维"],
+                  ["决策权", "从人转向系统——管理者「不知道怎么监督一个比自己更快更准的系统」"],
+                  ["部门墙", "比 AI 更难打通：信息孤岛，是落地后第一道组织难题"],
+                ].map(([a, b]) => (
+                  <div key={a} className="flex items-start gap-3">
+                    <span className="os-mono shrink-0 text-base font-bold text-[color:var(--os-you)]">
+                      {a}
+                    </span>
+                    <span className="text-[color:var(--os-dim)]">{b}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
 
-          {/* —— 我们的全新功能：席位制企业版 —— */}
+          {/* —— 同一道题，三种人：老板 / 高管 / 想单干的 —— */}
+          <div className="mt-8">
+            <div className="os-label mb-4">同一道题，三种人在撞 / one question</div>
+            <div className="grid gap-4 md:grid-cols-3">
+              {[
+                [Building2, "老板 · 组织层", "撞上的是：我的组织跑不跑得赢 AI。一个 AI 原生的新公司，可能正用 1/10 的人、3 倍的速度做你的生意——你第一时间看得见它吗？", "you"],
+                [Scale, "高管 · 岗位层", "从决策者变成监督者，却不知怎么监督一个比自己更快更准的系统。出路就是那句——「你不需要会做，但必须会判断」。", "sys"],
+                [User, "想单干的 · 转型层", "当一个人 + 一套 AI 系统就能顶一个部门，你为什么还在臃肿组织里耗？你自己，就可以是那个最敏捷的组织。", "sys"],
+              ].map(([Icon, t, d, tone]) => {
+                const I = Icon as typeof Building2;
+                const c = tone === "you" ? "var(--os-you)" : "var(--os-sys)";
+                return (
+                  <div key={t as string} className="os-panel p-6">
+                    <div className="flex items-center gap-2.5">
+                      <I className="h-5 w-5" style={{ color: c }} />
+                      <span className="text-base font-bold text-[color:var(--os-text)]">{t as string}</span>
+                    </div>
+                    <p className="mt-2.5 text-sm leading-relaxed text-[color:var(--os-dim)]">{d as string}</p>
+                  </div>
+                );
+              })}
+            </div>
+            <p className="os-mono mt-4 text-xs leading-relaxed text-[color:var(--os-faint)]">
+              美的数据来自其 2025 年报与公开报道（公众号「李文波谈敏捷组织」2026/06）；此处引用为说明行业趋势，不代表本课程承诺同等结果。
+            </p>
+          </div>
+
+          {/* —— 出路 = 你自己的 AI 中枢（席位制·数据不出企业） —— */}
           <div className="mt-14">
             <div className="os-label os-label--you mb-3 inline-flex items-center gap-2">
-              <Sparkles className="h-4 w-4" /> 全新功能 · 席位制企业版
+              <Sparkles className="h-4 w-4" /> 出路 · 你自己的 AI 中枢
             </div>
             <h3 className="text-2xl font-bold leading-snug text-[color:var(--os-text)] md:text-3xl">
-              一次部署，<span className="text-[color:var(--os-you)]">全员各有一个 AI 分身</span>
+              美的能砸几个亿自建「工厂大脑」，
+              <br />
+              <span className="text-[color:var(--os-you)]">没有美的资源的企业和个人，靠这一套</span>
             </h3>
             <p className="mt-4 max-w-2xl leading-relaxed text-[color:var(--os-dim)]">
-              不是给每人开个 AI 网页账号。<span className="text-[color:var(--os-text)]">席位 = 一个独立人设</span>——
-              一台服务器按员工数开席位，从创始人到高管到一线，每人一套独立的 AI 系统：各自的技能、记忆、口吻，互不串号；统一安装、统一更新、统一管理。
+              一套装在你自己内网、<span className="text-[color:var(--os-text)]">数据不出企业、不依赖被卡脖子的外国云</span>的 AI 中枢。
+              席位制让你按人头给全员开——<span className="text-[color:var(--os-text)]">席位 = 一个独立人设</span>，从老板到一线，每人一个替你做判断的 AI 参谋，而不是替你打杂的秘书。
             </p>
 
             <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {[
-                [Users, "席位 = 一个独立人设", "每位员工一个独立 AI 人设：独立的技能、记忆、风格。谁的活归谁，互不串号、互不打架。", "you"],
-                [Server, "一次部署，全员开通", "一台服务器、一次安装，按员工数开席位。新人入职加一席，离职释放一席，弹性伸缩。", "sys"],
-                [RefreshCw, "统一远程管理", "人设、技能包、流程模板由后台统一推送更新、远程备份恢复——IT 不用挨台机器装、挨个人教。", "sys"],
-                [Wallet, "成本解耦、看得见", "席位费一次结清；大模型 token 走公司自己的 provider 账单，用多少花多少，不被任何平台绑死。", "you"],
-                [ShieldCheck, "数据主权在你", "系统装在公司自己的机器：数据不出门、断网照常跑、永不被平台封停，合规可审计。", "you"],
-                [GraduationCap, "认证架构师上门交付", "由认证 AI 应用架构师（L2 / L3）落地，把你这行的打法装成「战役包」，接进真实业务流程——交付结果，不是丢个工具。", "sys"],
+                [Lock, "自主可控 · 装在你自己手里", "装在企业自己的机器 / 内网：数据不出门、断网照跑、永不被平台封停。不是又一个要翻墙、说停就停的外国订阅。", "you"],
+                [Radar, "席位 = 一个能判断的参谋", "按人头开席位，每人一个独立 AI 人设——你做关乎生死的决策时的雷达 / 参谋 / 验真器，不是个人秘书级的打杂。", "you"],
+                [ShieldCheck, "不卡脖子 · 数据不出企业", "数据出境合规、采购报销、被卡脖子——对个人是麻烦，对企业是硬伤。这套从根上绕开。", "sys"],
+                [Server, "一次部署，统一管理", "一台中枢按员工数开席位，人设 / 技能 / 流程后台统一推送更新、远程备份；新人加一席，离职释放一席。", "sys"],
+                [Wallet, "成本看得见、不被绑", "席位费一次结清；大模型 token 走公司自己的账，用多少花多少，不被任何平台绑死。", "sys"],
+                [GraduationCap, "认证架构师上门交付", "由认证 AI 应用架构师（L2 / L3）把你这行的打法装成「战役包」，接进真实业务流程——交付结果，不是丢个工具。", "you"],
               ].map(([Icon, t, d, tone]) => {
                 const I = Icon as typeof Users;
                 const c = tone === "you" ? "var(--os-you)" : "var(--os-sys)";
@@ -600,7 +638,7 @@ export default function MasLifePage() {
                 这套企业版，正是你考下认证后<span className="text-[color:var(--os-you)]">要去交付的产品</span>。
               </p>
               <p className="mt-4 leading-relaxed text-[color:var(--os-dim)]">
-                中小企业「AI 想落地、落不下去」是一块巨头不愿碰的长尾——一套能多席位部署的系统 + 一个认证架构师身份，就是你接住它的入场资格。你卖的不再是一锤子项目，是会持续续费的席位。
+                中小企业「AI 想落地、落不下去」是一块巨头不愿碰的长尾——一套能多席位部署的系统 + 一个认证架构师身份，就是你接住它的入场资格。你卖的不再是一锤子项目，是会持续续费的席位。而你自己——既是来学的学员，也可能就是把这套系统带进自己公司的那个人。
               </p>
             </div>
             <div className="flex flex-col gap-3">
